@@ -155,8 +155,12 @@
   .center{text-align:center;}
 
   /* ---------- philosophy ---------- */
-  .phil-grid{display:grid; grid-template-columns: 1.05fr .95fr; gap:clamp(30px,5vw,70px); align-items:start; margin-top:clamp(40px,6vw,64px);}
-  .phil-grid > *{min-width:0;}
+  .phil-grid{position:relative; margin-top:clamp(40px,6vw,64px);}
+  .phil-grid::before{
+    content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:linear-gradient(90deg, var(--paper) 0%, var(--paper) 40%, rgba(255,255,255,0.55) 58%, rgba(255,255,255,0) 78%);
+  }
+  .phil-copy{position:relative; z-index:3; width:60%;}
   .phil-copy h3{font-family:var(--serif); font-weight:600; font-size:clamp(18px,2vw,22px); margin:0 0 10px;}
   .phil-block{margin-bottom:34px;}
   .phil-block p{margin:0 0 12px; color:var(--ink-soft); line-height:1.75; font-size:15.5px;}
@@ -178,14 +182,14 @@
   .story:hover .ring{transform:translateY(-6px);}
   .story .ring img{width:100%; height:100%; object-fit:cover; border-radius:52px/71px; border:3px solid var(--paper);}
 
-  .stylist-card{position:relative; margin-top:44px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:28px; width:100%; max-width:360px; margin-left:auto; margin-right:auto;}
-  .stylist-card img{width:100%; max-width:320px; height:auto; min-height:360px; border-radius:var(--radius-md); object-fit:cover; display:block;}
+  .stylist-card{position:absolute; top:0; right:0; bottom:0; width:75%; z-index:0; margin:0; pointer-events:none;}
+  .stylist-card img{width:100%; height:100%; border-radius:var(--radius-lg); object-fit:cover; display:block; box-shadow:var(--shadow);}
   .portfolio-btn{
-    margin-top:6px; background:var(--blush); border:1px solid var(--blush-deep); color:var(--ink);
+    margin: 40px 0 0; background:var(--gold); border:1px solid var(----gold-deep); color:var(--ink);
     font-family:var(--serif); font-weight:700; font-size:16px; padding:14px 34px; border-radius:999px;
-    box-shadow:var(--shadow); transition:.3s ease;
+    box-shadow:var(--shadow); transition:.3s ease; display: inline-block; pointer-events:auto;
   }
-  .portfolio-btn:hover{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .portfolio-btn:hover{background:var(--gold); color:var(--paper); border-color:var(--gold);}
 
   /* ---------- how it works ---------- */
   .how-section{background:var(--cream);}
@@ -195,7 +199,7 @@
   .how-card:hover img{transform:scale(1.06);}
   .how-card h3{font-family:var(--serif); font-size:19px; margin:0 0 10px; font-weight:700;}
   .how-card p{margin:0 0 8px; font-size:14px; line-height:1.65; color:var(--ink-soft);}
-  .how-card p b{color:var(--ink); font-family:var(--sans); font-weight:500; letter-spacing:.02em;}
+  .how-card p b{color:var(--ink); font-family:var(--sans); font-weight:500; letter-spacing:.02em;} 
 
   /* ---------- why me / brands ---------- */
   .brands-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,6vw,80px); margin-top:clamp(40px,6vw,60px);}
@@ -289,7 +293,11 @@
   @media (max-width: 980px){
     nav.primary{display:none;}
     .burger{display:flex;}
-    .phil-grid{grid-template-columns:1fr;}
+    .phil-grid{display:block;}
+    .phil-grid::before{display:none;}
+    .phil-copy{width:100%;}
+    .stylist-card{position:static; width:100%; height:auto; margin-top:28px; pointer-events:auto;}
+    .stylist-card img{height:auto; aspect-ratio:4/5;}
     .how-grid{grid-template-columns:repeat(2,1fr);}
     .quotes-grid{display:none;}
     .quotes-mobile{display:block;}
@@ -299,8 +307,6 @@
   @media (max-width: 620px){
     .how-grid{grid-template-columns:1fr; max-width:340px; margin-left:auto; margin-right:auto;}
     .hero-caption{flex-direction:column; align-items:flex-start;}
-    .stylist-card{gap:20px; max-width:280px;}
-    .stylist-card img{width:100%; max-width:240px; min-height:280px;}
     .footer-grid{grid-template-columns:1fr; text-align:center;}
     .brand-sub{grid-template-columns:1fr;}
   }
@@ -345,7 +351,7 @@
 <section class="hero-section" id="home">
   <div class="hero-media">
     <figure class="reveal">
-      <img src="/Users/user1/Desktop/2026 PRTFL/header.png" alt="Two clients styled by Kllyncle, holding shopping bags that read 'styled by KLLYNCLE'" loading="eager">
+      <img src="header.png" alt="Two clients styled by Kllyncle, holding shopping bags that read 'styled by KLLYNCLE'" loading="eager">
     </figure>
     <div class="hero-caption reveal">
       <h1>Personal styling that turns a full closet into a wardrobe you actually reach for.</h1>
@@ -358,6 +364,16 @@
   <div class="wrap">
     <p class="kicker reveal">The Approach</p>
     <h2 class="section-title reveal">The Philosophy &amp; The Stylist</h2>
+	   <div>
+        <p class="kicker reveal" style="margin-bottom:6px;">Tap to see the moment</p>
+        <div class="stories reveal" id="storiesRow">
+          <button class="story" data-cap="Press day — always dressed for the moment."><div class="ring"><img src="IMG_1.jpg" alt="Client moment 1"></div></button>
+          <button class="story" data-cap="On set with a client for a live segment."><div class="ring"><img src="IMG_2.jpg" alt="Client moment 2"></div></button>
+          <button class="story" data-cap="A finished look, ready for the evening."><div class="ring"><img src="IMG_3.jpg" alt="Client moment 3"></div></button>
+          <button class="story" data-cap="Everyday styling, elevated with intention."><div class="ring"><img src="IMG_4.jpg" alt="Client moment 4"></div></button>
+          <button class="story" data-cap="Black tie, styled head to toe."><div class="ring"><img src="IMG_5.jpg" alt="Client moment 5"></div></button>
+          <button class="story" data-cap="A quiet moment before the next fitting."><div class="ring"><img src="IMG_6.jpg" alt="Client moment 6"></div></button>
+        </div>
 
     <div class="phil-grid">
       <div class="phil-copy">
@@ -375,26 +391,15 @@
           <h3>The Closet Cure</h3>
           <p>Our bodies fluctuate, we grow, we shrink, we evolve. Your closet shouldn't be a source of decision fatigue or a reminder of past versions of yourself. But let's face it: you have a demanding career to run, and digging through hangers to sort, resell, or donate is exhausting.</p>
           <p>I have a genuine obsession with clean spaces, luxury organization, and sharp curation. I will audit, organize, and refresh your space, deciding exactly what stays, what gets resold to earn you money back, and what gets donated — all with zero effort on your part.</p>
-        </div>
+          <a href="#portfolio" class="portfolio-btn">My Portfolio</a>        </div>
       </div>
-
-      <div>
-        <p class="kicker reveal" style="margin-bottom:6px;">Tap to see the moment</p>
-        <div class="stories reveal" id="storiesRow">
-          <button class="story" data-cap="Press day — always dressed for the moment."><div class="ring"><img src="/Users/user1/Desktop/2026 PRTFL/IMG_1.jpg" alt="Client moment 1"></div></button>
-          <button class="story" data-cap="On set with a client for a live segment."><div class="ring"><img src="/Users/user1/Desktop/2026 PRTFL/IMG_2.jpg" alt="Client moment 2"></div></button>
-          <button class="story" data-cap="A finished look, ready for the evening."><div class="ring"><img src="/Users/user1/Desktop/2026 PRTFL/IMG_3.jpg" alt="Client moment 3"></div></button>
-          <button class="story" data-cap="Everyday styling, elevated with intention."><div class="ring"><img src="/Users/user1/Desktop/2026 PRTFL/IMG_4.jpg" alt="Client moment 4"></div></button>
-          <button class="story" data-cap="Black tie, styled head to toe."><div class="ring"><img src="/Users/user1/Desktop/2026 PRTFL/IMG_5.jpg" alt="Client moment 5"></div></button>
-          <button class="story" data-cap="A quiet moment before the next fitting."><div class="ring"><img src="/Users/user1/Desktop/2026 PRTFL/IMG_6.jpg" alt="Client moment 6"></div></button>
-        </div>
 
         <div class="stylist-card reveal">
-          <img src="/Users/user1/Desktop/2026 PRTFL/ICON_1.png" alt="Kelly, founder of Kllyncle, dressed and ready for a client fitting">
-          <a href="#portfolio" class="portfolio-btn">My Portfolio</a>
+          <img src="phil.png" alt="Kelly, founder of Kllyncle, dressed and ready for a client fitting">
+         
         </div>
       </div>
-    </div>
+</div>
   </div>
 </section>
 
@@ -417,7 +422,7 @@
         <p><b>The Process:</b> We go through your current clothes piece by piece to determine what stays, what gets altered, and what goes. You are left with a functional, clutter-free closet made up only of items you love and wear.</p>
       </div>
       <div class="how-card">
-        <figure><img src="/ICON_4.png" alt="Curated shopping trip"></figure>
+        <figure><img src="ICON_4.png" alt="Curated shopping trip"></figure>
         <h3>Curated Shopping</h3>
         <p><b>The Goal:</b> Fill the gaps in your wardrobe with intentional, high-impact pieces.</p>
         <p><b>The Process:</b> Based on the closet audit, a targeted shopping list is created. I source versatile, mix-and-match pieces that elevate your everyday style, either via pre-selected online links or an in-person shopping trip.</p>
@@ -511,9 +516,21 @@
     </div>
 
     <div class="gallery-strip reveal" id="galleryStrip">
-      <figure><img src="carasol.png" alt="Everyday styling look"></figure>
-    </div>
-  </div>
+  <figure><img src="img_1.jpg" alt="Gallery image 1"></figure>
+  <figure><img src="img_2.jpg" alt="Gallery image 2"></figure>
+  <figure><img src="img_3.jpg" alt="Gallery image 3"></figure>
+  <figure><img src="img_4.jpg" alt="Gallery image 4"></figure>
+  <figure><img src="img_5.jpg" alt="Gallery image 5"></figure>
+  <figure><img src="img_6.jpg" alt="Gallery image 6"></figure>
+  <figure><img src="IMG_7.png" alt="Gallery image 7"></figure>
+  <figure><img src="img_8.jpg" alt="Gallery image 8"></figure>
+  <figure><img src="img_9.png" alt="Gallery image 9"></figure>
+  <figure><img src="img_10.jpg" alt="Gallery image 10"></figure>
+  <figure><img src="img_11.jpg" alt="Gallery image 11"></figure>
+  <figure><img src="img_12.png" alt="Gallery image 12"></figure>
+
+</div>
+      
 </section>
 
 <section class="section-pad contact-section" id="contact">
@@ -569,10 +586,10 @@
       <div>
         <h4>See What I've Done</h4>
         <div class="social-row">
-          <a href="#" aria-label="TikTok"><img src="data:image/png;base64,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" alt="TikTok"></a>
-          <a href="#" aria-label="Instagram"><img src="data:image/png;base64,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" alt="Instagram"></a>
-          <a href="#" aria-label="Facebook"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAA8CAMAAAD1wtK3AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAGeUExURfXx5ebo5qfD7XSm80WK+BRt/ghm/zaC+mOc9ZS479Db6avF7VWT9zmC+pC28OPn5rvP6yd4/BBr/omy8ejp5mad9TSA+s7a6d3j5yl5/LHJ7Nff6CN2/KXC7dLd6Bxx/aHA7i18+wxp/3iq+qTF+cTZ+Nvn+ezx+u3z+uHq98zd95i9+cbV6k6P96PE+fz9/f////7+/pO48Mfa+VST9+3s5R5z/bTP+MfV6oy08DF+/U+Q9x1y/cPY+MvY6brP6/T3+/v8/Xys+nKm+m2j+n+s8nOl8w5q/yl5/Sp6+zmD/KjH+PLv5UaL/EKJ/MjW6uzr5UyP+zB+/bjN6+Xn5k2Q+zSA/abC7d7k55e575W575O6+aPC7k6R+7TL7Hus+gln/8LT6j2F+fL2+3qo8tTj+TiC+rrO6zN//X6r8it6+8/b6VeU9hlv/crY6aDA7l2X9k2P9yh5/Onq5tzi58zZ6dHc6a3H7Q9q/7PK7D6F+RVu/rnN60eL+Nvi51aU95u87y99+67H7fn27/v69f38+f7+/P79+26j9Yix8WAh9+0AAAABYktHRDCu3C3kAAAAB3RJTUUH6ggEASgGceUvegAAAZpJREFUSMft09VbwlAYgPGDcRQUA1FQEbuDKYo1REGxFRu7sLtbLIz/2mCP49S2G6/ce8c+fiw+BsB/TRMVHRMLv4qL1+oUq4REGJk+KVmJSkmFeIY0WWVMh7QyTNLMnAkZZUmxbAtklsNm1lwoUR7z3vLRLxYUFhWXlJaVV1SGP1cxXDXKamycUG34gIW+jzqU2TkOc7CexhocCGvkSAebKK4ZYS0czbVSHI84J9XBNoK50LtrF0iH0+3xdP4e7iKcF2HdArP1oD+nJ1wvMu8TXD++fA3GBtDxoOCGcDeMOR86HhHcKO7GMDeOjicEN4m7Kcz5FbpptnNzeHZxOMO+TtLNisM59nMh3bw4XMD3J44WCbckDpdxt8I+32rEczHiLsB2ayJbJ/5nG9S9b2Jr2CLfo20lbod0WgV736W8t749+fPtUxw4kHWHgNqRzHUen9DdKS95PsMZYHTOS7kLwEznYLrLKyCR/5rhbm6BdF6qu7sHclmDhOMfZNV3psBjpAs+KVI/mZ9fQq/cW+j9w+VTrtTU1P68T5vlgSoe84UBAAAAAElFTkSuQmCC" alt="Facebook"></a>
-          <a href="#" aria-label="Pinterest"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAA8CAMAAAD1wtK3AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAKXUExURfXx5fbz6POxtfF9jO1LYugUNOYAI+kgPu5RZ/GAj/OxtPXx5vS9v+9neucRMegaOfXc1/PCwus0Tu5gdPTg2PTY0e1UaucTM/KZovXw5PPBwOgWNexCW/Xl3PGepeYGKOorSPKgpugcO/XQzfO8vu1HYO9dc/J4ivJ/kPJ7jes4U+cLLOkmQ/Xn3vTTzucQMOYIKfF0h/rGzf////nByfFxhO5UautDW+9hdv3m6f7x8/FtgfKQmvKiqOcPL/i2wPnDy/Xm3vTn3egbOugXNvzb4PvP1fans/OJmfnAyPzd4egYN/F/jvGboecMLfvR1/Bne+cSMuosSPexu/i3wOtBWfWXpfJ9ju5VbOYBI+khP//8/PBsgO1IYf3n6vGSm/WZp+s0T+cOL+5oev3r7ekkQu1MZPF2iOkiQP/+/vm8xexAWew9V/i1v+kfPf/3+PrFze9acPBrf+1JYvOGlvvQ1u5PZ/BqfvFwg+w/Wf7v8e9Zb+5Wbe9gdf3k5/BleuowTPJ3ifrHzvWWpPOCk+knRPWUovi0vuw9VvJ+j/719v709fest+9idfrL0vrN0/WYpvBme+5YbvGaovalsf3o6/Wap/vU2v7t7/3q7fvV2vTg1+tAWf7u8PFvguooRfzg5PairvGprfOHl/rM0+ouSfetuP7y8/m/x+cNLu9vf/GusOw8VuouSvzZ3u1QZfF1iPi7xPertvSKmuw+WPGRmvTXz+xMYvK5ueopRvTm3fKqresyTukePPPW0PKtsfze4us1UPTe1/O2t+1Va/Xr4fPb0+xSZ/729/Khp/Gxsus8VPSOneYHKe91g/Tm3PO9u/rw6/zj5OorR/B/jPPe1fO+vfCDj+xIX+otSO5ld/KhqPTd19Lf1ooAAAABYktHRDM31XxeAAAAB3RJTUUH6ggEASgGceUvegAAAqtJREFUSMftlPVDFEEUx0fRsTnFwG7CPHQsPBULxQIOE8VCRUzsQATEbkVUFAMbFfVQ7O7ujj/GN7sze3M3s3v3O3x/mX3vfT+7O2/fLEJlWRUqBlSqjEFVqlarXsNfqmatQCzIFlDbH6pOEJZUt54vqn4DrFJww0aWWOMm2ERNm1lgzVtgU7U032UrbKXWbUywtqIrMCQ0LLxd+w5CqmMnJdbZbjgiunQlTN26u7fcQ8n1NOq9Iomg3g6j0EeB9eXFflHES/35HNgHSNjAQaw2OFo3DxkaEx4zTL8ePoIVR0rcKFaJjaPG6HinHiaM1sAxvFsSN5ZVxlHbeKGLEzQwnkXSfCXq+YmTwJTk8d0mU26KCTeV5aeBJ0p73+nJWMgRh5qbwTwzwTIL1hRYZ7Nc6hwI5qq5eXp6PjgWwLowjT6Dt3gRDdQcG4rFYFjCu0OWMm4ZDRKUHHM4mHu5xq1g2ZU0CLHiVoFhNazpGpfKsmtokGHFrWVPyaTOTN7QLMJuZ8plg2EdrDnUuZ5zG2i0UckFM0uk3vFN7h2BNkOQnqjktjDLVrBkY5wEyzbjNG6HaIf6O+zknl2E7MZ4DzjjOLeXPjxXze3jJmfe/gMYHwRnPj90hyA4bDKfBR6j7CTu/SXniCMgnaMjIpeicUePHcc4t5BensBm3EmRO+X1ozjNz0aExKEzAkcH+ew5Ays6zwsXZO6iwFFz8aVCnbqcYeTtBTKHrhjlYnCngctVUnT1Wqlwv+sKDN0w3sYFXAmWdRMpdYvX84ALk7Hbd9QcussM9Kvfk7D7D5CZHuqOfEIeSdjjJ8hcT+2snS5v7NlzZKUXLzXuld2Tsr1GvvTmLXDvPKj3Hz76xECfPn+JFaiv3777Q2n68fPXbxswpX/+/vMbKle5ypr+A0UOwAYIaZFIAAAAAElFTkSuQmCC" alt="Pinterest"></a>
+          <a href="#" aria-label="TikTok"><img src="tiktok.png" alt="TikTok"></a>
+          <a href="#" aria-label="Instagram"><img src="instagram.png" alt="Instagram"></a>
+          <a href="#" aria-label="Facebook"><img src="facebook.png" alt="Facebook"></a>
+          <a href="#" aria-label="Pinterest"><img src="pinterest.png" alt="Pinterest"></a>
         </div>
       </div>
       <div>
