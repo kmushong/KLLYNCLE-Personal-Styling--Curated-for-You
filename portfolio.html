@@ -88,7 +88,7 @@
       line-height: 1.2;
     }
 
-    /* --- GALLERY GRID SECTION (REPLACED WITH STORIES SCROLLER) --- */
+    /* --- GALLERY GRID SECTION --- */
     main {
       flex: 1;
       max-width: 1200px;
@@ -97,35 +97,82 @@
       padding: 20px 24px 80px;
     }
 
-    /* New: stories scroller (matches philosophy/stylist sections) */
-    .stories{
-      display:flex; gap:16px; overflow-x:auto; padding:12px 4px 18px; scroll-snap-type:x proximity; align-items:flex-start;
-      -ms-overflow-style:none; scrollbar-width:none;
-    }
-    .stories::-webkit-scrollbar{display:none;}
-
-    .story{
-      flex:0 0 auto; width:132px; scroll-snap-align:start; cursor:pointer; background:none; border:none; padding:0; text-align:center;
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 28px;
+      justify-items: center;
     }
 
-    .story .ring{
-      width:132px; height:132px; border-radius:999px; padding:6px; overflow:hidden;
-      background:conic-gradient(from 210deg, #f3a0b0, #f7cba7, #f3a0b0);
-      display:flex; align-items:center; justify-content:center; transition:transform .35s ease;
+    .portfolio-card {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 3 / 4;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+      background-color: #f4f4f4;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
     }
 
-    .story img{
-      width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; 
-      transition:transform .35s ease;
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 30px rgba(0, 0, 0, 0.12);
     }
 
-    .story:hover .ring{ transform:scale(1.03); }
-    .story:hover img{ transform:scale(1.06); }
+    .portfolio-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
 
-    .story-caption{ margin-top:10px; font-size:0.8rem; color:#444; font-weight:500; }
+    .portfolio-card:hover img {
+      transform: scale(1.05);
+    }
 
-    /* keep existing card styles for backwards compatibility but hide original grid on this page */
-    .portfolio-grid{ display:none; }
+    /* Hover Overlay */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      color: #ffffff;
+    }
+
+    .portfolio-card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .overlay-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .overlay-title {
+      font-size: 0.8rem;
+      opacity: 0.95;
+    }
+
+    .overlay-description {
+      font-size: 0.72rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+    }
 
     /* --- LIGHTBOX MODAL --- */
     .modal {
@@ -238,10 +285,14 @@
         gap: 32px;
       }
 
-      .stories{ gap:12px; }
+      .portfolio-grid {
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
 
-      .story{ width:112px; }
-
+      .portfolio-card {
+        border-radius: 20px;
+      }
     }
   </style>
 </head>
@@ -260,79 +311,67 @@
 
   <!-- MAIN GALLERY -->
   <main>
-    <!-- Replaced the grid with the horizontal "stories" scroller used on philosophy/stylist sections -->
-    <div class="stories" aria-label="Portfolio stories">
-      <!-- Story 1 -->
-      <button class="story" aria-label="Look 01">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_1.jpg" alt="Look 01"></div>
-        <div class="story-caption">Look #01</div>
-      </button>
-
-      <!-- Story 2 -->
-      <button class="story" aria-label="Look 02">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_2.JPG" alt="Look 02"></div>
-        <div class="story-caption">Look #02</div>
-      </button>
-
-      <!-- Story 3 -->
-      <button class="story" aria-label="Look 03">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_3.jpg" alt="Look 03"></div>
-        <div class="story-caption">Look #03</div>
-      </button>
-
-      <!-- Story 4 -->
-      <button class="story" aria-label="Look 04">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_4.jpg" alt="Look 04"></div>
-        <div class="story-caption">Look #04</div>
-      </button>
-
-      <!-- Story 5 -->
-      <button class="story" aria-label="Look 05">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_5.jpg" alt="Look 05"></div>
-        <div class="story-caption">Look #05</div>
-      </button>
-
-      <!-- Story 6 -->
-      <button class="story" aria-label="Look 06">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_6.jpg" alt="Look 06"></div>
-        <div class="story-caption">Look #06</div>
-      </button>
-
-      <!-- Story 7 -->
-      <button class="story" aria-label="Look 07">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_7.png" alt="Look 07"></div>
-        <div class="story-caption">Look #07</div>
-      </button>
-
-      <!-- Story 8 -->
-      <button class="story" aria-label="Look 08">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_8.jpg" alt="Look 08"></div>
-        <div class="story-caption">Look #08</div>
-      </button>
-
-      <!-- Story 9 -->
-      <button class="story" aria-label="Look 09">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_9.png" alt="Look 09"></div>
-        <div class="story-caption">Look #09</div>
-      </button>
-
-      <!-- Story 10 -->
-      <button class="story" aria-label="Look 10">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_10.jpg" alt="Look 10"></div>
-        <div class="story-caption">Look #10</div>
-      </button>
-
-      <!-- Story 11 -->
-      <button class="story" aria-label="Look 11">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_11.jpg" alt="Look 11"></div>
-        <div class="story-caption">Look #11</div>
-      </button>
-
-      <!-- Story 12 -->
-      <button class="story" aria-label="Look 12">
-        <div class="ring"><img src="file:///Users/user1/Desktop/2026%20PRTFL/IMG_12.png" alt="Look 12"></div>
-        <div class="story-caption">Look #12</div>
-      </button>
+    <div class="portfolio-grid">
+      <!-- Image 1 -->
+      <div class="portfolio-card">
+        <img src="img1.jpg" alt="Model Look 1">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #01</span><span class="overlay-description">Soft glam in champagne tones</span></div></div>
+      </div>
+      <!-- Image 2 -->
+      <div class="portfolio-card">
+        <img src="img2.jpg" alt="Model Look 2">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #02</span><span class="overlay-description">Sculpted blazer with pearl details</span></div></div>
+      </div>
+      <!-- Image 3 -->
+      <div class="portfolio-card">
+        <img src="img3.jpg" alt="Model Look 3">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #03</span><span class="overlay-description">Nude satin with effortless waves</span></div></div>
+      </div>
+      <!-- Image 4 -->
+      <div class="portfolio-card">
+        <img src="img4.jpg" alt="Model Look 4">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #04</span><span class="overlay-description">Minimalist monochrome elegance</span></div></div>
+      </div>
+      <!-- Image 5 -->
+      <div class="portfolio-card">
+        <img src="img5.jpg" alt="Model Look 5">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #05</span><span class="overlay-description">Romantic blush with a tailored edge</span></div></div>
+      </div>
+      <!-- Image 6 -->
+      <div class="portfolio-card">
+        <img src="img6.jpg" alt="Model Look 6">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #06</span><span class="overlay-description">Golden-hour glow and silk layers</span></div></div>
+      </div>
+      <!-- Image 7 -->
+      <div class="portfolio-card">
+        <img src="img7.png" alt="Model Look 7">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #07</span><span class="overlay-description">Modern street style in rich neutrals</span></div></div>
+      </div>
+      <!-- Image 8 -->
+      <div class="portfolio-card">
+        <img src="img8.jpg" alt="Model Look 8">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #08</span><span class="overlay-description">Chic evening drama with bold texture</span></div></div>
+      </div>
+      <!-- Image 9 -->
+      <div class="portfolio-card">
+        <img src="img9.jpg" alt="Model Look 9">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #09</span><span class="overlay-description">Clean lines and polished accessories</span></div></div>
+      </div>
+      <!-- Image 10 -->
+      <div class="portfolio-card">
+        <img src="img10.jpg" alt="Model Look 10">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #10</span><span class="overlay-description">Luxe minimalism with sculptural shape</span></div></div>
+      </div>
+      <!-- Image 11 -->
+      <div class="portfolio-card">
+        <img src="img11.jpg" alt="Model Look 11">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #11</span><span class="overlay-description">Soft contrast and airy movement</span></div></div>
+      </div>
+      <!-- Image 12 -->
+      <div class="portfolio-card">
+        <img src="img12.jpg" alt="Model Look 12">
+        <div class="card-overlay"><div class="overlay-text"><span class="overlay-title">Look #12</span><span class="overlay-description">Editorial cool with statement earrings</span></div></div>
+      </div>
     </div>
   </main>
 
@@ -376,13 +415,12 @@
     const modal = document.getElementById('lightboxModal');
     const modalImg = document.getElementById('modalImage');
     const modalClose = document.getElementById('modalClose');
-    // select stories instead of portfolio cards
-    const stories = document.querySelectorAll('.story');
+    const cards = document.querySelectorAll('.portfolio-card');
 
-    // Open lightbox when clicking any story
-    stories.forEach(story => {
-      story.addEventListener('click', () => {
-        const img = story.querySelector('img');
+    // Open lightbox when clicking any card
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
         modal.classList.add('active');
         modalImg.src = img.src;
         modalImg.alt = img.alt;
