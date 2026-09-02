@@ -8,27 +8,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dawning+of+a+New+Day&family=Roboto+Mono:ital,wght@0,400;0,500;1,500&family=Jost:wght@300;400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream: #F3EEE0;
-    --cream-deep: #ECE4D0;
+    /* ---- Style Haus palette, carried over to KLLYNCLE ---- */
+    --cream: #f2f0e9;
+    --cream-deep: #e7e2d3;
     --paper: #FFFFFF;
-    --ink: #1B1812;
-    --ink-soft: #4a4438;
+    --ink: #251410;
+    --ink-blue: #2e3541;
+    --ink-soft: #57635b;
     --taupe: #8a8071;
-    --blush: #E7C9CE;
-    --blush-deep: #cf9aa5;
-    --gold: #B8912E;
-    --line: rgba(27,24,18,0.12);
-    --shadow: 0 20px 60px -25px rgba(27,24,18,0.35);
-    --radius-lg: 28px;
-    --radius-md: 18px;
-    --radius-sm: 10px;
+    --gold: #8c6b29;
+    --rust: #a53f03;
+    --wine: #5a2f2b;
+    --line: rgba(37,20,16,0.14);
+    --shadow: 0 20px 60px -25px rgba(37,20,16,0.35);
+    --radius-lg: 18px;
+    --radius-md: 10px;
+    --radius-sm: 4px;
     --maxw: 1280px;
-    --serif: 'Playfair Display', 'Georgia', serif;
-    --body: 'Lora', 'Georgia', serif;
-    --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    --display: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    --body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'Roboto Mono', ui-monospace, monospace;
+    --script: 'Dawning of a New Day', cursive;
   }
 
   *{box-sizing:border-box;}
@@ -37,7 +40,7 @@
     margin:0;
     font-family:var(--body);
     color:var(--ink);
-    background:var(--paper);
+    background:var(--cream);
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
@@ -70,11 +73,11 @@
 
   /* ---------- top announcement ---------- */
   .announce{
-    background:var(--cream-deep);
-    color:var(--ink-soft);
+    background:var(--ink);
+    color:var(--cream);
     text-align:center;
-    font-family:var(--sans);
-    font-size:12.5px;
+    font-family:var(--mono);
+    font-size:11.5px;
     letter-spacing:.09em;
     text-transform:uppercase;
     padding:10px 16px;
@@ -85,18 +88,21 @@
     background:var(--cream);
     position:sticky; top:0; z-index:60;
     border-bottom:1px solid transparent;
-    transition:box-shadow .3s ease, border-color .3s ease;
+    transition:box-shadow .3s ease, border-color .3s ease, background .3s ease;
   }
-  header.site.scrolled{box-shadow:0 6px 24px -18px rgba(0,0,0,.4); border-color:var(--line);}
-  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,5vw,64px);}
-  .logo{font-family:var(--serif); font-weight:800; font-size:clamp(22px,3vw,28px); letter-spacing:.02em;}
+  header.site.scrolled{box-shadow:0 6px 24px -18px rgba(37,20,16,.45); border-color:var(--line); background:var(--cream);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,5vw,64px) 8px;}
+  .logo-block{display:flex; flex-direction:column; line-height:1;}
+  .logo{font-family:var(--display); font-weight:800; font-size:clamp(20px,2.6vw,26px); letter-spacing:.02em;}
+  .logo span{color:var(--rust);}
+  .logo-tag{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--taupe); margin-top:4px;}
   nav.primary ul{display:flex;gap:clamp(20px,3vw,42px);}
   nav.primary a{
-    font-family:var(--sans); font-size:13px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;
+    font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;
     position:relative; padding:4px 0;
   }
   nav.primary a::after{
-    content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:var(--ink);
+    content:""; position:absolute; left:0; right:0; bottom:-3px; height:1px; background:var(--rust);
     transform:scaleX(0); transform-origin:left; transition:transform .35s ease;
   }
   nav.primary a:hover::after, nav.primary a.active::after{transform:scaleX(1);}
@@ -116,96 +122,84 @@
   }
   .mobile-menu.open{max-height:320px; border-color:var(--line);}
   .mobile-menu ul{display:flex; flex-direction:column; padding:8px clamp(20px,5vw,64px) 22px;}
-  .mobile-menu a{font-family:var(--sans); font-size:15px; letter-spacing:.08em; text-transform:uppercase; padding:12px 0; border-bottom:1px solid var(--line);}
+  .mobile-menu a{font-family:var(--mono); font-size:14px; letter-spacing:.08em; text-transform:uppercase; padding:12px 0; border-bottom:1px solid var(--line);}
 
   /* ---------- hero ---------- */
-  .hero-section{background:var(--cream); padding:clamp(28px,5vw,56px) 0 clamp(50px,7vw,90px);}
+  .hero-section{position:relative; background:var(--cream); min-height:clamp(600px,85vh,860px); padding:0; overflow:hidden;}
   .hero-media{
-    max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px);
+    position:relative; min-height:inherit; max-width:none; margin:0; padding:0;
   }
   .hero-media figure{
-    margin:0; border-radius:var(--radius-lg); overflow:hidden; background:var(--cream-deep);
-    box-shadow:var(--shadow); aspect-ratio: 16 / 9; display:block;
+    position:absolute; inset:clamp(16px,2.5vw,32px); margin:0; border-radius:var(--radius-lg); overflow:hidden; background:var(--ink);
+    box-shadow:none; aspect-ratio:auto; display:block;
   }
-  .hero-media img{width:100%; height:100%; object-fit:cover; object-position:center; display:block;}
+  .hero-media video{width:100%; height:100%; object-fit:cover; object-position:center 8%; display:block;}
+  .hero-kicker{
+    position:absolute; left:clamp(20px,5vw,64px); top:clamp(20px,4vw,40px); z-index:1;
+    font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--cream);
+    text-shadow:0 2px 18px rgba(0,0,0,.5);
+  }
   .hero-caption{
-    display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;
-    margin-top:26px;
+    position:absolute; left:clamp(20px,5vw,64px); right:clamp(20px,5vw,64px); bottom:clamp(34px,6vw,72px);
+    display:flex; flex-direction:column; align-items:flex-end; gap:24px; z-index:1;
+    margin:0; color:var(--cream); text-align:right; text-shadow:0 2px 18px rgba(0,0,0,.5);
   }
   .hero-caption h1{
-    font-family:var(--serif); font-weight:300; font-style:italic; font-size:clamp(18px,1.7vw,35px);
-    max-width:640px; margin:0; line-height:1.25;
+    font-family:var(--display); font-weight:300; font-style:normal; font-size:clamp(20px,2.6vw,44px);
+    max-width:660px; margin:0; line-height:1.2; color:var(--cream);
   }
   .hero-cta{
-    display:inline-flex; align-items:center; gap:10px; background:var(--ink); color:var(--paper);
-    padding:14px 26px; border-radius:999px; font-family:var(--sans); font-size:13px; letter-spacing:.1em;
-    text-transform:uppercase; white-space:nowrap; border:1px solid var(--ink); transition:.3s ease;
+    display:inline-flex; align-items:center; gap:10px; background:var(--cream); color:var(--ink);
+    padding:14px 28px; border-radius:var(--radius-sm); font-family:var(--mono); font-size:12.5px; letter-spacing:.12em;
+    text-transform:uppercase; white-space:nowrap; border:1px solid var(--cream); transition:.3s ease;
   }
-  .hero-cta:hover{background:transparent; color:var(--ink);}
+  .hero-cta:hover{background:transparent; color:var(--cream);}
 
   /* ---------- section heading ---------- */
+  .kicker-row{display:flex; align-items:baseline; gap:14px; margin:0 0 12px;}
   .kicker{
-    font-family:var(--sans); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--taupe);
-    margin:0 0 12px;
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--taupe);
+    margin:0;
+  }
+  .section-no{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; color:var(--rust);
   }
   h2.section-title{
-    font-family:var(--serif); font-weight:700; font-size:clamp(32px,5vw,58px); margin:0 0 8px; line-height:1.05;
+    font-family:var(--display); font-weight:700; font-size:clamp(30px,4.6vw,54px); margin:0 0 8px; line-height:1.06;
   }
-  .section-title .dots{color:var(--blush-deep);}
+  .section-title .dots{color:var(--rust);}
   .section-pad{padding:clamp(64px,9vw,120px) 0;}
   .center{text-align:center;}
+  .center .kicker-row{justify-content:center;}
 
   /* ---------- philosophy ---------- */
   .phil-grid{position:relative; margin-top:clamp(40px,6vw,64px);}
-  .phil-grid::before{
-    content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
-    background:linear-gradient(90deg, var(--paper) 0%, var(--paper) 40%, rgba(255,255,255,0.55) 58%, rgba(255,255,255,0) 78%);
-  }
-  .phil-copy{position:relative; z-index:3; width:60%;}
-  .phil-copy h3{font-family:var(--serif); font-weight:600; font-size:clamp(18px,2vw,22px); margin:0 0 10px;}
-  .phil-block{margin-bottom:34px;}
-  .phil-block p{margin:0 0 12px; color:var(--ink-soft); line-height:1.75; font-size:15.5px;}
+  .phil-copy{position:relative; z-index:3; width:100%;}
+  .phil-copy h3{font-family:var(--display); font-weight:600; font-size:clamp(18px,2vw,22px); margin:0 0 10px;}
+  .phil-block{margin-bottom:34px; padding-left:20px; border-left:2px solid var(--gold);}
+  .phil-block p{margin:0 0 12px; color:var(--ink-soft); line-height:1.75; font-size:15.5px; font-family:var(--body);}
   .phil-block:last-child{margin-bottom:0;}
 
-  .stories{
-    display:flex; gap:16px; overflow-x:auto; padding:6px 4px 18px; scroll-snap-type:x proximity;
-    -ms-overflow-style:none; scrollbar-width:none;
-  }
-  .stories::-webkit-scrollbar{display:none;}
-  .story{
-    flex:0 0 auto; width:112px; scroll-snap-align:start; cursor:pointer; background:none; border:none; padding:0;
-  }
-  .story .ring{
-    width:112px; height:150px; border-radius:56px/75px; padding:4px;
-    background:conic-gradient(from 210deg, var(--blush-deep), var(--gold), var(--blush-deep));
-    transition:transform .35s ease;
-  }
-  .story:hover .ring{transform:translateY(-6px);}
-  .story .ring img{width:100%; height:100%; object-fit:cover; border-radius:52px/71px; border:3px solid var(--paper);}
-
-  .stylist-card{position:absolute; top:0; right:0; bottom:0; width:75%; z-index:0; margin:0; pointer-events:none;}
-  .stylist-card img{width:100%; height:100%; border-radius:var(--radius-lg); object-fit:cover; display:block; box-shadow:var(--shadow);}
   .portfolio-btn{
-    margin: 40px 0 0; background:var(--gold); border:1px solid var(----gold-deep); color:var(--ink);
-    font-family:var(--serif); font-weight:700; font-size:16px; padding:14px 34px; border-radius:999px;
-    box-shadow:var(--shadow); transition:.3s ease; display: inline-block; pointer-events:auto;
+    margin: 40px 0 0; background:var(--ink); border:1px solid var(--ink); color:var(--cream);
+    font-family:var(--mono); font-weight:500; font-size:13px; letter-spacing:.1em; text-transform:uppercase; padding:14px 30px; border-radius:var(--radius-sm);
+    box-shadow:none; transition:.3s ease; display: inline-block; pointer-events:auto;
   }
-  .portfolio-btn:hover{background:var(--gold); color:var(--paper); border-color:var(--gold);}
+  .portfolio-btn:hover{background:transparent; color:var(--ink);}
 
   /* ---------- how it works ---------- */
-  .how-section{background:var(--cream);}
-  .how-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:clamp(40px,6vw,60px);}
-  .how-card figure{margin:0 0 18px; border-radius:var(--radius-md); overflow:hidden; aspect-ratio:258/232; background:var(--paper);}
-  .how-card img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
-  .how-card:hover img{transform:scale(1.06);}
-  .how-card h3{font-family:var(--serif); font-size:19px; margin:0 0 10px; font-weight:700;}
-  .how-card p{margin:0 0 8px; font-size:14px; line-height:1.65; color:var(--ink-soft);}
-  .how-card p b{color:var(--ink); font-family:var(--sans); font-weight:500; letter-spacing:.02em;} 
+  .how-section{background:var(--cream-deep);}
+  .how-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:44px; margin-top:clamp(40px,6vw,60px);}
+  .how-card{position:relative; padding-left:26px; border-left:2px solid var(--rust);}
+  .how-card .how-index{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.15em; color:var(--rust); margin-bottom:8px;}
+  .how-card h3{font-family:var(--display); font-size:19px; margin:0 0 10px; font-weight:700;}
+  .how-card p{margin:0 0 8px; font-size:14px; line-height:1.65; color:var(--ink-soft); font-family:var(--body);}
+  .how-card p b{color:var(--ink); font-family:var(--mono); font-weight:500; letter-spacing:.02em; text-transform:uppercase; font-size:12px;}
 
   /* ---------- why me / brands ---------- */
   .brands-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,6vw,80px); margin-top:clamp(40px,6vw,60px);}
   .brand-col h3{
-    font-family:var(--serif); font-style:italic; font-weight:600; font-size:clamp(19px,2.2vw,24px);
+    font-family:var(--display); font-style:normal; font-weight:600; font-size:clamp(18px,2vw,22px);
     color:var(--gold); text-align:center; margin:0 0 30px; position:relative; display:inline-block;
   }
   .brand-col-head{text-align:center;}
@@ -213,93 +207,96 @@
   .brand-sub.single{grid-template-columns:1fr; max-width:260px; margin:0 auto;}
   .logo-pill{
     display:flex; align-items:center; justify-content:center; text-align:center; padding:18px 10px;
-    font-family:var(--sans); letter-spacing:.06em; color:var(--ink-soft); font-size:14px;
+    font-family:var(--mono); letter-spacing:.06em; color:var(--ink-soft); font-size:13px;
     border-bottom:1px solid var(--line); min-height:64px; transition:.3s ease;
   }
   .logo-pill:hover{color:var(--ink); transform:translateY(-2px);}
-  .logo-pill.serif{font-family:var(--serif); font-weight:700; font-size:16px; letter-spacing:.03em; text-transform:none;}
-  .logo-pill.script{font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:17px; text-transform:none;}
+  .logo-pill.serif{font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:.03em; text-transform:none;}
+  .logo-pill.script{font-family:var(--script); font-style:normal; font-weight:400; font-size:24px; text-transform:none;}
 
   /* ---------- testimonials ---------- */
   .quotes-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:44px; margin-top:clamp(40px,6vw,60px);}
-  .quote{position:relative; padding-left:22px; border-left:2px solid var(--blush-deep);}
-  .quote p{font-size:15.5px; line-height:1.75; color:var(--ink-soft); margin:0 0 14px; font-style:italic;}
-  .quote cite{font-family:var(--sans); font-style:normal; font-size:13px; letter-spacing:.06em; color:var(--ink);}
+  .quote{position:relative; padding-left:22px; border-left:2px solid var(--gold);}
+  .quote p{font-size:15.5px; line-height:1.75; color:var(--ink-soft); margin:0 0 14px; font-style:normal; font-family:var(--body);}
+  .quote cite{font-family:var(--mono); font-style:normal; font-size:12.5px; letter-spacing:.08em; color:var(--rust); text-transform:uppercase;}
 
   .quotes-mobile{display:none;}
 
   .gallery-strip{display:flex; gap:16px; overflow-x:auto; margin-top:clamp(50px,7vw,80px); padding:4px 4px 14px; scroll-snap-type:x proximity; -ms-overflow-style:none; scrollbar-width:none;}
   .gallery-strip::-webkit-scrollbar{display:none;}
-  .gallery-strip figure{flex:0 0 auto; width:180px; height:230px; margin:0; border-radius:90px/115px; overflow:hidden; scroll-snap-align:start;}
-  .gallery-strip img{width:100%; height:100%; object-fit:cover; filter:grayscale(15%); transition:filter .4s ease, transform .5s ease;}
-  .gallery-strip figure:hover img{filter:grayscale(0); transform:scale(1.05);}
+  .gallery-strip figure{position:relative; flex:0 0 auto; width:180px; height:270px; margin:0; padding:4px 4px 0; border-radius:12px; overflow:hidden; scroll-snap-align:start; background:var(--ink); transition:transform .35s ease, box-shadow .35s ease;}
+  .gallery-strip figure:hover{transform:translateY(-6px); box-shadow:0 16px 28px -18px rgba(37,20,16,.5);}
+  .gallery-strip img{width:100%; height:220px; object-fit:cover; border-radius:8px; filter:grayscale(35%) sepia(8%); transition:filter .4s ease, transform .5s ease;}
+  .gallery-strip figure:hover img{filter:grayscale(0) sepia(0); transform:scale(1.05);}
+  .gallery-strip figcaption{height:46px; display:flex; align-items:center; padding:0 8px; color:var(--cream); font-family:var(--mono); font-size:10px; letter-spacing:.08em; line-height:1.3; text-transform:uppercase;}
+  .gallery-cue{display:flex; align-items:center; justify-content:flex-end; gap:10px; margin:clamp(28px,4vw,44px) 0 -30px; color:var(--taupe); font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;}
+  .gallery-cue-arrow{display:inline-block; color:var(--gold); font-size:20px; line-height:1; animation:swipeHint 1.6s ease-in-out infinite;}
+  @keyframes swipeHint{0%,100%{transform:translateX(0); opacity:.55;} 50%{transform:translateX(8px); opacity:1;}}
+  @media (prefers-reduced-motion: reduce){.gallery-cue-arrow{animation:none;}}
 
   /* ---------- contact / newsletter ---------- */
   .contact-section{background:var(--ink); color:var(--cream);}
   .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,80px); align-items:flex-start; margin-top:clamp(36px,5vw,56px);}
-  .contact-section .kicker{color:var(--blush);}
-  .contact-section h2.section-title{color:var(--paper);}
-  .contact-section p.lead{color:rgba(243,238,224,0.75); font-size:15.5px; line-height:1.7; max-width:440px;}
+  .contact-section .kicker{color:var(--gold);}
+  .contact-section .section-no{color:var(--cream); opacity:.5;}
+  .contact-section h2.section-title{color:var(--cream);}
+  .contact-section p.lead{color:rgba(242,240,233,0.75); font-size:15.5px; line-height:1.7; max-width:440px;}
   .field{margin-bottom:18px;}
-  .field label{display:block; font-family:var(--sans); font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; color:rgba(243,238,224,0.65);}
+  .field label{display:block; font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; color:rgba(242,240,233,0.65);}
   .field input, .field textarea{
-    width:100%; background:transparent; border:1px solid rgba(243,238,224,0.3); border-radius:10px;
-    padding:13px 15px; color:var(--paper); font-family:var(--body); font-size:14.5px; transition:.3s ease;
+    width:100%; background:transparent; border:1px solid rgba(242,240,233,0.3); border-radius:var(--radius-sm);
+    padding:13px 15px; color:var(--cream); font-family:var(--body); font-size:14.5px; transition:.3s ease;
   }
-  .field input:focus, .field textarea:focus{outline:none; border-color:var(--blush);}
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--gold);}
   .field textarea{resize:vertical; min-height:100px;}
   .submit-btn{
-    background:var(--blush); color:var(--ink); border:none; padding:14px 30px; border-radius:999px;
-    font-family:var(--sans); font-size:13px; letter-spacing:.1em; text-transform:uppercase; font-weight:500;
+    background:var(--gold); color:var(--ink); border:none; padding:14px 30px; border-radius:var(--radius-sm);
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:500;
     transition:.3s ease;
   }
-  .submit-btn:hover{background:var(--paper);}
-  .form-msg{margin-top:14px; font-size:13.5px; font-family:var(--sans); color:var(--blush); min-height:18px;}
+  .submit-btn:hover{background:var(--cream);}
+  .form-msg{margin-top:14px; font-size:13.5px; font-family:var(--mono); color:var(--gold); min-height:18px;}
 
-  .newsletter-box{margin-top:38px; padding-top:30px; border-top:1px solid rgba(243,238,224,0.2);}
-  .newsletter-box h3{font-family:var(--serif); font-size:19px; margin:0 0 6px;}
-  .newsletter-box p{font-size:13.5px; color:rgba(243,238,224,0.65); margin:0 0 16px;}
+  .newsletter-box{margin-top:38px; padding-top:30px; border-top:1px solid rgba(242,240,233,0.2);}
+  .newsletter-box h3{font-family:var(--display); font-size:19px; margin:0 0 6px;}
+  .newsletter-box p{font-size:13.5px; color:rgba(242,240,233,0.65); margin:0 0 16px; font-family:var(--body);}
   .newsletter-row{display:flex; gap:10px; flex-wrap:wrap;}
   .newsletter-row input{flex:1; min-width:180px;}
   .newsletter-row button{flex:0 0 auto;}
 
   /* ---------- footer ---------- */
-  footer.site{background:var(--cream); border-top:1px solid var(--line);}
+  footer.site{background:var(--cream-deep); border-top:1px solid var(--line);}
   .footer-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:34px; padding:clamp(46px,6vw,64px) 0 30px; text-align:center;}
-  .footer-grid h4{font-family:var(--serif); font-weight:700; font-size:16px; margin:0 0 14px;}
-  .footer-grid p, .footer-grid a{font-size:14px; color:var(--ink-soft); display:block; margin-bottom:8px;}
+  .footer-grid h4{font-family:var(--mono); font-weight:500; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin:0 0 14px; color:var(--taupe);}
+  .footer-grid p, .footer-grid a{font-size:14px; color:var(--ink-soft); display:block; margin-bottom:8px; font-family:var(--body);}
   .footer-grid a:hover{color:var(--ink);}
   .social-row{display:flex; gap:14px; justify-content:center;}
   .social-row a{font-size:20px; color:var(--ink-soft); transition:transform .3s ease, color .3s ease;}
-  .social-row a:hover{transform:translateY(-4px); color:var(--ink);}
-  .footer-bottom{text-align:center; font-family:var(--sans); font-size:11.5px; letter-spacing:.05em; color:var(--taupe); padding:18px 0 26px; border-top:1px solid var(--line);}
+  .social-row a:hover{transform:translateY(-4px); color:var(--rust);}
+  .footer-bottom{text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--taupe); padding:18px 0 26px; border-top:1px solid var(--line);}
 
   .back-top{
     position:fixed; right:22px; bottom:22px; width:46px; height:46px; border-radius:50%; background:var(--ink);
-    color:var(--paper); display:flex; align-items:center; justify-content:center; border:none; z-index:70;
+    color:var(--cream); display:flex; align-items:center; justify-content:center; border:none; z-index:70;
     opacity:0; pointer-events:none; transform:translateY(12px); transition:.35s ease; box-shadow:var(--shadow);
   }
   .back-top.show{opacity:1; pointer-events:auto; transform:translateY(0);}
 
   /* ---------- lightbox ---------- */
-  .lightbox{position:fixed; inset:0; background:rgba(20,17,12,0.88); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; pointer-events:none; transition:opacity .3s ease; padding:24px;}
+  .lightbox{position:fixed; inset:0; background:rgba(37,20,16,0.88); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; pointer-events:none; transition:opacity .3s ease; padding:24px;}
   .lightbox.open{opacity:1; pointer-events:auto;}
   .lightbox-inner{max-width:420px; width:100%; background:var(--cream); border-radius:var(--radius-md); overflow:hidden; text-align:center; transform:scale(.94); transition:transform .3s ease;}
   .lightbox.open .lightbox-inner{transform:scale(1);}
   .lightbox-inner img{width:100%; max-height:60vh; object-fit:cover;}
-  .lightbox-inner .cap{padding:18px 20px 22px; font-family:var(--serif); font-style:italic; font-size:15px; color:var(--ink-soft);}
-  .lightbox-close{position:absolute; top:18px; right:18px; width:40px; height:40px; border-radius:50%; border:1px solid rgba(243,238,224,0.4); background:transparent; color:var(--cream); font-size:18px;}
+  .lightbox-inner .cap{padding:18px 20px 22px; font-family:var(--display); font-style:normal; font-size:15px; color:var(--ink-soft);}
+  .lightbox-close{position:absolute; top:18px; right:18px; width:40px; height:40px; border-radius:50%; border:1px solid rgba(242,240,233,0.4); background:transparent; color:var(--cream); font-size:18px;}
 
   /* ---------- responsive ---------- */
   @media (max-width: 980px){
     nav.primary{display:none;}
     .burger{display:flex;}
     .phil-grid{display:block;}
-    .phil-grid::before{display:none;}
     .phil-copy{width:100%;}
-    .stylist-card{position:static; width:100%; height:auto; margin-top:28px; pointer-events:auto;}
-    .stylist-card img{height:auto; aspect-ratio:4/5;}
-    .how-grid{grid-template-columns:repeat(2,1fr);}
     .quotes-grid{display:none;}
     .quotes-mobile{display:block;}
     .contact-grid{grid-template-columns:1fr;}
@@ -307,7 +304,7 @@
   }
   @media (max-width: 620px){
     .how-grid{grid-template-columns:1fr; max-width:340px; margin-left:auto; margin-right:auto;}
-    .hero-caption{flex-direction:column; align-items:flex-start;}
+    .hero-caption{flex-direction:column; align-items:flex-end; text-align:right;}
     .footer-grid{grid-template-columns:1fr; text-align:center;}
     .brand-sub{grid-template-columns:1fr;}
   }
@@ -319,16 +316,19 @@
   .qm-slides .quote{flex:0 0 100%;}
   .qm-dots{display:flex; justify-content:center; gap:8px; margin-top:22px;}
   .qm-dots button{width:8px; height:8px; border-radius:50%; border:none; background:var(--line); padding:0;}
-  .qm-dots button.active{background:var(--ink); width:22px; border-radius:5px; transition:.3s ease;}
+  .qm-dots button.active{background:var(--rust); width:22px; border-radius:5px; transition:.3s ease;}
 </style>
 </head>
 <body>
 
-<div class="announce">✦ Complimentary 40 Minute Consultation, All Summer Long ✦</div>
+<div class="announce">✧ Complimentary 40 Minute Consultation, All Summer Long ✧</div>
 
 <header class="site" id="siteHeader">
   <div class="nav-row">
-    <a href="#home" class="logo">KLLYNCLE</a>
+    <a href="#home" class="logo-block">
+      <span class="logo">KLLYNCLE <span>/</span></span>
+      <span class="logo-tag">Contemporary Styling Studio</span>
+    </a>
     <nav class="primary">
       <ul>
         <li><a href="#home" class="nav-link active">Home</a></li>
@@ -352,10 +352,13 @@
 <section class="hero-section" id="home">
   <div class="hero-media">
     <figure class="reveal">
-      <img src="header.png" alt="Two clients styled by Kllyncle, holding shopping bags that read 'styled by KLLYNCLE'" loading="eager">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto" aria-label="KLLYNCLE styling preview">
+        <source src="header.mp4" type="video/mp4">
+      </video>
     </figure>
+    <p class="hero-kicker reveal">KLLYNCLE / Personal Styling</p>
     <div class="hero-caption reveal">
-      <h1>Personal styling that turns a full closet into a wardrobe you actually reach for.</h1>
+      <h1>When Did Getting Dressed Start Feeling Like Work?</h1>
       <a href="#contact" class="hero-cta">Book your consultation →</a>
     </div>
   </div>
@@ -363,19 +366,12 @@
 
 <section class="section-pad" id="about">
   <div class="wrap">
-    <p class="kicker reveal">The Approach</p>
+    <div class="kicker-row">
+      <span class="section-no">NO.001</span>
+      <p class="kicker reveal">The Approach</p>
+    </div>
     <h2 class="section-title reveal">The Philosophy &amp; The Stylist</h2>
 	   <div>
-        <p class="kicker reveal" style="margin-bottom:6px;">Tap to see the moment</p>
-        <div class="stories reveal" id="storiesRow">
-          <button class="story" data-cap="Press day — always dressed for the moment."><div class="ring"><img src="img1.jpg" alt="Client moment 1"></div></button>
-          <button class="story" data-cap="On set with a client for a live segment."><div class="ring"><img src="img2.jpg" alt="Client moment 2"></div></button>
-          <button class="story" data-cap="A finished look, ready for the evening."><div class="ring"><img src="img3.jpg" alt="Client moment 3"></div></button>
-          <button class="story" data-cap="Everyday styling, elevated with intention."><div class="ring"><img src="img4.jpg" alt="Client moment 4"></div></button>
-          <button class="story" data-cap="Black tie, styled head to toe."><div class="ring"><img src="img5.jpg" alt="Client moment 5"></div></button>
-          <button class="story" data-cap="A quiet moment before the next fitting."><div class="ring"><img src="img6.jpg" alt="Client moment 6"></div></button>
-        </div>
-
     <div class="phil-grid">
       <div class="phil-copy">
         <div class="phil-block reveal">
@@ -395,45 +391,43 @@
           <a href="portfolio.html" class="portfolio-btn">My Portfolio</a>        </div>
       </div>
 
-       <div class="stylist-card reveal">
-          <picture>
-            <source media="(max-width: 980px)" srcset="phil2.png">
-            <img src="phil.png" alt="Kelly, founder of Kllyncle, dressed and ready for a client fitting">
-          </picture>
-      </div>
 </div>
   </div>
 </section>
 
 <section class="how-section section-pad" id="how-it-works">
   <div class="wrap center">
-    <h2 class="section-title reveal">How It Works...</h2>
+    <div class="kicker-row">
+      <span class="section-no">NO.002</span>
+      <p class="kicker reveal">The Process</p>
+    </div>
+    <h2 class="section-title reveal">How It Works</h2>
   </div>
   <div class="wrap">
     <div class="how-grid reveal-stagger" id="howGrid">
       <div class="how-card">
-        <figure><img src="icn1.jpg" alt="Style consultation session"></figure>
+        <span class="how-index">01</span>
         <h3>Style Consultation</h3>
-        <p><b>The Goal:</b> Define your personal aesthetic, lifestyle needs, and fashion goals.</p>
-        <p><b>The Process:</b> We discuss your daily routine, body shape, preferred colors, and style inspirations. This ensures your wardrobe aligns with both who you are and where you want to go.</p>
+        <p><b>The Goal</b> Define your personal aesthetic, lifestyle needs, and fashion goals.</p>
+        <p>We discuss your daily routine, body shape, preferred colors, and style inspirations. This ensures your wardrobe aligns with both who you are and where you want to go.</p>
       </div>
       <div class="how-card">
-        <figure><img src="icn2.jpg" alt="Closet audit in progress"></figure>
+        <span class="how-index">02</span>
         <h3>Closet Audit</h3>
-        <p><b>The Goal:</b> Streamline and organize your existing wardrobe.</p>
-        <p><b>The Process:</b> We go through your current clothes piece by piece to determine what stays, what gets altered, and what goes. You are left with a functional, clutter-free closet made up only of items you love and wear.</p>
+        <p><b>The Goal</b> Streamline and organize your existing wardrobe.</p>
+        <p>We go through your current clothes piece by piece to determine what stays, what gets altered, and what goes. You are left with a functional, clutter-free closet made up only of items you love and wear.</p>
       </div>
       <div class="how-card">
-        <figure><img src="icn3.jpg" alt="Curated shopping trip"></figure>
+        <span class="how-index">03</span>
         <h3>Curated Shopping</h3>
-        <p><b>The Goal:</b> Fill the gaps in your wardrobe with intentional, high-impact pieces.</p>
-        <p><b>The Process:</b> Based on the closet audit, a targeted shopping list is created. I source versatile, mix-and-match pieces that elevate your everyday style, either via pre-selected online links or an in-person shopping trip.</p>
+        <p><b>The Goal</b> Fill the gaps in your wardrobe with intentional, high-impact pieces.</p>
+        <p>Based on the closet audit, a targeted shopping list is created. I source versatile, mix-and-match pieces that elevate your everyday style, either via pre-selected online links or an in-person shopping trip.</p>
       </div>
       <div class="how-card">
-        <figure><img src="icn4.jpg" alt="Resale and donation sorting"></figure>
+        <span class="how-index">04</span>
         <h3>Resale &amp; Donation</h3>
-        <p><b>The Goal:</b> Give your pre-loved items a second life and recoup some cash.</p>
-        <p><b>The Process:</b> High-quality, gently used items removed during the audit are sorted, photographed, and prepared for consignment or resale — turning closet clutter into a return on investment.</p>
+        <p><b>The Goal</b> Give your pre-loved items a second life and recoup some cash.</p>
+        <p>High-quality, gently used items removed during the audit are sorted, photographed, and prepared for consignment or resale — turning closet clutter into a return on investment.</p>
       </div>
     </div>
   </div>
@@ -441,21 +435,25 @@
 
 <section class="section-pad" id="why-me">
   <div class="wrap center">
+    <div class="kicker-row">
+      <span class="section-no">NO.003</span>
+      <p class="kicker reveal">Credentials</p>
+    </div>
     <h2 class="section-title reveal">Why Me?</h2>
   </div>
   <div class="wrap">
     <div class="brands-grid">
       <div class="brand-col reveal">
-        <div class="brand-col-head"><h3>brands I've loved working for.....</h3></div>
+        <div class="brand-col-head"><h3>Brands I've Loved Working For</h3></div>
         <div class="brand-sub single">
           <div class="logo-pill serif">BOSS <span style="font-size:10px; letter-spacing:.2em; margin-left:6px; align-self:center;">HUGO BOSS</span></div>
-          <div class="logo-pill script">It's Chic <span style="font-size:10px; font-style:normal; letter-spacing:.15em; margin-left:4px;">by Chantelle</span></div>
+          <div class="logo-pill script">It's Chic <span style="font-size:11px; font-family:var(--mono); font-style:normal; letter-spacing:.1em; margin-left:4px;">by Chantelle</span></div>
           <div class="logo-pill" style="letter-spacing:.15em; font-weight:600;">DE LOVÉT</div>
-          <div class="logo-pill" style="font-family:var(--serif); font-style:italic;">Reformation Studio</div>
+          <div class="logo-pill" style="font-family:var(--display); font-style:normal;">Reformation Studio</div>
         </div>
       </div>
       <div class="brand-col reveal">
-        <div class="brand-col-head"><h3>brands that love to work with me.....</h3></div>
+        <div class="brand-col-head"><h3>Brands That Love To Work With Me</h3></div>
         <div class="brand-sub">
           <div class="logo-pill" style="letter-spacing:.2em;">EVERLANE</div>
           <div class="logo-pill" style="text-transform:none;">ARITZIA</div>
@@ -479,7 +477,10 @@
 
 <section class="section-pad" id="portfolio">
   <div class="wrap">
-    <p class="kicker reveal">Client Stories</p>
+    <div class="kicker-row">
+      <span class="section-no">NO.004</span>
+      <p class="kicker reveal">Client Stories</p>
+    </div>
     <h2 class="section-title reveal">Let My Work Speak For Itself</h2>
 
     <div class="quotes-grid">
@@ -517,19 +518,20 @@
       <div class="qm-dots" id="qmDots"></div>
     </div>
 
+    <div class="gallery-cue" aria-hidden="true"><span>Swipe right</span><span class="gallery-cue-arrow">→</span></div>
     <div class="gallery-strip reveal" id="galleryStrip">
-  <figure><img src="img1.jpg" alt="Gallery image 1"></figure>
-  <figure><img src="img2.jpg" alt="Gallery image 2"></figure>
-  <figure><img src="img3.jpg" alt="Gallery image 3"></figure>
-  <figure><img src="img4.jpg" alt="Gallery image 4"></figure>
-  <figure><img src="img5.jpg" alt="Gallery image 5"></figure>
-  <figure><img src="img6.jpg" alt="Gallery image 6"></figure>
-  <figure><img src="img7.png" alt="Gallery image 7"></figure>
-  <figure><img src="img8.jpg" alt="Gallery image 8"></figure>
-  <figure><img src="img9.jpg" alt="Gallery image 9"></figure>
-  <figure><img src="img10.jpg" alt="Gallery image 10"></figure>
-  <figure><img src="img11.jpg" alt="Gallery image 11"></figure>
-  <figure><img src="img12.jpg" alt="Gallery image 12"></figure>
+  <figure><img src="img1.jpg" alt="Gallery image 1"><figcaption>Soft glam in champagne tones</figcaption></figure>
+  <figure><img src="img2.jpg" alt="Gallery image 2"><figcaption>Sculpted blazer with pearl details</figcaption></figure>
+  <figure><img src="img3.jpg" alt="Gallery image 3"><figcaption>Nude satin with effortless waves</figcaption></figure>
+  <figure><img src="img4.jpg" alt="Gallery image 4"><figcaption>Minimalist monochrome elegance</figcaption></figure>
+  <figure><img src="img5.jpg" alt="Gallery image 5"><figcaption>Romantic blush with a tailored edge</figcaption></figure>
+  <figure><img src="img6.jpg" alt="Gallery image 6"><figcaption>Golden-hour glow and silk layers</figcaption></figure>
+  <figure><img src="img7.png" alt="Gallery image 7"><figcaption>Modern street style in rich neutrals</figcaption></figure>
+  <figure><img src="img8.jpg" alt="Gallery image 8"><figcaption>Chic evening drama with bold texture</figcaption></figure>
+  <figure><img src="img9.jpg" alt="Gallery image 9"><figcaption>Clean lines and polished accessories</figcaption></figure>
+  <figure><img src="img10.jpg" alt="Gallery image 10"><figcaption>Luxe minimalism with sculptural shape</figcaption></figure>
+  <figure><img src="img11.jpg" alt="Gallery image 11"><figcaption>Soft contrast and airy movement</figcaption></figure>
+  <figure><img src="img12.jpg" alt="Gallery image 12"><figcaption>Editorial cool with statement earrings</figcaption></figure>
 
 </div>
       
@@ -537,7 +539,10 @@
 
 <section class="section-pad contact-section" id="contact">
   <div class="wrap">
-    <p class="kicker reveal">Get In Touch</p>
+    <div class="kicker-row">
+      <span class="section-no">NO.005</span>
+      <p class="kicker reveal">Get In Touch</p>
+    </div>
     <h2 class="section-title reveal">Let's Build Your Wardrobe</h2>
     <div class="contact-grid">
       <div class="reveal">
@@ -605,14 +610,6 @@
 
 <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
-  <div class="lightbox-inner">
-    <img id="lightboxImg" src="" alt="">
-    <div class="cap" id="lightboxCap"></div>
-  </div>
-</div>
-
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -625,6 +622,11 @@ window.addEventListener('scroll', () => {
 
 /* mobile menu */
 const burger = document.getElementById('burgerBtn');
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo) {
+  heroVideo.playbackRate = 0.75;
+  heroVideo.play().catch(() => { heroVideo.controls = true; });
+}
 const mobileMenu = document.getElementById('mobileMenu');
 burger.addEventListener('click', () => {
   burger.classList.toggle('open');
@@ -655,23 +657,6 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
-
-/* stories lightbox */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCap = document.getElementById('lightboxCap');
-document.querySelectorAll('.story').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const img = btn.querySelector('img');
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCap.textContent = btn.getAttribute('data-cap') || '';
-    lightbox.classList.add('open');
-  });
-});
-document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
-lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 
 /* testimonial mobile carousel */
 const qmSlides = document.getElementById('qmSlides');
