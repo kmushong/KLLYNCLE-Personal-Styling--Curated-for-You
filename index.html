@@ -44,7 +44,6 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  body.contact-mode-leaving{opacity:0; transition:opacity .22s ease;}
   img{max-width:100%;display:block;}
   a{color:inherit;text-decoration:none;}
   ul{margin:0;padding:0;list-style:none;}
@@ -257,8 +256,6 @@
   }
   .submit-btn:hover{background:var(--cream);}
   .form-msg{margin-top:14px; font-size:13.5px; font-family:var(--mono); color:var(--gold); min-height:18px;}
-  .contact-mode{align-items:center; display:flex; flex-wrap:wrap; gap:12px; margin:0 0 22px;}
-  .contact-mode-label{color:rgba(242,240,233,0.75); font-family:var(--mono); font-size:11.5px; letter-spacing:.06em;}
   .mode-toggle{border:1px solid rgba(242,240,233,0.3); border-radius:var(--radius-sm); display:inline-flex; overflow:hidden; padding:2px;}
   .mode-toggle button{background:transparent; border:0; color:rgba(242,240,233,0.7); cursor:pointer; font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:8px 15px; text-transform:uppercase; transition:background .25s ease,color .25s ease;}
   .mode-toggle button.active{background:var(--gold); color:var(--ink);}
@@ -553,13 +550,6 @@
       <p class="kicker reveal">Get In Touch</p>
     </div>
     <h2 class="section-title reveal">Let's Build Your Wardrobe</h2>
-    <div class="contact-mode reveal" id="contactMode" aria-label="Choose how to contact KLLYNCLE">
-      <span class="contact-mode-label">Want to fill this out with AI instead?</span>
-      <div class="mode-toggle" role="group" aria-label="AI contact form preference">
-        <button type="button" class="active" data-mode="no" aria-pressed="true">No</button>
-        <button type="button" data-mode="yes" aria-pressed="false">Yes</button>
-      </div>
-    </div>
     <div class="contact-grid">
       <div class="reveal">
 
@@ -699,20 +689,6 @@ const newsletterForm = document.getElementById('newsletterForm');
 if (contactForm) contactForm.setAttribute('data-form-handler', 'native');
 if (newsletterForm) newsletterForm.setAttribute('data-form-handler', 'native');
 
-const contactMode = document.getElementById('contactMode');
-if (contactMode) {
-  contactMode.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
-    contactMode.querySelectorAll('button').forEach(option => {
-      const selected = option === button;
-      option.classList.toggle('active', selected);
-      option.setAttribute('aria-pressed', String(selected));
-    });
-    if (button.dataset.mode === 'yes') {
-      document.body.classList.add('contact-mode-leaving');
-      window.setTimeout(() => { window.location.href = 'contact-ai.html'; }, 220);
-    }
-  }));
-}
 </script>
 
 </body>
