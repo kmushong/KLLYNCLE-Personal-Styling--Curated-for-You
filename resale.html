@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closet Resale | KLLYNCLE</title>
+  <meta name="description" content="Shop 45 gently worn pieces from KLLYNCLE closet edits and personal styling curation.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --cream: #f4eee4; --cream-deep: #eae1d2; --ink: #241f1a; --ink-soft: #52493f; --mauve-deep: #7c4f47; --line: rgba(36,31,26,.14); --maxw: 1240px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; height: 100%; object-fit: cover; width: 100%; }
+    .announce { border-bottom: 1px solid var(--line); padding: 11px 24px; text-align: center; }
+    .announce p { color: var(--ink-soft); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    header.site { border-bottom: 1px solid var(--line); }
+    .nav-row { align-items: center; display: flex; gap: 28px; justify-content: space-between; margin: 0 auto; max-width: var(--maxw); padding: 25px 56px; }
+    .logo-block { display: flex; flex-direction: column; line-height: 1; }
+    .logo { font-family: Fraunces, serif; font-size: 23px; font-weight: 450; letter-spacing: .02em; }
+    .logo span { color: var(--mauve-deep); }
+    .logo-tag { color: var(--ink-soft); font-size: 9px; letter-spacing: .14em; margin-top: 5px; text-transform: uppercase; }
+    nav ul { display: flex; gap: 35px; list-style: none; }
+    nav a { color: var(--ink-soft); font-size: 13px; padding-bottom: 5px; position: relative; }
+    nav a::after { background: var(--mauve-deep); bottom: 0; content: ''; height: 1px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; width: 100%; }
+    nav a:hover::after, nav a.active::after { transform: scaleX(1); }
+    .burger { background: transparent; border: 1px solid var(--line); border-radius: 50%; display: none; height: 38px; width: 38px; }
+    .mobile-menu { display: none; }
+    main { margin: 0 auto; max-width: var(--maxw); padding: 0 56px 105px; }
+    .page-intro { padding: 82px 0 58px; }
+    .kicker { color: var(--mauve-deep); font-family: Fraunces, serif; font-size: 14px; font-style: italic; margin-bottom: 17px; }
+    h1 { font-family: Fraunces, serif; font-size: clamp(40px, 5vw, 66px); font-weight: 450; line-height: 1.04; max-width: 15ch; }
+    .intro-copy { color: var(--ink-soft); font-size: 15px; line-height: 1.7; margin-top: 24px; max-width: 52ch; }
+    .catalog-head { align-items: end; border-top: 1px solid var(--line); display: flex; justify-content: space-between; padding: 25px 0 22px; }
+    .catalog-head p { color: var(--ink-soft); font-size: 13px; }
+    .catalog-head strong { color: var(--ink); font-family: Fraunces, serif; font-size: 21px; font-weight: 450; }
+    .resale-grid { display: grid; gap: 28px 22px; grid-template-columns: repeat(4, 1fr); }
+    .resale-card { display: flex; flex-direction: column; gap: 10px; }
+    .resale-photo { aspect-ratio: 3 / 4; overflow: hidden; position: relative; }
+    .resale-photo img { transition: transform .45s ease, filter .45s ease; }
+    .resale-card:hover .resale-photo img { filter: saturate(.82); transform: scale(1.04); }
+    .resale-tag { background: var(--ink); color: var(--cream); font-size: 10px; left: 10px; letter-spacing: .07em; padding: 5px 8px; position: absolute; text-transform: uppercase; top: 10px; }
+    .resale-name { font-size: 14px; font-weight: 500; }
+    .resale-meta { color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
+    .resale-price { font-family: Fraunces, serif; font-size: 18px; font-weight: 600; }
+    .resale-btn { border: 1px solid var(--ink); border-radius: 2px; font-size: 12px; margin-top: 2px; padding: 9px; text-align: center; transition: background .25s ease, color .25s ease; }
+    button.resale-btn { background: transparent; color: inherit; cursor: pointer; font-family: inherit; width: 100%; }
+    .resale-btn:hover { background: var(--ink); color: var(--cream); }
+    .back-link { color: var(--mauve-deep); display: inline-block; font-size: 13px; margin-top: 48px; text-decoration: underline; text-underline-offset: 4px; }
+    footer.site { background: var(--cream-deep); border-top: 1px solid var(--line); }
+    .wrap { margin: 0 auto; max-width: var(--maxw); padding: 0 56px; }
+    .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; padding: 58px 0 30px; text-align: center; }
+    .footer-grid h4 { color: #8a8071; font-size: 12px; font-weight: 500; letter-spacing: .12em; margin: 0 0 14px; text-transform: uppercase; }
+    .footer-grid p, .footer-grid a { color: var(--ink-soft); display: block; font-size: 14px; margin-bottom: 8px; }
+    .footer-grid a:hover { color: var(--ink); }
+    .social-row { display: flex; gap: 14px; justify-content: center; }
+    .social-row a { color: var(--ink-soft); font-size: 20px; transition: color .25s ease, transform .25s ease; }
+    .social-row a:hover { color: var(--mauve-deep); transform: translateY(-3px); }
+    .footer-bottom { border-top: 1px solid var(--line); color: #8a8071; font-size: 11px; letter-spacing: .05em; padding: 18px 0 26px; text-align: center; }
+    @media (max-width: 980px) { .resale-grid { grid-template-columns: repeat(3, 1fr); } nav.primary { display: none; } .burger { display: block; } .mobile-menu { border-top: 1px solid var(--line); padding: 8px 56px 20px; } .mobile-menu.open { display: block; } .mobile-menu a { border-bottom: 1px solid var(--line); display: block; font-size: 14px; padding: 12px 0; } }
+    @media (max-width: 700px) { .nav-row { padding: 22px 24px; } main { padding-left: 24px; padding-right: 24px; } .page-intro { padding-top: 62px; } .catalog-head { align-items: flex-start; flex-direction: column; gap: 8px; } .resale-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 14px; } .mobile-menu { padding-left: 24px; padding-right: 24px; } .wrap { padding-left: 24px; padding-right: 24px; } .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="announce"><p>Complimentary 40-minute consultation, all season long</p></div>
+  <header class="site">
+    <div class="nav-row">
+      <a href="index.html" class="logo-block"><span class="logo">KLLYNCLE <span>/</span></span><span class="logo-tag">Contemporary Styling Studio</span></a>
+      <nav class="primary" aria-label="Primary navigation"><ul><li><a href="index.html">Home</a></li><li><a href="index.html#about">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a class="active" href="resale.html">Resale</a></li><li><a href="index.html#contact">Contact</a></li></ul></nav>
+      <button class="burger" id="burgerBtn" aria-label="Toggle menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="portfolio.html">Portfolio</a><a href="resale.html">Resale</a><a href="index.html#contact">Contact</a></div>
+  </header>
+
+  <main>
+    <section class="page-intro"><p class="kicker">Closet clean-out resale</p><h1>Good pieces, ready for their next wardrobe.</h1><p class="intro-copy">Gently used pieces from client and personal closet edits, priced to move. First come, first served. Message to buy and I will confirm availability, condition, and pickup or shipping details.</p></section>
+    <div class="catalog-head"><strong id="catalogCount">45 pieces</strong><p>Scroll through the full resale edit.</p></div>
+    <section class="resale-grid" id="resaleGrid" aria-label="Closet resale products"></section>
+    <a class="back-link" href="portfolio.html#resale">← Back to portfolio</a>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><h4>Business Hours</h4><p>Sun – Wed, 10:00 – 6:00 PM</p></div>
+        <div><h4>See What I've Done</h4><div class="social-row"><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a></div></div>
+        <div><h4>Connect With Me</h4><a href="index.html#contact">Contact</a><a href="index.html#contact">Newsletter</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> KLLYNCLE. Styled with care in Washington, D.C.</div>
+  </footer>
+
+  <script>
+    const products = [
+      ['Cashmere crewneck', 'Everlane', 'M', 'Like new', 45, 'img1.jpg'],
+      ['Leather ankle boot', 'Club Monaco', '8', 'Worn once', 60, 'img2.jpg'],
+      ['Denim jacket', 'Aritzia', 'S', 'Good', 28, 'img3.jpg'],
+      ['Silk blouse', 'Rails', 'M', 'Like new', 32, 'img4.jpg'],
+      ['Wool trouser', 'Todd Snyder', '32', 'Like new', 55, 'img5.jpg'],
+      ['Linen button-up', 'Reformation', 'M', 'Worn twice', 48, 'img6.jpg'],
+      ['Structured blazer', 'Staud', 'S', 'Like new', 85, 'img7.png'],
+      ['Cotton poplin shirt', 'Club Monaco', 'M', 'Good', 34, 'img8.jpg'],
+      ['Silk midi skirt', 'Rails', 'S', 'Like new', 52, 'img9.jpg'],
+      ['Ribbed cardigan', 'Everlane', 'M', 'Worn twice', 38, 'img10.jpg'],
+      ['Suede loafer', 'Club Monaco', '8.5', 'Good', 72, 'img11.jpg'],
+      ['Straight-leg jean', 'Mugsy', '30', 'Like new', 58, 'img12.jpg'],
+      ['Merino knit polo', 'Todd Snyder', 'L', 'Like new', 68, 'img9.png'],
+      ['Wrap midi dress', 'Reformation', 'M', 'Worn once', 95, 'img1.jpg'],
+      ['Pleated trouser', 'Aritzia', '6', 'Good', 44, 'img2.jpg'],
+      ['Cashmere scarf', 'Club Monaco', 'One size', 'Like new', 42, 'img3.jpg'],
+      ['Cropped denim jacket', 'Everlane', 'S', 'Good', 36, 'img4.jpg'],
+      ['Oxford shirt', 'Todd Snyder', 'M', 'Worn twice', 46, 'img5.jpg'],
+      ['Printed silk cami', 'Rails', 'S', 'Like new', 40, 'img6.jpg'],
+      ['Leather belt', 'Reformation', 'M', 'Good', 25, 'img7.png'],
+      ['Wide-leg pant', 'Staud', '8', 'Like new', 64, 'img8.jpg'],
+      ['Relaxed blazer', 'Club Monaco', 'L', 'Worn once', 78, 'img9.jpg'],
+      ['Fine gauge sweater', 'Everlane', 'S', 'Good', 35, 'img10.jpg'],
+      ['Canvas tote', 'Mugsy', 'One size', 'Like new', 24, 'img11.jpg'],
+      ['Linen shirt dress', 'Reformation', 'M', 'Worn once', 82, 'img12.jpg'],
+      ['Textured overshirt', 'Todd Snyder', 'L', 'Like new', 74, 'img9.png'],
+      ['Satin slip skirt', 'Rails', 'M', 'Good', 48, 'img1.jpg'],
+      ['Minimal tank', 'Aritzia', 'S', 'Like new', 22, 'img2.jpg'],
+      ['Chelsea boot', 'Club Monaco', '9', 'Good', 68, 'img3.jpg'],
+      ['Cropped cardigan', 'Everlane', 'M', 'Worn twice', 32, 'img4.jpg'],
+      ['Flannel overshirt', 'Mugsy', 'M', 'Good', 39, 'img5.jpg'],
+      ['Tailored vest', 'Staud', 'S', 'Like new', 58, 'img6.jpg'],
+      ['Silk neck scarf', 'Rails', 'One size', 'Like new', 29, 'img7.png'],
+      ['Travel blazer', 'Todd Snyder', '40', 'Worn once', 88, 'img8.jpg'],
+      ['Barrel-leg jean', 'Aritzia', '28', 'Good', 52, 'img9.jpg'],
+      ['Cashmere cardigan', 'Club Monaco', 'M', 'Like new', 76, 'img10.jpg'],
+      ['Leather crossbody', 'Reformation', 'One size', 'Good', 64, 'img11.jpg'],
+      ['Poplin mini dress', 'Everlane', 'S', 'Worn once', 55, 'img12.jpg'],
+      ['Corduroy trouser', 'Mugsy', '32', 'Good', 42, 'img9.png'],
+      ['Merino crewneck', 'Todd Snyder', 'M', 'Like new', 62, 'img1.jpg'],
+      ['Pleated midi dress', 'Staud', 'M', 'Worn once', 92, 'img2.jpg'],
+      ['Soft leather mule', 'Club Monaco', '8', 'Good', 54, 'img3.jpg'],
+      ['Relaxed linen pant', 'Reformation', '6', 'Like new', 58, 'img4.jpg'],
+      ['Striped cotton shirt', 'Rails', 'M', 'Good', 35, 'img5.jpg'],
+      ['Wool blend coat', 'Everlane', 'M', 'Like new', 110, 'img6.jpg'],
+      ['Knit midi skirt', 'Aritzia', 'S', 'Worn twice', 45, 'img7.png']
+    ];
+
+    const grid = document.getElementById('resaleGrid');
+    products.forEach(([name, brand, size, condition, price, image]) => {
+      const card = document.createElement('article');
+      card.className = 'resale-card';
+      card.innerHTML = `<div class="resale-photo"><img src="${image}" alt="${name} by ${brand}"><span class="resale-tag">${condition}</span></div><div class="resale-name">${name}</div><div class="resale-meta">Size ${size} | ${brand}</div><div class="resale-price">$${price}</div><button class="resale-btn add-to-cart" type="button" data-product="${name}" data-brand="${brand}" data-size="${size}" data-price="${price}">Message to buy</button>`;
+      grid.appendChild(card);
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+  </script>
+  <script src="cart.js"></script>
+</body>
+</html>

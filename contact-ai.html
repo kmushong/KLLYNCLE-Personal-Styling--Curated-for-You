@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Contact Form | KLLYNCLE</title>
+  <meta name="description" content="Share what you need with KLLYNCLE in your own words.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dawning+of+a+New+Day&family=Roboto+Mono:ital,wght@0,400;0,500;1,500&family=Jost:wght@300;400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --cream:#f2f0e9; --cream-deep:#e7e2d3; --ink:#251410; --ink-soft:#57635b; --gold:#8c6b29; --rust:#a53f03; --line:rgba(37,20,16,.14); --mono:'Roboto Mono',ui-monospace,monospace; --display:'Jost','Helvetica Neue',Arial,sans-serif; --body:'Inter','Helvetica Neue',Arial,sans-serif; --maxw:1280px; --radius:4px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--cream); color:var(--ink); font-family:var(--body); margin:0; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; text-decoration:none; }
+    button,input,textarea { font:inherit; }
+    .announce { background:var(--ink); color:var(--cream); font:11.5px var(--mono); letter-spacing:.09em; padding:10px 16px; text-align:center; text-transform:uppercase; }
+    header.site { border-bottom:1px solid transparent; }
+    .nav-row { align-items:center; display:flex; justify-content:space-between; margin:0 auto; max-width:var(--maxw); padding:22px clamp(20px,5vw,64px) 8px; }
+    .logo-block { display:flex; flex-direction:column; line-height:1; }
+    .logo { font-family:var(--display); font-size:clamp(20px,2.6vw,26px); font-weight:800; letter-spacing:.02em; }
+    .logo span { color:var(--rust); }
+    .logo-tag { color:#8a8071; font:10px var(--mono); letter-spacing:.18em; margin-top:4px; text-transform:uppercase; }
+    nav ul { display:flex; gap:clamp(20px,3vw,42px); list-style:none; margin:0; padding:0; }
+    nav a { font:500 12px var(--mono); letter-spacing:.12em; padding:4px 0; position:relative; text-transform:uppercase; }
+    nav a::after { background:var(--rust); bottom:-3px; content:''; height:1px; left:0; position:absolute; transform:scaleX(0); transform-origin:left; transition:transform .25s ease; width:100%; }
+    nav a:hover::after, nav a.active::after { transform:scaleX(1); }
+    .burger { background:transparent; border:1px solid var(--line); border-radius:50%; display:none; height:40px; width:40px; }
+    .mobile-menu { display:none; }
+    .page { margin:0 auto; max-width:760px; padding:clamp(70px,10vw,132px) 24px 120px; }
+    .back-link { color:var(--rust); display:inline-block; font:11px var(--mono); letter-spacing:.1em; margin-bottom:34px; text-transform:uppercase; transition:transform .25s ease; }
+    .back-link:hover { transform:translateX(-4px); }
+    .kicker { color:#8a8071; font:11.5px var(--mono); letter-spacing:.22em; margin:0 0 12px; text-transform:uppercase; }
+    h1 { font:700 clamp(34px,5vw,58px)/1.06 var(--display); margin:0 0 18px; }
+    .intro { color:var(--ink-soft); font-size:15.5px; line-height:1.7; margin:0 0 40px; max-width:560px; }
+    .ai-form { background:var(--ink); color:var(--cream); padding:clamp(24px,5vw,42px); }
+    .ai-form label { color:rgba(242,240,233,.68); display:block; font:11px var(--mono); letter-spacing:.1em; margin-bottom:10px; text-transform:uppercase; }
+    .ai-form textarea { background:transparent; border:1px solid rgba(242,240,233,.32); border-radius:var(--radius); color:var(--cream); min-height:230px; padding:16px; resize:vertical; width:100%; }
+    .ai-form textarea:focus,.review-grid input:focus,.review-grid textarea:focus { border-color:var(--gold); outline:none; }
+    .ai-form textarea::placeholder { color:rgba(242,240,233,.55); }
+    .submit-btn { background:var(--gold); border:1px solid var(--gold); border-radius:var(--radius); color:var(--ink); cursor:pointer; font:500 12px var(--mono); letter-spacing:.1em; margin-top:18px; padding:14px 26px; text-transform:uppercase; transition:background .25s ease,color .25s ease,transform .25s ease; }
+    .submit-btn:hover { background:var(--cream); border-color:var(--cream); transform:translateY(-2px); }
+    .submit-btn:disabled { cursor:wait; opacity:.65; }
+    .status { color:var(--gold); font:13px/1.5 var(--mono); min-height:20px; }
+    .review { border-top:1px solid var(--line); margin-top:34px; padding-top:30px; }
+    .review[hidden] { display:none; }
+    .review h2 { font:600 24px/1.2 var(--display); margin:0 0 8px; }
+    .review p { color:var(--ink-soft); font-size:14px; line-height:1.6; margin:0 0 20px; }
+    .review-grid { display:grid; gap:16px; grid-template-columns:1fr 1fr; }
+    .review-field { display:flex; flex-direction:column; gap:8px; }
+    .review-field.full { grid-column:1/-1; }
+    .review-grid label { color:#8a8071; font:11px var(--mono); letter-spacing:.08em; text-transform:uppercase; }
+    .review-grid input,.review-grid textarea { background:transparent; border:1px solid var(--line); border-radius:var(--radius); color:var(--ink); padding:12px 13px; width:100%; }
+    .review-grid textarea { min-height:110px; resize:vertical; }
+    footer.site { background:var(--cream-deep); border-top:1px solid var(--line); }
+    .footer-grid { display:grid; gap:34px; grid-template-columns:repeat(3,1fr); margin:0 auto; max-width:var(--maxw); padding:58px 56px 30px; text-align:center; }
+    .footer-grid h4 { color:#8a8071; font:500 12px var(--mono); letter-spacing:.12em; margin:0 0 14px; text-transform:uppercase; }
+    .footer-grid p,.footer-grid a { color:var(--ink-soft); display:block; font-size:14px; margin-bottom:8px; }
+    .social-row { display:flex; gap:14px; justify-content:center; }
+    .social-row a { font-size:20px; transition:color .25s ease,transform .25s ease; }
+    .social-row a:hover { color:var(--rust); transform:translateY(-3px); }
+    .footer-bottom { border-top:1px solid var(--line); color:#8a8071; font:11px var(--mono); letter-spacing:.05em; padding:18px 24px 26px; text-align:center; }
+    @media (max-width:980px) { nav.primary { display:none; } .burger { display:block; } .mobile-menu { border-top:1px solid var(--line); padding:8px clamp(20px,5vw,64px) 22px; } .mobile-menu.open { display:block; } .mobile-menu a { border-bottom:1px solid var(--line); display:block; font:14px var(--mono); letter-spacing:.08em; padding:12px 0; text-transform:uppercase; } }
+    @media (max-width:620px) { .page { padding-top:60px; } .review-grid { grid-template-columns:1fr; } .review-field.full { grid-column:auto; } .footer-grid { grid-template-columns:1fr; padding-left:24px; padding-right:24px; } }
+  </style>
+</head>
+<body>
+  <div class="announce">Complimentary 40 minute consultation, all summer long</div>
+  <header class="site">
+    <div class="nav-row">
+      <a href="index.html" class="logo-block"><span class="logo">KLLYNCLE <span>/</span></span><span class="logo-tag">Contemporary Styling Studio</span></a>
+      <nav class="primary" aria-label="Primary navigation"><ul><li><a href="index.html">Home</a></li><li><a href="index.html#about">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="resale.html">Resale</a></li><li><a class="active" href="contact-ai.html">Contact</a></li></ul></nav>
+      <button class="burger" id="burgerBtn" type="button" aria-label="Toggle menu">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="portfolio.html">Portfolio</a><a href="resale.html">Resale</a><a href="index.html#contact">Contact</a></div>
+  </header>
+
+  <main class="page">
+    <a class="back-link" href="index.html#contact">← Back to standard form</a>
+    <p class="kicker">AI-assisted contact</p>
+    <h1>Tell me what you need.</h1>
+    <p class="intro">Write naturally and I will organize your note into a simple inquiry for you to review before it is sent.</p>
+    <form class="ai-form" id="aiForm">
+      <label for="freeText">Your note</label>
+      <textarea id="freeText" placeholder="Tell us what you need - we'll take care of the rest." required></textarea>
+      <button class="submit-btn" id="extractButton" type="submit">Organize my note</button>
+      <p class="status" id="extractStatus" role="status"></p>
+    </form>
+
+    <section class="review" id="reviewStep" hidden aria-live="polite">
+      <h2>Review before sending</h2>
+      <p>Check the details below. You can edit anything before submitting your inquiry.</p>
+      <form class="review-grid" id="reviewForm" action="https://formspree.io/f/maqgnzeg" method="POST">
+        <div class="review-field"><label for="reviewName">Name</label><input id="reviewName" name="name" required></div>
+        <div class="review-field"><label for="reviewEmail">Email</label><input id="reviewEmail" name="email" type="email" required></div>
+        <div class="review-field full"><label for="reviewMessage">Message / inquiry type</label><textarea id="reviewMessage" name="message" required></textarea></div>
+        <input type="hidden" name="_subject" value="New AI-assisted inquiry from KLLYNCLE website">
+        <button class="submit-btn" type="submit">Submit inquiry</button>
+        <p class="status" id="submitStatus" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="footer-grid">
+      <div><h4>Business Hours</h4><p>Sun - Wed, 10:00 - 6:00 PM</p></div>
+      <div><h4>See What I've Done</h4><div class="social-row"><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a></div></div>
+      <div><h4>Connect With Me</h4><a href="index.html#contact">Contact</a><a href="index.html#contact">Newsletter</a></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> KLLYNCLE. Styled with care in Washington, D.C.</div>
+  </footer>
+
+  <script>
+    const AI_EXTRACTION_ENDPOINT = '/api/contact-ai/extract';
+    const STANDARD_CONTACT_ENDPOINT = 'https://formspree.io/f/maqgnzeg';
+
+    // Keeps the AI choice isolated so the form can be reused on another page later.
+    function renderToggle() {
+      const menu = document.getElementById('mobileMenu');
+      document.getElementById('burgerBtn').addEventListener('click', () => menu.classList.toggle('open'));
+    }
+
+    // The server endpoint keeps the AI provider key private. Expected response: { name, email, message }.
+    async function handleAIExtractionCall(freeText) {
+      const response = await fetch(AI_EXTRACTION_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ text: freeText })
+      });
+      if (!response.ok) throw new Error('AI extraction request failed');
+      return response.json();
+    }
+
+    function renderConfirmationStep(fields) {
+      document.getElementById('reviewName').value = fields.name || '';
+      document.getElementById('reviewEmail').value = fields.email || '';
+      document.getElementById('reviewMessage').value = fields.message || fields.inquiryType || '';
+      document.getElementById('reviewStep').hidden = false;
+      document.getElementById('reviewStep').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    renderToggle();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const aiForm = document.getElementById('aiForm');
+    const extractStatus = document.getElementById('extractStatus');
+    aiForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const button = document.getElementById('extractButton');
+      button.disabled = true;
+      extractStatus.textContent = 'Organizing your note...';
+      try {
+        const fields = await handleAIExtractionCall(document.getElementById('freeText').value);
+        renderConfirmationStep(fields);
+        extractStatus.textContent = '';
+      } catch (error) {
+        extractStatus.textContent = 'I could not organize that note right now. Please try again or use the standard form.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    const reviewForm = document.getElementById('reviewForm');
+    reviewForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const status = document.getElementById('submitStatus');
+      const button = reviewForm.querySelector('button[type="submit"]');
+      button.disabled = true;
+      status.textContent = 'Sending your inquiry...';
+      try {
+        const response = await fetch(STANDARD_CONTACT_ENDPOINT, { method: 'POST', body: new FormData(reviewForm), headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Submission failed');
+        status.textContent = 'Sent. I will be in touch soon.';
+        reviewForm.reset();
+      } catch (error) {
+        status.textContent = 'Something went wrong. Please try again or use the standard form.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
