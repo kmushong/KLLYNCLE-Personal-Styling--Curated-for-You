@@ -121,16 +121,45 @@
       .mobile-menu.open { display: block; }
       .mobile-menu a { border-bottom: 1px solid var(--line); display: block; font-size: 14px; padding: 12px 0; }
     }
+    @media (min-width: 1100px) {
+      .nav-row { padding-left: 72px; padding-right: 72px; }
+      .page-intro, .block { padding-left: 72px; padding-right: 72px; }
+      .block { padding-bottom: 112px; padding-top: 82px; }
+      .portfolio-grid { gap: 36px; }
+      .resale-grid { gap: 30px; }
+      .block-head { margin-bottom: 56px; }
+    }
+    @media (min-width: 701px) and (max-width: 1099px) {
+      .primary { display: none; }
+      .burger { display: block; }
+    }
     @media (max-width: 700px) {
+      .announce { font-size: 10px; line-height: 1.45; padding: 9px 18px; }
       .nav-row { padding: 22px 24px; }
+      .logo { font-size: 21px; }
+      .logo-tag { font-size: 8px; letter-spacing: .12em; }
+      .burger { height: 42px; width: 42px; }
       .page-intro, .block { padding-left: 24px; padding-right: 24px; }
-      .page-intro { padding-top: 62px; }
+      .page-intro { padding-bottom: 42px; padding-top: 58px; }
+      .page-intro h1 { font-size: clamp(38px, 11vw, 54px); max-width: 12ch; }
       .block-head { align-items: flex-start; flex-direction: column; gap: 16px; }
+      .block { padding-bottom: 72px; padding-top: 54px; }
+      .block-head { margin-bottom: 30px; }
+      .block-head p { font-size: 14px; line-height: 1.6; }
       .portfolio-grid, .resale-grid { grid-template-columns: 1fr; }
-      .portfolio-grid { gap: 40px; }
+      .portfolio-grid { gap: 34px; }
+      .deals-cue { justify-content: flex-start; margin-bottom: 14px; }
+      .deals-grid { gap: 14px; padding-bottom: 14px; }
+      .deal-card { flex-basis: min(78vw, 290px); }
+      .deal-body { padding: 17px 18px 20px; }
+      .resale-grid { gap: 30px; }
+      .resale-more { margin-top: 32px; width: 100%; }
+      .closing { padding: 76px 24px; }
+      .closing h2 { font-size: clamp(34px, 10vw, 48px); }
       .mobile-menu { padding-left: 24px; padding-right: 24px; }
       .wrap { padding-left: 24px; padding-right: 24px; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; padding-top: 44px; }
+      .footer-bottom { font-size: 10px; line-height: 1.5; padding-left: 20px; padding-right: 20px; }
     }
   </style>
 </head>

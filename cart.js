@@ -5,7 +5,7 @@
 
   const style = document.createElement('style');
   style.textContent = `
-    .cart-trigger { align-items:center; background:var(--ink); border:0; border-radius:50%; bottom:22px; color:var(--cream); cursor:pointer; display:flex; font:500 12px Inter,sans-serif; height:52px; justify-content:center; position:fixed; right:22px; width:52px; z-index:80; }
+    .cart-trigger { align-items:center; background:var(--ink); border:0; border-radius:50%; bottom:calc(18px + env(safe-area-inset-bottom)); color:var(--cream); cursor:pointer; display:flex; font:500 12px Inter,sans-serif; height:52px; justify-content:center; position:fixed; right:18px; width:52px; z-index:80; }
     .cart-trigger span { align-items:center; background:var(--mauve-deep); border-radius:50%; display:flex; font-size:10px; height:19px; justify-content:center; position:absolute; right:-3px; top:-3px; width:19px; }
     .cart-overlay { align-items:stretch; background:rgba(36,31,26,.58); display:flex; inset:0; justify-content:flex-end; opacity:0; pointer-events:none; position:fixed; transition:opacity .25s ease; z-index:90; }
     .cart-overlay.open { opacity:1; pointer-events:auto; }
@@ -27,7 +27,7 @@
     .cart-submit { background:var(--ink); border:1px solid var(--ink); border-radius:2px; color:var(--cream); cursor:pointer; font:500 12px Inter,sans-serif; letter-spacing:.08em; padding:13px; text-transform:uppercase; width:100%; }
     .cart-submit:disabled { cursor:wait; opacity:.6; }
     .cart-status { color:var(--mauve-deep); font-size:13px; line-height:1.5; margin-top:12px; min-height:18px; }
-    @media (max-width:600px) { .cart-panel { max-width:none; padding:24px; } }
+    @media (max-width:600px) { .cart-trigger { bottom:calc(14px + env(safe-area-inset-bottom)); right:14px; } .cart-panel { max-width:none; padding:22px 20px calc(22px + env(safe-area-inset-bottom)); } .cart-head h2 { font-size:27px; } .cart-items { min-height:120px; } .cart-form input { min-height:44px; } .cart-submit { min-height:46px; } }
   `;
   document.head.appendChild(style);
 

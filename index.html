@@ -173,12 +173,17 @@
   .center .kicker-row{justify-content:center;}
 
   /* ---------- philosophy ---------- */
-  .phil-grid{position:relative; margin-top:clamp(40px,6vw,64px);}
-  .phil-copy{position:relative; z-index:3; width:100%;}
-  .phil-copy h3{font-family:var(--display); font-weight:600; font-size:clamp(18px,2vw,22px); margin:0 0 10px;}
+  .phil-grid{position:relative; display:grid; grid-template-columns:minmax(560px, 1.35fr) minmax(300px, 0.8fr); align-items:center; gap:clamp(34px,5vw,62px); margin-top:clamp(40px,6vw,64px);}
+  .phil-copy{position:relative; z-index:3; width:min(100%, 960px); margin:0 auto;}
+  .phil-copy h3{font-family:var(--display); font-weight:600; font-size:clamp(18px,2vw,22px); margin:0 0 10px; line-height:1.35; color:var(--ink); letter-spacing:.015em;}
   .phil-block{margin-bottom:34px; padding-left:20px; border-left:2px solid var(--gold);}
-  .phil-block p{margin:0 0 12px; color:var(--ink-soft); line-height:1.75; font-size:15.5px; font-family:var(--body);}
+  .phil-block p{max-width:68ch; margin:0 0 12px; color:var(--ink-soft); line-height:1.75; font-size:15.5px; font-family:var(--body);}
   .phil-block:last-child{margin-bottom:0;}
+
+  .phil-image-wrap{position:relative; display:flex; align-items:center; justify-content:center; min-height:420px;}
+  .phil-image-frame{width:min(420px, 100%); background:var(--paper); border:1px solid var(--line); padding:12px; box-shadow:var(--shadow); border-radius:var(--radius-lg); transform:rotate(2deg);}
+  .phil-image-frame img{width:100%; aspect-ratio:4 / 5; object-fit:cover; border-radius:var(--radius-md); display:block; filter:saturate(1.06) contrast(1.03);}
+  .phil-image-caption{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; text-align:center; color:var(--taupe); padding-top:12px;}
 
   .portfolio-btn{
     margin: 40px 0 0; background:var(--ink); border:1px solid var(--ink); color:var(--cream);
@@ -301,15 +306,46 @@
     .burger{display:flex;}
     .phil-grid{display:block;}
     .phil-copy{width:100%;}
+    .phil-image-wrap{min-height:auto; margin-top:28px;}
+    .phil-image-frame{width:min(420px, 80vw); margin:0 auto; transform:none;}
     .quotes-grid{display:none;}
     .quotes-mobile{display:block;}
     .contact-grid{grid-template-columns:1fr;}
     .brands-grid{grid-template-columns:1fr; gap:46px;}
   }
+  @media (min-width: 1100px){
+    .wrap{max-width:1360px;}
+    .nav-row{padding-left:clamp(32px,5vw,84px); padding-right:clamp(32px,5vw,84px);}
+    .section-pad{padding-top:clamp(88px,9vw,140px); padding-bottom:clamp(88px,9vw,140px);}
+    .how-grid{column-gap:72px; row-gap:58px;}
+    .brands-grid{column-gap:clamp(60px,8vw,120px);}
+    .quotes-grid{column-gap:64px;}
+  }
   @media (max-width: 620px){
+    .announce{font-size:10px; line-height:1.45; padding:9px 18px;}
+    .nav-row{padding:16px 20px 7px;}
+    .logo{font-size:21px;}
+    .logo-tag{font-size:8px; letter-spacing:.12em;}
+    .burger{width:42px; height:42px;}
+    .hero-section{min-height:560px;}
+    .hero-media figure{inset:12px; border-radius:12px;}
+    .hero-kicker{font-size:9px; left:28px; top:28px; letter-spacing:.16em;}
     .how-grid{grid-template-columns:1fr; max-width:340px; margin-left:auto; margin-right:auto;}
-    .hero-caption{flex-direction:column; align-items:flex-end; text-align:right;}
-    .footer-grid{grid-template-columns:1fr; text-align:center;}
+    .hero-caption{bottom:32px; gap:18px; left:28px; right:28px; flex-direction:column; align-items:flex-start; text-align:left;}
+    .hero-caption h1{font-size:clamp(26px,8vw,36px); line-height:1.1; max-width:13ch;}
+    .hero-cta{font-size:10px; letter-spacing:.08em; padding:13px 17px;}
+    .section-pad{padding:64px 0;}
+    h2.section-title{font-size:clamp(31px,9vw,43px);}
+    .phil-block{margin-bottom:28px; padding-left:15px;}
+    .phil-block p, .contact-section p.lead{font-size:14px; line-height:1.65;}
+    .newsletter-row{display:block;}
+    .newsletter-row input, .newsletter-row button{width:100%;}
+    .newsletter-row button{margin-top:10px;}
+    .gallery-strip figure{width:160px; height:248px;}
+    .gallery-strip img{height:200px;}
+    .gallery-cue{font-size:10px; margin-bottom:-24px;}
+    .footer-grid{grid-template-columns:1fr; padding-top:44px; text-align:center;}
+    .footer-bottom{font-size:10px; line-height:1.5; padding-left:20px; padding-right:20px;}
     .brand-sub{grid-template-columns:1fr;}
   }
 
@@ -381,20 +417,29 @@
     <div class="phil-grid">
       <div class="phil-copy">
         <div class="phil-block reveal">
-          <h3>Demystifying luxury pricing, maximizing your time.</h3>
-          <p>Let's be honest: modern luxury retail pricing is rarely reflective of actual value. Brands constantly mark up prices only to quietly discount them later. But as a busy professional in Washington, D.C., you don't have the time to scour off-price racks, and you certainly aren't going to spend your valuable day bargaining with boutique sales associates.</p>
-          <p>That is where I come in.......</p>
+          <h3>Maximizing Your Time</h3>
+          <p>My job is to help you see yourself clearly and show up in every room with intention — today, not yesterday.</p>
+          <p>Through closet edits, personal shopping, and wardrobe refinement, we build something intentional, effortless, and completely your own.</p>
         </div>
         <div class="phil-block reveal">
-          <h3>The Insider's Advantage</h3>
-          <p>Over the years, I have built an exclusive network and deep rapport with key luxury retail insiders. More importantly, I leverage collective buying power.</p>
-          <p>When you shop with me, you aren't just placing an individual order. I pool my clients' selections into high-volume bulk orders. While you might only be purchasing one or two perfect pieces, our collective order of 25+ items incentivizes luxury boutiques to extend exclusive, insider discounts directly to us. High-fashion access, without the retail markup.</p>
+          <h3>The Insider’s Advantage</h3>
+          <p>Private access. Exceptional pieces. Preferential pricing.</p>
+          <p>My experience in the fashion industry has given me a unique perspective on how to source the best pieces for my clients, often before they hit the market.</p>
+          <p>I know how to find the right pieces for your wardrobe, and I know how to get them at the right price.</p>
         </div>
         <div class="phil-block reveal">
           <h3>The Closet Cure</h3>
-          <p>Our bodies fluctuate, we grow, we shrink, we evolve. Your closet shouldn't be a source of decision fatigue or a reminder of past versions of yourself. But let's face it: you have a demanding career to run, and digging through hangers to sort, resell, or donate is exhausting.</p>
-          <p>I have a genuine obsession with clean spaces, luxury organization, and sharp curation. I will audit, organize, and refresh your space, deciding exactly what stays, what gets resold to earn you money back, and what gets donated — all with zero effort on your part.</p>
-          <a href="portfolio.html" class="portfolio-btn">My Portfolio</a>        </div>
+          <p>Once I start understanding your life — what you actually wear, where you need to show up, and what isn’t working.</p>
+          <p>From there, we build a wardrobe that works for the life you’re actually living right now.</p>
+
+          <a href="portfolio.html" class="portfolio-btn">My Portfolio</a>
+        </div>
+      </div>
+      <div class="phil-image-wrap reveal">
+        <figure class="phil-image-frame">
+          <img src="phil.png" alt="KLLYNCLE stylist portrait">
+          <figcaption class="phil-image-caption">The Stylist</figcaption>
+        </figure>
       </div>
 
 </div>
@@ -414,25 +459,21 @@
       <div class="how-card">
         <span class="how-index">01</span>
         <h3>Style Consultation</h3>
-        <p><b>The Goal</b> Define your personal aesthetic, lifestyle needs, and fashion goals.</p>
         <p>We discuss your daily routine, body shape, preferred colors, and style inspirations. This ensures your wardrobe aligns with both who you are and where you want to go.</p>
       </div>
       <div class="how-card">
         <span class="how-index">02</span>
         <h3>Closet Audit</h3>
-        <p><b>The Goal</b> Streamline and organize your existing wardrobe.</p>
         <p>We go through your current clothes piece by piece to determine what stays, what gets altered, and what goes. You are left with a functional, clutter-free closet made up only of items you love and wear.</p>
       </div>
       <div class="how-card">
         <span class="how-index">03</span>
         <h3>Curated Shopping</h3>
-        <p><b>The Goal</b> Fill the gaps in your wardrobe with intentional, high-impact pieces.</p>
         <p>Based on the closet audit, a targeted shopping list is created. I source versatile, mix-and-match pieces that elevate your everyday style, either via pre-selected online links or an in-person shopping trip.</p>
       </div>
       <div class="how-card">
         <span class="how-index">04</span>
         <h3>Resale &amp; Donation</h3>
-        <p><b>The Goal</b> Give your pre-loved items a second life and recoup some cash.</p>
         <p>High-quality, gently used items removed during the audit are sorted, photographed, and prepared for consignment or resale — turning closet clutter into a return on investment.</p>
       </div>
     </div>
@@ -564,7 +605,7 @@
             <input type="hidden" name="_subject" value="Newsletter signup from KLLYNCLE website">
             <div class="form-msg" id="newsletterMsg"></div>
           </form>
-        </div>
+      </div>
       </div>
 
       <form class="reveal" id="contactForm" action="https://formspree.io/f/maqgnzeg" method="POST" accept-charset="UTF-8">
