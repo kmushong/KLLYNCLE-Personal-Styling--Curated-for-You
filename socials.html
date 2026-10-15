@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101010">
+    <link rel="stylesheet" href="pages.css">
+    <title>Socials | Kelly Mushonga</title>
+</head>
+<body>
+    <header class="page-header"><div class="page-wrap page-header-inner">
+        <a class="page-brand" href="video.html#portfolio">KELLY MUSHONGA</a>
+        <nav class="page-nav" aria-label="Work pages"><a href="portfolio.html">Portfolio</a><a href="shop.html">Shop</a><a href="resale.html">Resale</a><a href="socials.html" aria-current="page">Socials</a><a href="wardrobe-refresh.html">Wardrobe Refresh</a><a href="style-notes.html">Style Notes</a></nav>
+    </div></header>
+    <main class="page-wrap page-main">
+        <section class="page-intro"><p class="page-kicker">Around the web / 04</p><h1>Style updates, wherever you scroll.</h1><p>Short previews of the places to find styling notes, new work, and updates. Open a channel to see the latest posts.</p></section>
+        <section class="page-section" aria-label="Social channels">
+            <div class="social-list">
+                <a class="social-entry" href="https://www.instagram.com/styledbykllyncle/" target="_blank" rel="noopener noreferrer"><h2>Instagram</h2><p>Styling updates, outfit ideas, and current shop or resale posts.</p><span>@styledbykllyncle ↗</span></a>
+                <a class="social-entry" href="https://www.tiktok.com/@styledbykllyncle" target="_blank" rel="noopener noreferrer"><h2>TikTok</h2><p>Style inspiration, outfit edits, and behind-the-scenes looks.</p><span>@styledbykllyncle ↗</span></a>
+                <a class="social-entry" href="https://www.facebook.com/styledbykllyncle/" target="_blank" rel="noopener noreferrer"><h2>Facebook</h2><p>Follow along for styling updates and shared announcements.</p><span>Styled by Kllyncle ↗</span></a>
+                <a class="social-entry" href="https://www.pinterest.com/styledbykllyncle/" target="_blank" rel="noopener noreferrer"><h2>Pinterest</h2><p>Explore outfit ideas, styling references, and saved inspiration.</p><span>@styledbykllyncle ↗</span></a>
+                <a class="social-entry" href="https://www.vinted.com/member/styledbykllyncle" target="_blank" rel="noopener noreferrer"><h2>Vinted</h2><p>Browse pre-loved pieces and resale finds.</p><span>@styledbykllyncle ↗</span></a>
+                <a class="social-entry" href="https://www.depop.com/styledbykllyncle/" target="_blank" rel="noopener noreferrer"><h2>Depop</h2><p>Shop pre-loved style and curated resale pieces.</p><span>@styledbykllyncle ↗</span></a>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer"><div class="page-wrap"><a href="video.html#portfolio">Back to My Work</a> · Kelly Mushonga</div></footer>
+    <script>
+        (function () {
+            var list = document.querySelector('.social-list');
+            var cards = Array.from(list.children);
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (reducedMotion) return;
+
+            function activateCard(activeIndex) {
+                cards.forEach(function (card, index) {
+                    var distance = index - activeIndex;
+                    card.style.setProperty('--coverflow-rotate', (distance * -18) + 'deg');
+                    card.style.setProperty('--coverflow-depth', (Math.max(0, 1 - Math.abs(distance)) * 28 - Math.abs(distance) * 14) + 'px');
+                    card.style.setProperty('--coverflow-scale', Math.max(0.88, 1 - Math.abs(distance) * 0.055));
+                    card.style.setProperty('--coverflow-lift', (distance === 0 ? '-8px' : '0px'));
+                    card.classList.toggle('is-active', index === activeIndex);
+                });
+            }
+
+            function resetCards() {
+                cards.forEach(function (card) {
+                    ['--coverflow-rotate', '--coverflow-depth', '--coverflow-scale', '--coverflow-lift'].forEach(function (property) {
+                        card.style.removeProperty(property);
+                    });
+                    card.classList.remove('is-active');
+                });
+            }
+
+            list.addEventListener('pointermove', function (event) {
+                if (event.pointerType !== 'mouse') return;
+                var activeIndex = cards.reduce(function (closestIndex, card, index) {
+                    var bounds = card.getBoundingClientRect();
+                    var distance = Math.hypot(event.clientX - (bounds.left + bounds.width / 2), event.clientY - (bounds.top + bounds.height / 2));
+                    var closestBounds = cards[closestIndex].getBoundingClientRect();
+                    var closestDistance = Math.hypot(event.clientX - (closestBounds.left + closestBounds.width / 2), event.clientY - (closestBounds.top + closestBounds.height / 2));
+                    return distance < closestDistance ? index : closestIndex;
+                }, 0);
+                activateCard(activeIndex);
+            });
+
+            list.addEventListener('pointerleave', resetCards);
+            list.addEventListener('focusin', function (event) {
+                var activeIndex = cards.indexOf(event.target.closest('.social-entry'));
+                if (activeIndex >= 0) activateCard(activeIndex);
+            });
+            list.addEventListener('focusout', function (event) {
+                if (!list.contains(event.relatedTarget)) resetCards();
+            });
+        }());
+    </script>
+</body>
+</html>

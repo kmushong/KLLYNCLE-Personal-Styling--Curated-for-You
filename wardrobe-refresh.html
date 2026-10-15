@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101010">
+    <link rel="stylesheet" href="pages.css">
+    <title>Wardrobe Refresh | Kelly Mushonga</title>
+</head>
+<body>
+    <header class="page-header"><div class="page-wrap page-header-inner">
+        <a class="page-brand" href="video.html#portfolio">KELLY MUSHONGA</a>
+        <nav class="page-nav" aria-label="Work pages"><a href="portfolio.html">Portfolio</a><a href="shop.html">Shop</a><a href="resale.html">Resale</a><a href="socials.html">Socials</a><a href="wardrobe-refresh.html" aria-current="page">Wardrobe Refresh</a><a href="style-notes.html">Style Notes</a></nav>
+    </div></header>
+    <main class="page-wrap page-main">
+        <section class="page-intro"><p class="page-kicker">Video preview / 05</p><h1>The Wardrobe Refresh.</h1><p>A closer look at the edit: what stays, what can be styled in new ways, and what is ready to move on.</p></section>
+        <section class="page-section">
+            <div class="video-preview video-preview-player"><div class="video-embed"><iframe id="wardrobe-refresh-video" src="https://www.youtube-nocookie.com/embed/Sif0pD7GswU?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1" title="The Wardrobe Refresh" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="origin" allowfullscreen></iframe></div></div>
+        </section>
+    </main>
+    <footer class="page-footer"><div class="page-wrap"><a href="video.html#portfolio">Back to My Work</a> · YouTube video</div></footer>
+    <script>
+        var wardrobeRefreshPlayer;
+
+        function onYouTubeIframeAPIReady() {
+            wardrobeRefreshPlayer = new YT.Player('wardrobe-refresh-video', {
+                events: {
+                    onReady: function (event) {
+                        event.target.mute();
+                        event.target.playVideo();
+                    }
+                }
+            });
+        }
+    </script>
+    <script src="https://www.youtube.com/iframe_api" async></script>
+</body>
+</html>

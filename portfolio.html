@@ -1,273 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio | KLLYNCLE</title>
-  <meta name="description" content="A curated look at KLLYNCLE styling work, weekly finds, and closet resale pieces.">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --cream: #f4eee4;
-      --cream-deep: #eae1d2;
-      --ink: #241f1a;
-      --ink-soft: #52493f;
-      --mauve-deep: #7c4f47;
-      --sale: #6e7c5e;
-      --line: rgba(36, 31, 26, .14);
-      --maxw: 1240px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    ul { list-style: none; }
-
-    .announce { border-bottom: 1px solid var(--line); padding: 11px 24px; text-align: center; }
-    .announce p { color: var(--ink-soft); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
-    header.site { border-bottom: 1px solid var(--line); }
-    .nav-row { align-items: center; display: flex; gap: 28px; justify-content: space-between; margin: 0 auto; max-width: var(--maxw); padding: 25px 56px; }
-    .logo-block { display: flex; flex-direction: column; line-height: 1; }
-    .logo { font-family: Fraunces, serif; font-size: 23px; font-weight: 450; letter-spacing: .02em; }
-    .logo span { color: var(--mauve-deep); }
-    .logo-tag { color: var(--ink-soft); font-size: 9px; letter-spacing: .14em; margin-top: 5px; text-transform: uppercase; }
-    .primary ul { display: flex; gap: 35px; }
-    .primary a { color: var(--ink-soft); font-size: 13px; padding-bottom: 5px; position: relative; }
-    .primary a::after { background: var(--mauve-deep); bottom: 0; content: ''; height: 1px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; width: 100%; }
-    .primary a:hover::after, .primary a.active::after { transform: scaleX(1); }
-    .burger { background: transparent; border: 1px solid var(--line); border-radius: 50%; display: none; height: 38px; width: 38px; }
-    .mobile-menu { display: none; }
-
-    .page-intro, .block { margin: 0 auto; max-width: var(--maxw); padding-left: 56px; padding-right: 56px; }
-    .page-intro { padding-bottom: 48px; padding-top: 82px; }
-    .kicker, .num { color: var(--mauve-deep); font-family: Fraunces, serif; font-size: 14px; font-style: italic; }
-    .page-intro .kicker { margin-bottom: 17px; }
-    .page-intro h1 { font-family: Fraunces, serif; font-size: clamp(40px, 5vw, 66px); font-weight: 450; line-height: 1.04; max-width: 16ch; }
-    .block { border-top: 1px solid var(--line); padding-bottom: 98px; padding-top: 68px; }
-    .block-head { align-items: flex-end; display: flex; gap: 40px; justify-content: space-between; margin-bottom: 46px; }
-    .block-head .num { display: block; margin-bottom: 13px; }
-    .block-head h2 { font-family: Fraunces, serif; font-size: clamp(29px, 3vw, 43px); font-weight: 450; line-height: 1.08; max-width: 14ch; }
-    .block-head p { color: var(--ink-soft); font-size: 15px; line-height: 1.65; max-width: 36ch; }
-
-    .portfolio-grid { display: grid; gap: 28px; grid-template-columns: repeat(3, 1fr); }
-    .portfolio-card { cursor: pointer; }
-    .portfolio-photo { aspect-ratio: 4 / 5; background: var(--cream-deep); border-radius: 2px; overflow: hidden; }
-    .portfolio-photo img, .deal-photo img, .resale-photo img { transition: filter .45s ease, transform .45s ease; }
-    .portfolio-card:hover img, .deal-card:hover img, .resale-card:hover img { filter: saturate(.82); transform: scale(1.04); }
-    .portfolio-caption { padding-top: 16px; }
-    .portfolio-caption h3 { font-family: Fraunces, serif; font-size: 19px; font-weight: 450; margin-bottom: 5px; }
-    .portfolio-caption p, .resale-meta { color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
-
-    .deals-shell { overflow: hidden; }
-    .deals-grid { display: flex; gap: 22px; overflow-x: auto; padding: 4px 4px 18px; scroll-snap-type: x mandatory; scrollbar-color: var(--mauve-deep) transparent; scrollbar-width: thin; }
-    .deal-card { background: rgba(255,255,255,.35); border: 1px solid var(--line); border-radius: 3px; display: flex; flex: 0 0 clamp(258px, 28vw, 320px); flex-direction: column; overflow: hidden; scroll-snap-align: start; }
-    .deal-photo { aspect-ratio: 1 / 1; overflow: hidden; }
-    .deal-body { display: flex; flex: 1; flex-direction: column; gap: 10px; padding: 20px 22px 24px; }
-    .deal-brand, .resale-tag { color: var(--ink-soft); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-    .deal-name { font-family: Fraunces, serif; font-size: 19px; line-height: 1.3; }
-    .deal-link { color: var(--mauve-deep); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
-    .deal-pricing { align-items: baseline; border-top: 1px dashed var(--line); display: flex; gap: 10px; margin-top: auto; padding-top: 14px; }
-    .retail { color: var(--ink-soft); font-size: 13px; text-decoration: line-through; }
-    .yours { font-family: Fraunces, serif; font-size: 20px; font-weight: 600; }
-    .deal-pricing .label { color: var(--sale); font-size: 10px; letter-spacing: .06em; margin-left: auto; text-transform: uppercase; }
-    .deals-cue { align-items: center; color: var(--ink-soft); display: flex; font-size: 11px; gap: 10px; justify-content: flex-end; letter-spacing: .12em; margin: 0 4px 22px; text-transform: uppercase; }
-    .deals-cue-arrow { animation: slideHint 1.6s ease-in-out infinite; color: var(--mauve-deep); font-size: 20px; line-height: 1; }
-    @keyframes slideHint { 0%, 100% { transform: translateX(0); opacity: .55; } 50% { transform: translateX(8px); opacity: 1; } }
-
-    .resale-grid { display: grid; gap: 22px; grid-template-columns: repeat(4, 1fr); }
-    .resale-card { display: flex; flex-direction: column; gap: 11px; }
-    .resale-photo { aspect-ratio: 3 / 4; overflow: hidden; position: relative; }
-    .resale-tag { background: var(--ink); color: var(--cream); left: 10px; padding: 4px 9px; position: absolute; top: 10px; }
-    .resale-name { font-size: 14px; font-weight: 500; }
-    .resale-price { font-family: Fraunces, serif; font-size: 17px; font-weight: 600; }
-    .resale-btn { border: 1px solid var(--ink); border-radius: 2px; font-size: 12px; margin-top: 3px; padding: 9px; text-align: center; transition: background .25s ease, color .25s ease; }
-    button.resale-btn { background: transparent; color: inherit; cursor: pointer; font-family: inherit; width: 100%; }
-    .resale-btn:hover { background: var(--ink); color: var(--cream); }
-    .resale-more { border: 1px solid var(--ink); display: block; margin: 42px auto 0; max-width: 280px; padding: 14px 20px; text-align: center; transition: background .25s ease, color .25s ease; }
-    .resale-more:hover { background: var(--ink); color: var(--cream); }
-
-    .closing { background: var(--cream-deep); border-top: 1px solid var(--line); padding: 105px 24px; text-align: center; }
-    .closing h2 { font-family: Fraunces, serif; font-size: clamp(35px, 4.4vw, 58px); font-weight: 450; line-height: 1.08; margin: 0 auto 33px; max-width: 16ch; }
-    .btn-solid { background: var(--ink); border: 1px solid var(--ink); border-radius: 2px; color: var(--cream); display: inline-block; font-size: 13px; padding: 17px 32px; transition: background .25s ease, color .25s ease; }
-    .btn-solid:hover { background: transparent; color: var(--ink); }
-
-    /* This footer mirrors the footer in index.html. */
-    footer.site { background: var(--cream-deep); border-top: 1px solid var(--line); }
-    .wrap { margin: 0 auto; max-width: var(--maxw); padding: 0 56px; }
-    .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; padding: 58px 0 30px; text-align: center; }
-    .footer-grid h4 { color: #8a8071; font-size: 12px; font-weight: 500; letter-spacing: .12em; margin: 0 0 14px; text-transform: uppercase; }
-    .footer-grid p, .footer-grid a { color: var(--ink-soft); display: block; font-size: 14px; margin-bottom: 8px; }
-    .footer-grid a:hover { color: var(--ink); }
-    .social-row { display: flex; gap: 14px; justify-content: center; }
-    .social-row a { color: var(--ink-soft); font-size: 20px; transition: color .25s ease, transform .25s ease; }
-    .social-row a:hover { color: var(--mauve-deep); transform: translateY(-3px); }
-    .footer-bottom { border-top: 1px solid var(--line); color: #8a8071; font-size: 11px; letter-spacing: .05em; padding: 18px 0 26px; text-align: center; }
-
-    .lightbox { align-items: center; background: rgba(36,31,26,.88); display: flex; inset: 0; justify-content: center; opacity: 0; padding: 24px; pointer-events: none; position: fixed; transition: opacity .25s ease; z-index: 100; }
-    .lightbox.open { opacity: 1; pointer-events: auto; }
-    .lightbox img { max-height: 88vh; max-width: min(90vw, 620px); object-fit: contain; }
-    .lightbox-close { background: transparent; border: 1px solid rgba(244,238,228,.5); border-radius: 50%; color: var(--cream); font-size: 20px; height: 40px; position: absolute; right: 22px; top: 22px; width: 40px; }
-
-    @media (max-width: 980px) {
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-      .resale-grid { grid-template-columns: repeat(2, 1fr); }
-      .primary { display: none; }
-      .burger { display: block; }
-      .mobile-menu { border-top: 1px solid var(--line); padding: 8px 56px 20px; }
-      .mobile-menu.open { display: block; }
-      .mobile-menu a { border-bottom: 1px solid var(--line); display: block; font-size: 14px; padding: 12px 0; }
-    }
-    @media (min-width: 1100px) {
-      .nav-row { padding-left: 72px; padding-right: 72px; }
-      .page-intro, .block { padding-left: 72px; padding-right: 72px; }
-      .block { padding-bottom: 112px; padding-top: 82px; }
-      .portfolio-grid { gap: 36px; }
-      .resale-grid { gap: 30px; }
-      .block-head { margin-bottom: 56px; }
-    }
-    @media (min-width: 701px) and (max-width: 1099px) {
-      .primary { display: none; }
-      .burger { display: block; }
-    }
-    @media (max-width: 700px) {
-      .announce { font-size: 10px; line-height: 1.45; padding: 9px 18px; }
-      .nav-row { padding: 22px 24px; }
-      .logo { font-size: 21px; }
-      .logo-tag { font-size: 8px; letter-spacing: .12em; }
-      .burger { height: 42px; width: 42px; }
-      .page-intro, .block { padding-left: 24px; padding-right: 24px; }
-      .page-intro { padding-bottom: 42px; padding-top: 58px; }
-      .page-intro h1 { font-size: clamp(38px, 11vw, 54px); max-width: 12ch; }
-      .block-head { align-items: flex-start; flex-direction: column; gap: 16px; }
-      .block { padding-bottom: 72px; padding-top: 54px; }
-      .block-head { margin-bottom: 30px; }
-      .block-head p { font-size: 14px; line-height: 1.6; }
-      .portfolio-grid, .resale-grid { grid-template-columns: 1fr; }
-      .portfolio-grid { gap: 34px; }
-      .deals-cue { justify-content: flex-start; margin-bottom: 14px; }
-      .deals-grid { gap: 14px; padding-bottom: 14px; }
-      .deal-card { flex-basis: min(78vw, 290px); }
-      .deal-body { padding: 17px 18px 20px; }
-      .resale-grid { gap: 30px; }
-      .resale-more { margin-top: 32px; width: 100%; }
-      .closing { padding: 76px 24px; }
-      .closing h2 { font-size: clamp(34px, 10vw, 48px); }
-      .mobile-menu { padding-left: 24px; padding-right: 24px; }
-      .wrap { padding-left: 24px; padding-right: 24px; }
-      .footer-grid { grid-template-columns: 1fr; padding-top: 44px; }
-      .footer-bottom { font-size: 10px; line-height: 1.5; padding-left: 20px; padding-right: 20px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101010">
+    <link rel="stylesheet" href="pages.css">
+    <title>Portfolio | Kelly Mushonga</title>
 </head>
 <body>
-  <div class="announce"><p>Complimentary 40-minute consultation, all season long</p></div>
-  <header class="site">
-    <div class="nav-row">
-      <a href="index.html" class="logo-block"><span class="logo">KLLYNCLE <span>/</span></span><span class="logo-tag">Contemporary Styling Studio</span></a>
-      <nav class="primary" aria-label="Primary navigation"><ul><li><a href="index.html">Home</a></li><li><a href="index.html#about">About</a></li><li><a class="active" href="portfolio.html">Portfolio</a></li><li><a href="resale.html">Resale</a></li><li><a href="index.html#contact">Contact</a></li></ul></nav>
-      <button class="burger" id="burgerBtn" aria-label="Toggle menu">☰</button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="portfolio.html">Portfolio</a><a href="resale.html">Resale</a><a href="index.html#contact">Contact</a></div>
-  </header>
+    <header class="page-header"><div class="page-wrap page-header-inner">
+        <a class="page-brand" href="video.html#portfolio">KELLY MUSHONGA</a>
+        <nav class="page-nav" aria-label="Work pages"><a href="portfolio.html" aria-current="page">Portfolio</a><a href="shop.html">Shop</a><a href="resale.html">Resale</a><a href="socials.html">Socials</a><a href="wardrobe-refresh.html">Wardrobe Refresh</a><a href="style-notes.html">Style Notes</a></nav>
+    </div></header>
+    <main class="page-wrap page-main">
+        <section class="page-intro"><p class="page-kicker">Personal styling / portfolio</p><h1>Personal style, made practical.</h1><p>Explore five of my most notable styling projects.</p></section>
+        <section class="page-section portfolio-showcase" aria-labelledby="portfolio-work-title">
+            <div class="section-heading"><h2 id="portfolio-work-title">Selected work</h2><p>Choose a chapter</p></div>
+            <div class="portfolio-tabs" role="tablist" aria-label="Portfolio chapters">
+                <button class="portfolio-tab" id="work-tab-1" type="button" role="tab" aria-label="01 KK MEDIA HOUSE" aria-selected="true" aria-controls="work-panel-1" tabindex="0"><span>01</span><small><span class="tab-label-full">KK MEDIA HOUSE</span><span class="tab-label-short">KK MEDIA<br>HOUSE</span></small></button>
+                <button class="portfolio-tab" id="work-tab-2" type="button" role="tab" aria-label="02 CBS NEWS REPORTER" aria-selected="false" aria-controls="work-panel-2" tabindex="-1"><span>02</span><small><span class="tab-label-full">CBS NEWS REPORTER</span><span class="tab-label-short">CBS NEWS<br>REPORTER</span></small></button>
+                <button class="portfolio-tab" id="work-tab-3" type="button" role="tab" aria-label="03 INFLUENCER" aria-selected="false" aria-controls="work-panel-3" tabindex="-1"><span>03</span><small><span class="tab-label-full">INFLUENCER</span><span class="tab-label-short">INFLUENCER</span></small></button>
+                <button class="portfolio-tab" id="work-tab-4" type="button" role="tab" aria-label="04 AI AGENCY FOUNDER" aria-selected="false" aria-controls="work-panel-4" tabindex="-1"><span>04</span><small><span class="tab-label-full">AI AGENCY FOUNDER</span><span class="tab-label-short">AI AGENCY<br>FOUNDER</span></small></button>
+                <button class="portfolio-tab" id="work-tab-5" type="button" role="tab" aria-label="05 BIOMEDICAL RESEARCH ANALYST" aria-selected="false" aria-controls="work-panel-5" tabindex="-1"><span>05</span><small><span class="tab-label-full">BIOMEDICAL RESEARCH ANALYST</span><span class="tab-label-short">BIOMED<br>ANALYST</span></small></button>
+            </div>
+            <div class="portfolio-panels">
+                <article class="project-panel" id="work-panel-1" role="tabpanel" aria-labelledby="work-tab-1" tabindex="0">
+                    <img class="project-image-4-5" src="img1.jpg" alt="Styling project for KAVISA KATIKU">
+                    <div class="project-copy"><p class="page-kicker">01 / KK MEDIA HOUSE</p><h2>A milestone, in the founder's own style.</h2><p>For a one-year anniversary portrait, a sleek black look gives the moment a polished, confident feel. The clean silhouette lets the founder, the celebration, and the keepsake book share the frame without competing.</p><dl><div><dt>FOCUS</dt><dd>Anniversary portrait styling</dd></div><div><dt>APPROACH</dt><dd>A refined dark look with a simple silhouette that photographs clearly</dd></div><div><dt>CLIENT</dt><dd>01 KAVISA KATIKU</dd></div><div><dt>CLIENT REVIEW</dt><dd>Fictional sample for layout: “The look felt polished, personal, and completely right for our anniversary shoot.”</dd></div></dl></div>
+                </article>
+                <article class="project-panel" id="work-panel-2" role="tabpanel" aria-labelledby="work-tab-2" tabindex="0" hidden>
+                    <img class="project-image-2-3" src="img2.jpg" alt="Styling project for ROBERT COSTA">
+                    <div class="project-copy"><p class="page-kicker">02 / CBS NEWS REPORTER</p><h2>Composed for the camera.</h2><p>A broadcast portrait calls for a look that reads clearly under studio lights and still feels natural up close. A tailored navy suit, crisp shirt, and considered tie create a confident, camera-ready finish.</p><dl><div><dt>FOCUS</dt><dd>On-camera professional styling</dd></div><div><dt>APPROACH</dt><dd>Clean tailoring and restrained color with a polished finish</dd></div><div><dt>CLIENT</dt><dd>02 ROBERT COSTA</dd></div><div><dt>CLIENT REVIEW</dt><dd>Fictional sample for layout: “The outfit looked sharp on camera and still felt comfortable and natural.”</dd></div></dl></div>
+                </article>
+                <article class="project-panel" id="work-panel-3" role="tabpanel" aria-labelledby="work-tab-3" tabindex="0" hidden>
+                    <img class="project-image-3-4" src="img3.jpg" alt="Styling project for TORI MARIE LEWIS">
+                    <div class="project-copy"><p class="page-kicker">03 / INFLUENCER</p><h2>A statement look for a night out.</h2><p>A bright, tiered pink gown makes the outfit the focal point while keeping the overall styling soft and celebratory. The full-length silhouette carries from arrival photos through the evening.</p><dl><div><dt>FOCUS</dt><dd>Event and appearance styling</dd></div><div><dt>APPROACH</dt><dd>Let a vivid statement dress lead; keep accessories and finishing details complementary</dd></div><div><dt>CLIENT</dt><dd>03 TORI MARIE LEWIS</dd></div><div><dt>CLIENT REVIEW</dt><dd>Fictional sample for layout: “I felt confident, comfortable, and ready to enjoy the whole evening.”</dd></div></dl></div>
+                </article>
+                <article class="project-panel" id="work-panel-4" role="tabpanel" aria-labelledby="work-tab-4" tabindex="0" hidden>
+                    <img class="project-image-3-4" src="img4.jpg" alt="Styling project for JORDAN LEE">
+                    <div class="project-copy"><p class="page-kicker">04 / AI AGENCY FOUNDER</p><h2>Effortless polish by the water.</h2><p>For a waterfront setting, a crisp white outfit feels relaxed without losing its polish. Clean lines and a structured handbag bring definition to the look while keeping it easy to wear.</p><dl><div><dt>FOCUS</dt><dd>Waterfront event styling</dd></div><div><dt>APPROACH</dt><dd>Light, coordinated separates with a structured accessory for contrast</dd></div><div><dt>CLIENT</dt><dd>04 JORDAN LEE</dd></div><div><dt>CLIENT REVIEW</dt><dd>Fictional sample for layout: “The outfit struck just the right balance between relaxed and put-together.”</dd></div></dl></div>
+                </article>
+                <article class="project-panel" id="work-panel-5" role="tabpanel" aria-labelledby="work-tab-5" tabindex="0" hidden>
+                    <img class="project-image-2-3" src="img5.jpg" alt="Styling project for ISLAM HUSSEIN">
+                    <div class="project-copy"><p class="page-kicker">05 / BIOMEDICAL RESEARCH ANALYST</p><h2>Professional, approachable, and in focus.</h2><p>A strong professional headshot balances warmth with authority. A crisp white shirt and dark tailored jacket keep the portrait timeless, while the open expression makes it feel approachable.</p><dl><div><dt>FOCUS</dt><dd>Professional portrait styling</dd></div><div><dt>APPROACH</dt><dd>Classic tailoring and a light shirt for clear contrast on camera</dd></div><div><dt>CLIENT</dt><dd>05 ISLAM HUSSEIN</dd></div><div><dt>CLIENT REVIEW</dt><dd>Fictional sample for layout: “The final look felt like me, only more polished and ready for the camera.”</dd></div></dl></div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer"><div class="page-wrap"><a href="video.html#portfolio">Back to My Work</a> · Washington, DC</div></footer>
+    <script>
+        (function () {
+            var tabs = Array.from(document.querySelectorAll('.portfolio-tab'));
 
-  <main>
-    <div class="page-intro"><p class="kicker">Portfolio</p><h1>Client looks, weekly finds, and a few of my own closet's best pieces.</h1></div>
-    <section class="block">
-      <div class="block-head"><div><span class="num">i.</span><h2>People I've styled</h2></div><p>A look at recent closet edits, event styling, and full wardrobe builds.</p></div>
-      <div class="portfolio-grid">
-        <article class="portfolio-card"><div class="portfolio-photo"><img src="img1.jpg" alt="Soft glam styling in champagne tones"></div><div class="portfolio-caption"><h3>Full closet edit</h3><p>Client story - Wardrobe reset, spring 2026</p></div></article>
-        <article class="portfolio-card"><div class="portfolio-photo"><img src="img2.jpg" alt="Sculpted blazer styling with pearl details"></div><div class="portfolio-caption"><h3>Event styling</h3><p>Client story - Gala look, head to toe</p></div></article>
-        <article class="portfolio-card"><div class="portfolio-photo"><img src="img3.jpg" alt="Nude satin styling with effortless waves"></div><div class="portfolio-caption"><h3>Capsule build</h3><p>Client story - 12-piece travel capsule</p></div></article>
-        <article class="portfolio-card"><div class="portfolio-photo"><img src="img4.jpg" alt="Minimalist monochrome outfit styling"></div><div class="portfolio-caption"><h3>Personal shopping</h3><p>Client story - Seasonal restock</p></div></article>
-        <article class="portfolio-card"><div class="portfolio-photo"><img src="img5.jpg" alt="Romantic blush styling with tailored details"></div><div class="portfolio-caption"><h3>Interview styling</h3><p>Client story - Career wardrobe</p></div></article>
-        <article class="portfolio-card"><div class="portfolio-photo"><img src="img6.jpg" alt="Golden hour glow and silk layers styling"></div><div class="portfolio-caption"><h3>Full closet edit</h3><p>Client story - Fall refresh</p></div></article>
-      </div>
-    </section>
-    <section class="block">
-      <div class="block-head"><div><span class="num">ii.</span><h2>Clothing deals of the week</h2></div><p>Pieces I've found from brands I work with, offered below retail. Swipe right to browse the full edit, then tap through to the retailer or ask me to secure your size.</p></div>
-      <div class="deals-cue" aria-hidden="true"><span>Slide right for more</span><span class="deals-cue-arrow">→</span></div>
-      <div class="deals-shell">
-        <div class="deals-grid" aria-label="Weekly clothing deals">
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/795702121-469_0.jpg?v=1738085089" alt="Club Monaco Super Slim Jeans in Indigo"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Super Slim Jeans</div><a class="deal-link" href="https://www.clubmonaco.com/products/super-slim-jeans-795702121-469" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$185</span><span class="yours">$129.50</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0186/1574/files/SEPT26_SH22810958_MINT_F1_R.jpg?v=1786630202" alt="Todd Snyder Cotton Cashmere Sport Shirt"></div><div class="deal-body"><div class="deal-brand">Todd Snyder</div><div class="deal-name">Cotton-Cashmere Sport Shirt</div><a class="deal-link" href="https://www.toddsnyder.com/products/cotton-cashmere-sport-shirt-plaidmint" target="_blank" rel="noopener">View product at Todd Snyder ↗</a><div class="deal-pricing"><span class="retail">$238</span><span class="yours">$198</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0167/1180/files/LORA-NAVY-1-861B-347E-005_d5910f47-c466-4f7f-9619-278547a0e141.jpg?v=1780631399" alt="Rails Lora Top in Navy"></div><div class="deal-body"><div class="deal-brand">Rails</div><div class="deal-name">Lora Top</div><a class="deal-link" href="https://rails.com/products/lora-top-navy" target="_blank" rel="noopener">View product at Rails ↗</a><div class="deal-pricing"><span class="retail">$228</span><span class="yours">$159</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/795702121-469_alternate3.jpg?v=1738085089" alt="Club Monaco Super Slim Jeans alternate view"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Super Slim Jeans, alternate wash</div><a class="deal-link" href="https://www.clubmonaco.com/products/super-slim-jeans-795702121-469" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$185</span><span class="yours">$129.50</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/827708728-001_alternate2.jpg?v=1745248102" alt="Club Monaco Leather Sneaker in Black"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Leather Sneaker</div><a class="deal-link" href="https://www.clubmonaco.com/products/club-monaco-leather-sneaker-827708728-100" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$178</span><span class="yours">$128</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/795888269-410_0main.jpg?v=1763684388" alt="Club Monaco Connor Tech Pant in Navy"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Connor Tech Pant</div><a class="deal-link" href="https://www.clubmonaco.com/products/connor-tech-pant-795888269-100-1" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$198</span><span class="yours">$148</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/295101710-103_0.jpg?v=1736826732" alt="Club Monaco Cross Strap Top in Black"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Cross Strap Top</div><a class="deal-link" href="https://www.clubmonaco.com/products/cross-strap-top-295101710-103" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$138</span><span class="yours">$49</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/795701469-100_0.jpg?v=1738085089" alt="Club Monaco Super Slim Jeans in Black"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Super Slim Jeans, Black</div><a class="deal-link" href="https://www.clubmonaco.com/products/super-slim-jeans-795701469-100" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$185</span><span class="yours">$129.50</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/795706082-400_0main.jpg?v=1763577950" alt="Club Monaco Long Sleeve Oxford Shirt in Blue"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Long-Sleeve Oxford Shirt</div><a class="deal-link" href="https://www.clubmonaco.com/products/long-sleeve-solid-oxford-shirt-795706082-400" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$138</span><span class="yours">$98</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/795692169-410_alternate1.jpg?v=1739298277" alt="Club Monaco Connor Chino in Navy"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Connor Chino</div><a class="deal-link" href="https://www.clubmonaco.com/products/connor-chino-795692169-410" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$178</span><span class="yours">$128</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/295102249-420_0.jpg?v=1736827489" alt="MOTHER The Skipper Fray Short in Denim"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">MOTHER The Skipper Fray Short</div><a class="deal-link" href="https://www.clubmonaco.com/products/mother-the-skipper-short-and-long-fray-295102249-420" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$278</span><span class="yours">$198</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0570/2719/9048/files/491901938-011_alternate3.jpg?v=1736827520" alt="Club Monaco Adele Cashmere Scarf in Cream"></div><div class="deal-body"><div class="deal-brand">Club Monaco</div><div class="deal-name">Adele Cashmere Scarf</div><a class="deal-link" href="https://www.clubmonaco.com/products/adele-cashmere-scarf-491901938-011" target="_blank" rel="noopener">View product at Club Monaco ↗</a><div class="deal-pricing"><span class="retail">$185</span><span class="yours">$129.50</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0186/1574/files/SEPT26_SH22810958_MINT_F1_R.jpg?v=1786630202" alt="Todd Snyder Cotton Cashmere Sport Shirt alternate view"></div><div class="deal-body"><div class="deal-brand">Todd Snyder</div><div class="deal-name">Cotton-Cashmere Sport Shirt, second color</div><a class="deal-link" href="https://www.toddsnyder.com/products/cotton-cashmere-sport-shirt-plaidmint" target="_blank" rel="noopener">View product at Todd Snyder ↗</a><div class="deal-pricing"><span class="retail">$238</span><span class="yours">$198</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0167/1180/files/LORA-NAVY-1-861B-347E-005_d5910f47-c466-4f7f-9619-278547a0e141.jpg?v=1780631399" alt="Rails Lora Top alternate view in Navy"></div><div class="deal-body"><div class="deal-brand">Rails</div><div class="deal-name">Lora Top, alternate view</div><a class="deal-link" href="https://rails.com/products/lora-top-navy" target="_blank" rel="noopener">View product at Rails ↗</a><div class="deal-pricing"><span class="retail">$228</span><span class="yours">$159</span><span class="label">My price</span></div></div></article>
-          <article class="deal-card"><div class="deal-photo"><img src="https://cdn.shopify.com/s/files/1/0186/1574/files/SEPT26_SH22810958_MINT_044_M2_R.jpg?v=1786630198" alt="Todd Snyder Cotton Cashmere Sport Shirt detail view"></div><div class="deal-body"><div class="deal-brand">Todd Snyder</div><div class="deal-name">Cotton-Cashmere Sport Shirt, detail view</div><a class="deal-link" href="https://www.toddsnyder.com/products/cotton-cashmere-sport-shirt-plaidmint" target="_blank" rel="noopener">View product at Todd Snyder ↗</a><div class="deal-pricing"><span class="retail">$238</span><span class="yours">$198</span><span class="label">My price</span></div></div></article>
-        </div>
-      </div>
-    </section>
-    <section class="block" id="resale">
-      <div class="block-head"><div><span class="num">iii.</span><h2>Closet clean-out resale</h2></div><p>Gently used pieces from client and personal closet edits, priced to move. First come, first served.</p></div>
-      <div class="resale-grid">
-        <article class="resale-card"><div class="resale-photo"><img src="img10.jpg" alt="Cashmere sweater"><span class="resale-tag">Like new</span></div><div class="resale-name">Cashmere sweater</div><div class="resale-meta">Size M · Brand name</div><div class="resale-price">$45</div><button class="resale-btn add-to-cart" type="button" data-product="Cashmere sweater" data-brand="Brand name" data-size="M" data-price="45">Message to buy</button></article>
-        <article class="resale-card"><div class="resale-photo"><img src="img11.jpg" alt="Leather ankle boot"><span class="resale-tag">Worn once</span></div><div class="resale-name">Leather ankle boot</div><div class="resale-meta">Size 8 · Brand name</div><div class="resale-price">$60</div><button class="resale-btn add-to-cart" type="button" data-product="Leather ankle boot" data-brand="Brand name" data-size="8" data-price="60">Message to buy</button></article>
-        <article class="resale-card"><div class="resale-photo"><img src="img12.jpg" alt="Denim jacket"><span class="resale-tag">Good</span></div><div class="resale-name">Denim jacket</div><div class="resale-meta">Size S · Brand name</div><div class="resale-price">$28</div><button class="resale-btn add-to-cart" type="button" data-product="Denim jacket" data-brand="Brand name" data-size="S" data-price="28">Message to buy</button></article>
-        <article class="resale-card"><div class="resale-photo"><img src="img9.png" alt="Silk blouse"><span class="resale-tag">Like new</span></div><div class="resale-name">Silk blouse</div><div class="resale-meta">Size M · Brand name</div><div class="resale-price">$32</div><button class="resale-btn add-to-cart" type="button" data-product="Silk blouse" data-brand="Brand name" data-size="M" data-price="32">Message to buy</button></article>
-      </div>
-      <a class="resale-more" href="resale.html">View the full closet resale <span aria-hidden="true">→</span></a>
-    </section>
-  </main>
+            function selectTab(selectedIndex, moveFocus) {
+                tabs.forEach(function (tab, index) {
+                    var selected = index === selectedIndex;
+                    tab.setAttribute('aria-selected', String(selected));
+                    tab.tabIndex = selected ? 0 : -1;
+                    document.getElementById(tab.getAttribute('aria-controls')).hidden = !selected;
+                });
+                if (moveFocus) tabs[selectedIndex].focus();
+            }
 
-  <section class="closing"><h2>Want first pick of next week's deals and resale drops?</h2><a href="index.html#contact" class="btn-solid">Book your consultation</a></section>
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded portfolio image"><button class="lightbox-close" id="lightboxClose" aria-label="Close image">×</button><img id="lightboxImage" src="" alt=""></div>
-
-  <footer class="site">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div>
-          <h4>Business Hours</h4>
-          <p>Sun – Wed, 10:00 – 6:00 PM</p>
-        </div>
-        <div>
-          <h4>See What I've Done</h4>
-        <div class="social-row">
-            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4>Connect With Me</h4>
-          <a href="#contact">Contact</a>
-          <a href="#contact">Newsletter</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">© <span id="year"></span> KLLYNCLE. Styled with care in Washington, D.C.</div>
-  </footer>
-
-  <script src="cart.js"></script>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const mobileMenu = document.getElementById('mobileMenu');
-    document.getElementById('burgerBtn').addEventListener('click', () => mobileMenu.classList.toggle('open'));
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const closeLightbox = () => lightbox.classList.remove('open');
-    document.querySelectorAll('.portfolio-card').forEach(card => card.addEventListener('click', () => {
-      const image = card.querySelector('img');
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt;
-      lightbox.classList.add('open');
-    }));
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
-    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
-  </script>
+            tabs.forEach(function (tab, index) {
+                tab.addEventListener('click', function () { selectTab(index, false); });
+                tab.addEventListener('keydown', function (event) {
+                    var nextIndex = index;
+                    if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+                    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+                    else if (event.key === 'Home') nextIndex = 0;
+                    else if (event.key === 'End') nextIndex = tabs.length - 1;
+                    else return;
+                    event.preventDefault();
+                    selectTab(nextIndex, true);
+                });
+            });
+        }());
+    </script>
 </body>
 </html>

@@ -1,161 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Closet Resale | KLLYNCLE</title>
-  <meta name="description" content="Shop 45 gently worn pieces from KLLYNCLE closet edits and personal styling curation.">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root { --cream: #f4eee4; --cream-deep: #eae1d2; --ink: #241f1a; --ink-soft: #52493f; --mauve-deep: #7c4f47; --line: rgba(36,31,26,.14); --maxw: 1240px; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font-family: Inter, sans-serif; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; height: 100%; object-fit: cover; width: 100%; }
-    .announce { border-bottom: 1px solid var(--line); padding: 11px 24px; text-align: center; }
-    .announce p { color: var(--ink-soft); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
-    header.site { border-bottom: 1px solid var(--line); }
-    .nav-row { align-items: center; display: flex; gap: 28px; justify-content: space-between; margin: 0 auto; max-width: var(--maxw); padding: 25px 56px; }
-    .logo-block { display: flex; flex-direction: column; line-height: 1; }
-    .logo { font-family: Fraunces, serif; font-size: 23px; font-weight: 450; letter-spacing: .02em; }
-    .logo span { color: var(--mauve-deep); }
-    .logo-tag { color: var(--ink-soft); font-size: 9px; letter-spacing: .14em; margin-top: 5px; text-transform: uppercase; }
-    nav ul { display: flex; gap: 35px; list-style: none; }
-    nav a { color: var(--ink-soft); font-size: 13px; padding-bottom: 5px; position: relative; }
-    nav a::after { background: var(--mauve-deep); bottom: 0; content: ''; height: 1px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; width: 100%; }
-    nav a:hover::after, nav a.active::after { transform: scaleX(1); }
-    .burger { background: transparent; border: 1px solid var(--line); border-radius: 50%; display: none; height: 38px; width: 38px; }
-    .mobile-menu { display: none; }
-    main { margin: 0 auto; max-width: var(--maxw); padding: 0 56px 105px; }
-    .page-intro { padding: 82px 0 58px; }
-    .kicker { color: var(--mauve-deep); font-family: Fraunces, serif; font-size: 14px; font-style: italic; margin-bottom: 17px; }
-    h1 { font-family: Fraunces, serif; font-size: clamp(40px, 5vw, 66px); font-weight: 450; line-height: 1.04; max-width: 15ch; }
-    .intro-copy { color: var(--ink-soft); font-size: 15px; line-height: 1.7; margin-top: 24px; max-width: 52ch; }
-    .catalog-head { align-items: end; border-top: 1px solid var(--line); display: flex; justify-content: space-between; padding: 25px 0 22px; }
-    .catalog-head p { color: var(--ink-soft); font-size: 13px; }
-    .catalog-head strong { color: var(--ink); font-family: Fraunces, serif; font-size: 21px; font-weight: 450; }
-    .resale-grid { display: grid; gap: 28px 22px; grid-template-columns: repeat(4, 1fr); }
-    .resale-card { display: flex; flex-direction: column; gap: 10px; }
-    .resale-photo { aspect-ratio: 3 / 4; overflow: hidden; position: relative; }
-    .resale-photo img { transition: transform .45s ease, filter .45s ease; }
-    .resale-card:hover .resale-photo img { filter: saturate(.82); transform: scale(1.04); }
-    .resale-tag { background: var(--ink); color: var(--cream); font-size: 10px; left: 10px; letter-spacing: .07em; padding: 5px 8px; position: absolute; text-transform: uppercase; top: 10px; }
-    .resale-name { font-size: 14px; font-weight: 500; }
-    .resale-meta { color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
-    .resale-price { font-family: Fraunces, serif; font-size: 18px; font-weight: 600; }
-    .resale-btn { border: 1px solid var(--ink); border-radius: 2px; font-size: 12px; margin-top: 2px; padding: 9px; text-align: center; transition: background .25s ease, color .25s ease; }
-    button.resale-btn { background: transparent; color: inherit; cursor: pointer; font-family: inherit; width: 100%; }
-    .resale-btn:hover { background: var(--ink); color: var(--cream); }
-    .back-link { color: var(--mauve-deep); display: inline-block; font-size: 13px; margin-top: 48px; text-decoration: underline; text-underline-offset: 4px; }
-    footer.site { background: var(--cream-deep); border-top: 1px solid var(--line); }
-    .wrap { margin: 0 auto; max-width: var(--maxw); padding: 0 56px; }
-    .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; padding: 58px 0 30px; text-align: center; }
-    .footer-grid h4 { color: #8a8071; font-size: 12px; font-weight: 500; letter-spacing: .12em; margin: 0 0 14px; text-transform: uppercase; }
-    .footer-grid p, .footer-grid a { color: var(--ink-soft); display: block; font-size: 14px; margin-bottom: 8px; }
-    .footer-grid a:hover { color: var(--ink); }
-    .social-row { display: flex; gap: 14px; justify-content: center; }
-    .social-row a { color: var(--ink-soft); font-size: 20px; transition: color .25s ease, transform .25s ease; }
-    .social-row a:hover { color: var(--mauve-deep); transform: translateY(-3px); }
-    .footer-bottom { border-top: 1px solid var(--line); color: #8a8071; font-size: 11px; letter-spacing: .05em; padding: 18px 0 26px; text-align: center; }
-    @media (max-width: 980px) { .resale-grid { grid-template-columns: repeat(3, 1fr); } nav.primary { display: none; } .burger { display: block; } .mobile-menu { border-top: 1px solid var(--line); padding: 8px 56px 20px; } .mobile-menu.open { display: block; } .mobile-menu a { border-bottom: 1px solid var(--line); display: block; font-size: 14px; padding: 12px 0; } }
-    @media (min-width: 1100px) { .nav-row { padding-left: 72px; padding-right: 72px; } main { padding-left: 72px; padding-right: 72px; } .resale-grid { gap: 34px 28px; } .page-intro { padding-bottom: 76px; padding-top: 98px; } }
-    @media (min-width: 701px) and (max-width: 1099px) { nav.primary { display: none; } .burger { display: block; } }
-    @media (max-width: 700px) { .announce { font-size: 10px; line-height: 1.45; padding: 9px 18px; } .nav-row { padding: 16px 20px; } .logo { font-size: 21px; } .logo-tag { font-size: 8px; letter-spacing: .12em; } .burger { height: 42px; width: 42px; } main { padding: 0 20px 72px; } .page-intro { padding: 58px 4px 42px; } h1 { font-size: clamp(38px, 11vw, 54px); max-width: 12ch; } .intro-copy { font-size: 14px; line-height: 1.65; margin-top: 20px; } .catalog-head { align-items: flex-start; flex-direction: column; gap: 8px; padding: 20px 4px 18px; } .resale-grid { grid-template-columns: 1fr; gap: 30px; padding: 0 4px; } .resale-photo { aspect-ratio: 4 / 5; } .resale-btn { min-height: 42px; } .mobile-menu { padding-left: 20px; padding-right: 20px; } .wrap { padding-left: 20px; padding-right: 20px; } .footer-grid { grid-template-columns: 1fr; padding-top: 44px; } .footer-bottom { font-size: 10px; line-height: 1.5; padding-left: 20px; padding-right: 20px; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101010">
+    <link rel="stylesheet" href="pages.css">
+    <title>Resale | Kelly Mushonga</title>
 </head>
 <body>
-  <div class="announce"><p>Complimentary 40-minute consultation, all season long</p></div>
-  <header class="site">
-    <div class="nav-row">
-      <a href="index.html" class="logo-block"><span class="logo">KLLYNCLE <span>/</span></span><span class="logo-tag">Contemporary Styling Studio</span></a>
-      <nav class="primary" aria-label="Primary navigation"><ul><li><a href="index.html">Home</a></li><li><a href="index.html#about">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a class="active" href="resale.html">Resale</a></li><li><a href="index.html#contact">Contact</a></li></ul></nav>
-      <button class="burger" id="burgerBtn" aria-label="Toggle menu">☰</button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="portfolio.html">Portfolio</a><a href="resale.html">Resale</a><a href="index.html#contact">Contact</a></div>
-  </header>
+    <header class="page-header"><div class="page-wrap page-header-inner">
+        <a class="page-brand" href="video.html#portfolio">KELLY MUSHONGA</a>
+        <nav class="page-nav" aria-label="Work pages"><a href="portfolio.html">Portfolio</a><a href="shop.html">Shop</a><a href="resale.html" aria-current="page">Resale</a><a href="socials.html">Socials</a><a href="wardrobe-refresh.html">Wardrobe Refresh</a><a href="style-notes.html">Style Notes</a></nav>
+    </div></header>
+    <button class="shop-cart-shortcut" id="resale-cart-shortcut" type="button" aria-expanded="false" aria-controls="resale-inquiry" aria-label="Open resale inquiry cart, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h2l2.1 11.2a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L21 9H6M10 21h.01M18 21h.01"/></svg><span id="resale-cart-shortcut-count" aria-hidden="true">0</span></button>
+    <main class="page-wrap page-main shop-main">
+        <section class="shop-intro">
+            <p class="page-kicker">SECOND LIFE / 03</p>
+            <div class="shop-intro-row"><h1>Pre-loved, ready for a new closet.</h1><p>Curated resale pieces with wearable styling, easy shapes, and good second-life energy. Ask about size, condition, and pickup details before ordering.</p></div>
+        </section>
+        <dialog class="shop-inquiry" id="resale-inquiry" aria-labelledby="resale-inquiry-title">
+            <div class="shop-inquiry-heading">
+                <div><p class="page-kicker">RESALE INQUIRY</p><h2 id="resale-inquiry-title">Your list <span id="resale-cart-count">(0)</span></h2></div>
+                <p class="shop-estimate-notice">Listed prices are estimates until availability, condition, and pickup details are confirmed. No payment is taken here.</p>
+                <button class="shop-inquiry-close" id="resale-inquiry-close" type="button" aria-label="Close cart">×</button>
+            </div>
+            <div id="resale-cart-items" class="shop-cart-items" aria-live="polite"><p class="shop-cart-empty">Your resale inquiry list is empty.</p></div>
+            <form class="shop-cart-form" id="resale-cart-form">
+                <input id="resale-cart-subject" type="hidden" name="_subject" value="Resale item inquiry">
+                <textarea id="resale-cart-message" name="message" hidden></textarea>
+                <label class="shop-cart-email" id="resale-cart-email-field" for="resale-cart-email" hidden>Your email
+                    <input id="resale-cart-email" name="email" type="email" autocomplete="email" data-fs-field required placeholder="you@example.com">
+                    <span class="shop-field-error" data-fs-error="email"></span>
+                </label>
+                <div class="shop-cart-footer">
+                    <p class="shop-cart-total">Estimated subtotal <strong id="resale-cart-subtotal">$0.00</strong></p>
+                    <div class="shop-cart-actions"><button class="shop-clear-cart" id="resale-clear-cart" type="button" disabled>Clear list</button><button class="shop-inquiry-submit" id="resale-inquiry-submit" type="submit" data-fs-submit-btn disabled>Send resale inquiry</button></div>
+                </div>
+                <p class="shop-inquiry-status" id="resale-inquiry-status" data-fs-success role="status" aria-live="polite">Inquiry sent. Kelly will confirm availability, condition, and pickup details. No payment was made.</p>
+                <p class="shop-inquiry-status shop-form-error" data-fs-error role="alert" aria-live="assertive"></p>
+                <a class="shop-inquiry-fallback" id="resale-inquiry-fallback" href="mailto:kellynicolemushonga@gmail.com" hidden>Email Kelly instead</a>
+            </form>
+        </dialog>
+        <section class="shop-catalog" aria-label="Resale clothing">
+            <div class="shop-toolbar">
+                <div class="shop-categories" role="group" aria-label="Filter resale pieces by category">
+                    <button class="shop-filter is-active" type="button" data-category="all" aria-pressed="true">All pieces <span>30</span></button>
+                    <button class="shop-filter" type="button" data-category="dress" aria-pressed="false">Dresses <span>14</span></button>
+                    <button class="shop-filter" type="button" data-category="set" aria-pressed="false">Sets <span>8</span></button>
+                    <button class="shop-filter" type="button" data-category="outerwear" aria-pressed="false">Outerwear <span>8</span></button>
+                </div>
+                <label class="shop-search-label" for="shop-search">Search</label>
+                <input class="shop-search" id="shop-search" type="search" placeholder="Search pieces" autocomplete="off">
+            </div>
+            <p class="shop-results" id="shop-results" aria-live="polite">30 pieces</p>
+            <div class="shop-product-grid" id="shop-product-grid"></div>
+            <p class="shop-empty" hidden>No pieces match that search. Try another term or select all pieces.</p>
+        </section>
+    </main>
+    <footer class="page-footer"><div class="page-wrap"><a href="video.html#portfolio">Back to My Work</a> · Washington, DC</div></footer>
+    <script>
+        (function () {
+            var catalog = [
+                { category: 'dress', name: 'Soft Knit Midi', tag: 'COZY', image: 'img1.jpg', description: 'A relaxed midi with an easy drape and soft movement.', search: 'soft knit midi cozy dress' },
+                { category: 'dress', name: 'Cocoa Slip', tag: 'MINIMAL', image: 'img3.jpg', description: 'Simple shape, polished finish, and all-day wearability.', search: 'cocoa slip minimal dress' },
+                { category: 'dress', name: 'Mauve Bias Dress', tag: 'SOFT', image: 'img3.jpg', description: 'A flattering bias-cut silhouette in a subtle tone.', search: 'mauve bias dress soft' },
+                { category: 'dress', name: 'Pearl Satin Dress', tag: 'LUXE', image: 'img1.jpg', description: 'A sleek option that photographs beautifully and feels elevated.', search: 'pearl satin dress luxe' },
+                { category: 'dress', name: 'Sand Pleated Midi', tag: 'ELEGANT', image: 'img3.jpg', description: 'Textured, flattering, and easy to style up or down.', search: 'sand pleated midi elegant' },
+                { category: 'dress', name: 'Rose Ruffle Midi', tag: 'ROMANTIC', image: 'img1.jpg', description: 'A feminine look with movement and a soft finish.', search: 'rose ruffle midi romantic' },
+                { category: 'dress', name: 'Navy Column', tag: 'CLASSIC', image: 'img1.jpg', description: 'A clean, classic silhouette with a strong neutral base.', search: 'navy column classic dress' },
+                { category: 'dress', name: 'Stone Swipe Dress', tag: 'NEUTRAL', image: 'img1.jpg', description: 'A tonal piece with structure and understated charm.', search: 'stone swipe dress neutral' },
+                { category: 'dress', name: 'Champagne Twist Dress', tag: 'GLAM', image: 'img3.jpg', description: 'A dress with a little shimmer and a lot of polish.', search: 'champagne twist dress glam' },
+                { category: 'dress', name: 'Black Wrap Dress', tag: 'EVERYDAY', image: 'img1.jpg', description: 'A dependable classic for work, dinner, or easy evenings.', search: 'black wrap dress everyday' },
+                { category: 'dress', name: 'Rosewater Midi', tag: 'FRESH', image: 'img3.jpg', description: 'A pastel tone with a fluid line and easy movement.', search: 'rosewater midi fresh dress' },
+                { category: 'dress', name: 'Satin Slip Midi', tag: 'LUXE', image: 'img3.jpg', description: 'A polished slip dress with a smooth finish and drape.', search: 'satin slip midi luxe dress' },
+                { category: 'set', name: 'Ivory Riviera Set', tag: 'RESORT', image: 'img4.jpg', description: 'Light, easy, and made for easy travel styling.', search: 'ivory riviera set resort' },
+                { category: 'set', name: 'Monochrome Lounge Set', tag: 'CHIC', image: 'img4.jpg', description: 'A refined co-ord that feels elevated and easy to wear.', search: 'monochrome lounge set chic' },
+                { category: 'set', name: 'Linen Utility Set', tag: 'SMART', image: 'img4.jpg', description: 'Structured but relaxed, with lightweight texture and polish.', search: 'linen utility set smart' },
+                { category: 'set', name: 'Coastal Linen Set', tag: 'COASTAL', image: 'img4.jpg', description: 'A soft-toned pairing built for warm weather and easy movement.', search: 'coastal linen set coastal' },
+                { category: 'set', name: 'Soft Neutrals Set', tag: 'EASY', image: 'img4.jpg', description: 'Clean neutrals and easy proportions for everyday layering.', search: 'soft neutrals set easy' },
+                { category: 'set', name: 'Sand Resort Co-ord', tag: 'BEACH', image: 'img4.jpg', description: 'A lighter coordinated set for easy days by the water.', search: 'sand resort co-ord beach' },
+                { category: 'set', name: 'Cotton Pop Set', tag: 'BREEZY', image: 'img4.jpg', description: 'A playful set with movement and a relaxed finish.', search: 'cotton pop set breezy' },
+                { category: 'set', name: 'Modern City Co-ord', tag: 'CITY', image: 'img4.jpg', description: 'Structured separates with a clean, elevated city feel.', search: 'modern city co-ord city' },
+                { category: 'outerwear', name: 'Cocoa Trench', tag: 'CLASSIC', image: 'img2.jpg', description: 'A warm neutral layer with polished structure and easy wear.', search: 'cocoa trench classic outerwear' },
+                { category: 'outerwear', name: 'Stone Utility Jacket', tag: 'UTILITY', image: 'img2.jpg', description: 'A relaxed layer with a clean shape and everyday practicality.', search: 'stone utility jacket utility' },
+                { category: 'outerwear', name: 'Black Leather Moto', tag: 'EDGE', image: 'img2.jpg', description: 'A sharper layer that instantly adds attitude and shape.', search: 'black leather moto edge' },
+                { category: 'outerwear', name: 'Taupe Wool Coat', tag: 'WOOL', image: 'img2.jpg', description: 'Classic texture and a polished line for cold-weather styling.', search: 'taupe wool coat winter' },
+                { category: 'outerwear', name: 'Ash Bomber', tag: 'LIGHT', image: 'img2.jpg', description: 'A lightweight layer for transitional days and everyday wear.', search: 'ash bomber light outerwear' },
+                { category: 'outerwear', name: 'Cream Overshirt', tag: 'RELAXED', image: 'img2.jpg', description: 'A soft layer with a relaxed fit and easy layering potential.', search: 'cream overshirt relaxed outerwear' },
+                { category: 'outerwear', name: 'Forest Utility Coat', tag: 'EARTHY', image: 'img2.jpg', description: 'Grounded color and useful structure for everyday wear.', search: 'forest utility coat earthy outerwear' },
+                { category: 'outerwear', name: 'Camel Wool Blend', tag: 'POLISHED', image: 'img2.jpg', description: 'A timeless, rich neutral that works across seasons.', search: 'camel wool blend polished outerwear' },
+                { category: 'dress', name: 'Sultry Satin Slip', tag: 'GLOW', image: 'img1.jpg', description: 'A smooth satin line that makes an evening look feel effortless.', search: 'sultry satin slip glow dress' },
+                { category: 'dress', name: 'Stone Column Midi', tag: 'CLEAN', image: 'img3.jpg', description: 'The cleanest neutral in the lot, designed for easy styling.', search: 'stone column midi clean dress' }
+            ];
 
-  <main>
-    <section class="page-intro"><p class="kicker">Closet clean-out resale</p><h1>Good pieces, ready for their next wardrobe.</h1><p class="intro-copy">Gently used pieces from client and personal closet edits, priced to move. First come, first served. Message to buy and I will confirm availability, condition, and pickup or shipping details.</p></section>
-    <div class="catalog-head"><strong id="catalogCount">45 pieces</strong><p>Scroll through the full resale edit.</p></div>
-    <section class="resale-grid" id="resaleGrid" aria-label="Closet resale products"></section>
-    <a class="back-link" href="portfolio.html#resale">← Back to portfolio</a>
-  </main>
+            var grid = document.getElementById('shop-product-grid');
+            var products = [];
+            var filters = Array.from(document.querySelectorAll('.shop-filter'));
+            var search = document.getElementById('shop-search');
+            var resultCount = document.getElementById('shop-results');
+            var emptyState = document.querySelector('.shop-empty');
+            var activeCategory = 'all';
+            var cartItems = {};
+            var cartContainer = document.getElementById('resale-cart-items');
+            var cartCount = document.getElementById('resale-cart-count');
+            var cartSubtotal = document.getElementById('resale-cart-subtotal');
+            var cartEmailField = document.getElementById('resale-cart-email-field');
+            var cartEmailInput = document.getElementById('resale-cart-email');
+            var cartForm = document.getElementById('resale-cart-form');
+            var cartMessage = document.getElementById('resale-cart-message');
+            var cartSubmit = document.getElementById('resale-inquiry-submit');
+            var clearCartButton = document.getElementById('resale-clear-cart');
+            var cartFallback = document.getElementById('resale-inquiry-fallback');
+            var cartShortcut = document.getElementById('resale-cart-shortcut');
+            var cartPanel = document.getElementById('resale-inquiry');
+            var closeCartButton = document.getElementById('resale-inquiry-close');
+            var resalePrice = 30;
 
-  <footer class="site">
-    <div class="wrap">
-      <div class="footer-grid">
-        <div><h4>Business Hours</h4><p>Sun – Wed, 10:00 – 6:00 PM</p></div>
-        <div><h4>See What I've Done</h4><div class="social-row"><a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a><a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a></div></div>
-        <div><h4>Connect With Me</h4><a href="index.html#contact">Contact</a><a href="index.html#contact">Newsletter</a></div>
-      </div>
-    </div>
-    <div class="footer-bottom">© <span id="year"></span> KLLYNCLE. Styled with care in Washington, D.C.</div>
-  </footer>
+            try {
+                var savedCart = JSON.parse(localStorage.getItem('kelly-resale-inquiry') || '{}');
+                Object.keys(savedCart).forEach(function (key) {
+                    var index = Number(key);
+                    var quantity = Number(savedCart[key]);
+                    if (Number.isInteger(index) && catalog[index] && Number.isInteger(quantity) && quantity > 0 && quantity <= 99) {
+                        cartItems[index] = quantity;
+                    }
+                });
+            } catch (error) {
+                cartItems = {};
+            }
 
-  <script>
-    const products = [
-      ['Cashmere crewneck', 'Everlane', 'M', 'Like new', 45, 'img1.jpg'],
-      ['Leather ankle boot', 'Club Monaco', '8', 'Worn once', 60, 'img2.jpg'],
-      ['Denim jacket', 'Aritzia', 'S', 'Good', 28, 'img3.jpg'],
-      ['Silk blouse', 'Rails', 'M', 'Like new', 32, 'img4.jpg'],
-      ['Wool trouser', 'Todd Snyder', '32', 'Like new', 55, 'img5.jpg'],
-      ['Linen button-up', 'Reformation', 'M', 'Worn twice', 48, 'img6.jpg'],
-      ['Structured blazer', 'Staud', 'S', 'Like new', 85, 'img7.png'],
-      ['Cotton poplin shirt', 'Club Monaco', 'M', 'Good', 34, 'img8.jpg'],
-      ['Silk midi skirt', 'Rails', 'S', 'Like new', 52, 'img9.jpg'],
-      ['Ribbed cardigan', 'Everlane', 'M', 'Worn twice', 38, 'img10.jpg'],
-      ['Suede loafer', 'Club Monaco', '8.5', 'Good', 72, 'img11.jpg'],
-      ['Straight-leg jean', 'Mugsy', '30', 'Like new', 58, 'img12.jpg'],
-      ['Merino knit polo', 'Todd Snyder', 'L', 'Like new', 68, 'img9.png'],
-      ['Wrap midi dress', 'Reformation', 'M', 'Worn once', 95, 'img1.jpg'],
-      ['Pleated trouser', 'Aritzia', '6', 'Good', 44, 'img2.jpg'],
-      ['Cashmere scarf', 'Club Monaco', 'One size', 'Like new', 42, 'img3.jpg'],
-      ['Cropped denim jacket', 'Everlane', 'S', 'Good', 36, 'img4.jpg'],
-      ['Oxford shirt', 'Todd Snyder', 'M', 'Worn twice', 46, 'img5.jpg'],
-      ['Printed silk cami', 'Rails', 'S', 'Like new', 40, 'img6.jpg'],
-      ['Leather belt', 'Reformation', 'M', 'Good', 25, 'img7.png'],
-      ['Wide-leg pant', 'Staud', '8', 'Like new', 64, 'img8.jpg'],
-      ['Relaxed blazer', 'Club Monaco', 'L', 'Worn once', 78, 'img9.jpg'],
-      ['Fine gauge sweater', 'Everlane', 'S', 'Good', 35, 'img10.jpg'],
-      ['Canvas tote', 'Mugsy', 'One size', 'Like new', 24, 'img11.jpg'],
-      ['Linen shirt dress', 'Reformation', 'M', 'Worn once', 82, 'img12.jpg'],
-      ['Textured overshirt', 'Todd Snyder', 'L', 'Like new', 74, 'img9.png'],
-      ['Satin slip skirt', 'Rails', 'M', 'Good', 48, 'img1.jpg'],
-      ['Minimal tank', 'Aritzia', 'S', 'Like new', 22, 'img2.jpg'],
-      ['Chelsea boot', 'Club Monaco', '9', 'Good', 68, 'img3.jpg'],
-      ['Cropped cardigan', 'Everlane', 'M', 'Worn twice', 32, 'img4.jpg'],
-      ['Flannel overshirt', 'Mugsy', 'M', 'Good', 39, 'img5.jpg'],
-      ['Tailored vest', 'Staud', 'S', 'Like new', 58, 'img6.jpg'],
-      ['Silk neck scarf', 'Rails', 'One size', 'Like new', 29, 'img7.png'],
-      ['Travel blazer', 'Todd Snyder', '40', 'Worn once', 88, 'img8.jpg'],
-      ['Barrel-leg jean', 'Aritzia', '28', 'Good', 52, 'img9.jpg'],
-      ['Cashmere cardigan', 'Club Monaco', 'M', 'Like new', 76, 'img10.jpg'],
-      ['Leather crossbody', 'Reformation', 'One size', 'Good', 64, 'img11.jpg'],
-      ['Poplin mini dress', 'Everlane', 'S', 'Worn once', 55, 'img12.jpg'],
-      ['Corduroy trouser', 'Mugsy', '32', 'Good', 42, 'img9.png'],
-      ['Merino crewneck', 'Todd Snyder', 'M', 'Like new', 62, 'img1.jpg'],
-      ['Pleated midi dress', 'Staud', 'M', 'Worn once', 92, 'img2.jpg'],
-      ['Soft leather mule', 'Club Monaco', '8', 'Good', 54, 'img3.jpg'],
-      ['Relaxed linen pant', 'Reformation', '6', 'Like new', 58, 'img4.jpg'],
-      ['Striped cotton shirt', 'Rails', 'M', 'Good', 35, 'img5.jpg'],
-      ['Wool blend coat', 'Everlane', 'M', 'Like new', 110, 'img6.jpg'],
-      ['Knit midi skirt', 'Aritzia', 'S', 'Worn twice', 45, 'img7.png']
-    ];
+            function setCartOpen(isOpen) {
+                if (isOpen && !cartPanel.open) cartPanel.showModal();
+                if (!isOpen && cartPanel.open) cartPanel.close();
+                updateCartShortcut(isOpen);
+                (isOpen ? closeCartButton : cartShortcut).focus();
+            }
 
-    const grid = document.getElementById('resaleGrid');
-    products.forEach(([name, brand, size, condition, price, image]) => {
-      const card = document.createElement('article');
-      card.className = 'resale-card';
-      card.innerHTML = `<div class="resale-photo"><img src="${image}" alt="${name} by ${brand}"><span class="resale-tag">${condition}</span></div><div class="resale-name">${name}</div><div class="resale-meta">Size ${size} | ${brand}</div><div class="resale-price">$${price}</div><button class="resale-btn add-to-cart" type="button" data-product="${name}" data-brand="${brand}" data-size="${size}" data-price="${price}">Message to buy</button>`;
-      grid.appendChild(card);
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('burgerBtn').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
-  </script>
-  <script src="cart.js"></script>
+            function updateCartShortcut(isOpen) {
+                var totalQuantity = Object.keys(cartItems).reduce(function (total, key) {
+                    return total + cartItems[key];
+                }, 0);
+                cartShortcut.setAttribute('aria-expanded', String(isOpen));
+                cartShortcut.setAttribute('aria-label', (isOpen ? 'Close' : 'Open') + ' resale inquiry cart, ' + totalQuantity + (totalQuantity === 1 ? ' item' : ' items'));
+                document.getElementById('resale-cart-shortcut-count').textContent = totalQuantity;
+            }
+
+            function formatPrice(amount) {
+                return '$' + amount.toFixed(2);
+            }
+
+            function createCartMessage() {
+                var lines = Object.keys(cartItems).map(function (key) {
+                    var item = catalog[Number(key)];
+                    return '- ' + item.name + ' x ' + cartItems[key] + ' at ' + formatPrice(resalePrice) + ' each';
+                });
+                var subtotal = Object.keys(cartItems).reduce(function (sum, key) {
+                    return sum + resalePrice * cartItems[key];
+                }, 0);
+                return 'Hi Kelly,\n\nI’m interested in these pre-loved pieces:\n' + lines.join('\n') + '\n\nEstimated subtotal: ' + formatPrice(subtotal) + '\n\nPlease confirm availability, condition, size, and pickup details before I decide. I understand the listed prices and subtotal are estimates until confirmed. This is an inquiry only; no payment is being made.\n\nThank you!';
+            }
+
+            function saveCart() {
+                try {
+                    localStorage.setItem('kelly-resale-inquiry', JSON.stringify(cartItems));
+                } catch (error) {
+                    // The inquiry remains available for this visit if storage is unavailable.
+                }
+            }
+
+            function renderCart() {
+                var ids = Object.keys(cartItems);
+                var totalQuantity = ids.reduce(function (total, key) { return total + cartItems[key]; }, 0);
+                var subtotal = totalQuantity * resalePrice;
+
+                if (!ids.length) {
+                    cartContainer.innerHTML = '<p class="shop-cart-empty">Your resale inquiry list is empty.</p>';
+                } else {
+                    cartContainer.innerHTML = ids.map(function (key) {
+                        var index = Number(key);
+                        var item = catalog[index];
+                        var quantity = cartItems[key];
+                        return '<div class="shop-cart-item"><div><p class="shop-product-brand">PRE-LOVED</p><h3>' + item.name + '</h3><p class="shop-cart-unit">Listed price ' + formatPrice(resalePrice) + ' · confirm condition and size</p></div><label>Qty <input class="shop-cart-quantity" type="number" min="1" max="99" value="' + quantity + '" data-cart-quantity="' + index + '" aria-label="Quantity of ' + item.name + '"></label><strong class="shop-cart-line-total">' + formatPrice(resalePrice * quantity) + '</strong><button class="shop-remove-item" type="button" data-cart-remove="' + index + '" aria-label="Remove ' + item.name + '">Remove</button></div>';
+                    }).join('');
+                }
+
+                cartCount.textContent = '(' + totalQuantity + ')';
+                cartSubtotal.textContent = formatPrice(subtotal);
+                cartEmailField.hidden = !ids.length;
+                if (!ids.length) cartEmailInput.value = '';
+                cartMessage.value = createCartMessage();
+                clearCartButton.disabled = !ids.length;
+                cartSubmit.disabled = !ids.length;
+                grid.querySelectorAll('[data-add-inquiry]').forEach(function (button) {
+                    var quantity = cartItems[button.dataset.addInquiry];
+                    button.textContent = quantity ? 'Added (' + quantity + ')' : 'Add to inquiry';
+                });
+                updateCartShortcut(cartPanel.open);
+                saveCart();
+            }
+
+            function setMailFallback() {
+                var subject = 'Resale item inquiry';
+                var body = cartMessage.value;
+                cartFallback.href = 'mailto:kellynicolemushonga@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                cartFallback.hidden = false;
+            }
+
+            cartShortcut.addEventListener('click', function () {
+                setCartOpen(!cartPanel.open);
+            });
+            closeCartButton.addEventListener('click', function () { setCartOpen(false); });
+            cartPanel.addEventListener('close', function () {
+                updateCartShortcut(false);
+                cartShortcut.focus();
+            });
+            cartPanel.addEventListener('click', function (event) {
+                var bounds = cartPanel.getBoundingClientRect();
+                if (event.target === cartPanel && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) setCartOpen(false);
+            });
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && cartPanel.open) {
+                    event.preventDefault();
+                    setCartOpen(false);
+                }
+            });
+
+            grid.addEventListener('click', function (event) {
+                var button = event.target.closest('[data-add-inquiry]');
+                if (!button) return;
+                var index = button.dataset.addInquiry;
+                cartItems[index] = Math.min((cartItems[index] || 0) + 1, 99);
+                renderCart();
+            });
+            cartContainer.addEventListener('change', function (event) {
+                var input = event.target.closest('[data-cart-quantity]');
+                if (!input) return;
+                cartItems[input.dataset.cartQuantity] = Math.max(1, Math.min(99, Number(input.value) || 1));
+                renderCart();
+            });
+            cartContainer.addEventListener('click', function (event) {
+                var button = event.target.closest('[data-cart-remove]');
+                if (!button) return;
+                delete cartItems[button.dataset.cartRemove];
+                renderCart();
+            });
+            clearCartButton.addEventListener('click', function () {
+                cartItems = {};
+                renderCart();
+            });
+            cartForm.addEventListener('submit', function () {
+                cartMessage.value = createCartMessage() + '\n\nCustomer email: ' + cartEmailInput.value.trim();
+                cartFallback.hidden = true;
+            });
+
+            window.formspree = window.formspree || function () {
+                (window.formspree.q = window.formspree.q || []).push(arguments);
+            };
+            window.formspree('initForm', {
+                formElement: '#resale-cart-form',
+                formId: 'maqgnzeg',
+                useDefaultStyles: false,
+                onSubmit: function () { cartFallback.hidden = true; },
+                onSuccess: function () {
+                    cartItems = {};
+                    renderCart();
+                },
+                onError: setMailFallback,
+                onFailure: setMailFallback
+            });
+
+            function createProductCard(item) {
+                var article = document.createElement('article');
+                article.className = 'shop-product';
+                article.dataset.category = item.category;
+                article.dataset.search = item.search + ' ' + item.name.toLowerCase();
+                article.innerHTML = [
+                    '<div class="shop-product-image">',
+                    '<img src="' + item.image + '" alt="' + item.name + '">',
+                    '</div>',
+                    '<div class="shop-product-info">',
+                    '<div class="shop-product-brandline"><p class="shop-product-brand">PRE-LOVED</p><span class="shop-retailer-link">Resale</span></div>',
+                    '<div class="shop-product-title"><h2>' + item.name + '</h2></div>',
+                    '<div class="shop-product-purchase"><div class="shop-product-prices"><span class="shop-retail-price">Listed price</span><span class="shop-client-price"><strong>$30</strong></span></div><button class="shop-add-inquiry" type="button" data-add-inquiry="' + catalog.indexOf(item) + '">Add to inquiry</button></div>',
+                    '<div class="shop-product-meta"><span>Confirm condition, size, and pickup</span></div>',
+                    '</div>'
+                ].join('');
+                return article;
+            }
+
+            catalog.forEach(function (item) {
+                grid.appendChild(createProductCard(item));
+            });
+
+            products = Array.from(document.querySelectorAll('.shop-product'));
+
+            function updateProducts() {
+                var query = search.value.trim().toLowerCase();
+                var visibleCount = 0;
+
+                products.forEach(function (product) {
+                    var matchesCategory = activeCategory === 'all' || product.dataset.category === activeCategory;
+                    var matchesSearch = !query || (product.dataset.search + ' ' + product.querySelector('h2').textContent).toLowerCase().includes(query);
+                    var visible = matchesCategory && matchesSearch;
+                    product.hidden = !visible;
+                    if (visible) visibleCount += 1;
+                });
+
+                resultCount.textContent = visibleCount + (visibleCount === 1 ? ' piece' : ' pieces');
+                emptyState.hidden = visibleCount > 0;
+            }
+
+            filters.forEach(function (filter) {
+                filter.addEventListener('click', function () {
+                    activeCategory = filter.dataset.category;
+                    filters.forEach(function (item) {
+                        var selected = item === filter;
+                        item.classList.toggle('is-active', selected);
+                        item.setAttribute('aria-pressed', String(selected));
+                    });
+                    updateProducts();
+                });
+            });
+
+            search.addEventListener('input', updateProducts);
+            renderCart();
+            updateProducts();
+        }());
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
