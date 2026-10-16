@@ -123,6 +123,18 @@ a { color: inherit; }
 .resale-gallery-stage figure { display: grid; width: 100%; height: min(68vh, 720px); min-height: 180px; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 10px; margin: 0; }
 .resale-gallery-stage figure img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
 .resale-gallery-stage figcaption, .resale-gallery-count { margin: 0; color: var(--page-muted); font-size: 11px; text-align: center; }
+.resale-gallery-details { display: grid; gap: 10px; padding: 14px 0; border-top: 1px solid var(--page-line); border-bottom: 1px solid var(--page-line); }
+.resale-gallery-details .page-kicker { margin-bottom: 5px; }
+.resale-gallery-details h2 { margin: 0; font-size: 20px; font-weight: 500; }
+.resale-gallery-details dl { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; }
+.resale-gallery-details dl div { display: flex; gap: 6px; font-size: 11px; }
+.resale-gallery-details dt { color: var(--page-muted); }
+.resale-gallery-details dd { margin: 0; }
+.resale-gallery-description { max-width: 70ch; margin: 0; color: var(--page-muted); font-size: 12px; line-height: 1.6; }
+.resale-gallery-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.resale-gallery-price { margin: 0; color: var(--page-muted); font-size: 12px; }
+.resale-gallery-price strong { margin-left: 6px; color: var(--page-pink); font-size: 17px; }
+.resale-gallery-add { min-height: 36px; }
 .resale-gallery-thumbnails { display: flex; justify-content: center; gap: 8px; overflow-x: auto; }
 .resale-gallery-thumbnails button { width: 58px; height: 72px; flex: 0 0 auto; padding: 0; border: 1px solid var(--page-line); background: transparent; cursor: pointer; }
 .resale-gallery-thumbnails button[aria-pressed="true"] { border: 2px solid var(--page-pink); }

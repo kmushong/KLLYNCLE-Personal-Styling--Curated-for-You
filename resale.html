@@ -16,7 +16,7 @@
     <main class="page-wrap page-main shop-main">
         <section class="shop-intro">
             <p class="page-kicker">SECOND LIFE / 03</p>
-            <div class="shop-intro-row"><h1>Pre-loved, ready for a new closet.</h1><p>Curated resale pieces with wearable styling, easy shapes, and good second-life energy. Ask about size, condition, and pickup details before ordering.</p></div>
+            <div class="shop-intro-row"><h1>Ready for a new closet.</h1><p>Curated resale pieces with wearable styling, easy shapes, and good second-life energy. Ask about size, condition, and pickup details before ordering.</p></div>
         </section>
         <dialog class="shop-inquiry" id="resale-inquiry" aria-labelledby="resale-inquiry-title">
             <div class="shop-inquiry-heading">
@@ -41,7 +41,7 @@
                 <a class="shop-inquiry-fallback" id="resale-inquiry-fallback" href="mailto:kellynicolemushonga@gmail.com" hidden>Email Kelly instead</a>
             </form>
         </dialog>
-        <dialog class="resale-gallery" id="resale-gallery" aria-label="Resale photo gallery">
+        <dialog class="resale-gallery" id="resale-gallery" aria-labelledby="resale-gallery-product-title">
             <div class="resale-gallery-content">
                 <div class="resale-gallery-header"><p class="page-kicker">RESALE LOOKS</p><button class="resale-gallery-close" id="resale-gallery-close" type="button" aria-label="Close photo gallery">×</button></div>
                 <div class="resale-gallery-stage" id="resale-gallery-stage">
@@ -49,6 +49,12 @@
                     <figure><img id="resale-gallery-image" src="resale1.jpg" alt=""><figcaption id="resale-gallery-caption"></figcaption></figure>
                     <button class="resale-gallery-nav" id="resale-gallery-next" type="button" aria-label="Next image">›</button>
                 </div>
+                <section class="resale-gallery-details" aria-live="polite">
+                    <div><p class="page-kicker">ITEM DETAILS</p><h2 id="resale-gallery-product-title"></h2></div>
+                    <dl><div><dt>Brand</dt><dd id="resale-gallery-brand"></dd></div><div><dt>Size</dt><dd id="resale-gallery-size"></dd></div></dl>
+                    <p class="resale-gallery-description" id="resale-gallery-description"></p>
+                    <div class="resale-gallery-actions"><p class="resale-gallery-price">Price <strong id="resale-gallery-price"></strong></p><button class="shop-add-inquiry resale-gallery-add" id="resale-gallery-add" type="button">Add to inquiry</button></div>
+                </section>
                 <div class="resale-gallery-thumbnails" role="group" aria-label="Choose a resale image">
                     <button type="button" data-gallery-index="0" aria-label="Show resale image 1" aria-pressed="true"><img src="resale1.jpg" alt=""></button>
                     <button type="button" data-gallery-index="1" aria-label="Show resale image 2" aria-pressed="false"><img src="resale11.jpg" alt=""></button>
@@ -61,8 +67,8 @@
             <div class="shop-toolbar">
                 <div class="shop-categories" role="group" aria-label="Filter resale pieces by category">
                     <button class="shop-filter is-active" type="button" data-category="all" aria-pressed="true">All pieces <span>30</span></button>
-                    <button class="shop-filter" type="button" data-category="dress" aria-pressed="false">Dresses <span>14</span></button>
-                    <button class="shop-filter" type="button" data-category="set" aria-pressed="false">Sets <span>8</span></button>
+                    <button class="shop-filter" type="button" data-category="dress" aria-pressed="false">Dresses <span>13</span></button>
+                    <button class="shop-filter" type="button" data-category="set" aria-pressed="false">Sets <span>9</span></button>
                     <button class="shop-filter" type="button" data-category="outerwear" aria-pressed="false">Outerwear <span>8</span></button>
                 </div>
                 <label class="shop-search-label" for="shop-search">Search</label>
@@ -77,7 +83,7 @@
     <script>
         (function () {
             var catalog = [
-                { category: 'dress', name: 'Soft Knit Midi', tag: 'COZY', image: 'resale1.jpg', description: 'A relaxed midi with an easy drape and soft movement.', search: 'soft knit midi cozy dress' },
+                { category: 'set', name: 'Grey Blazer & Skirt Set', tag: 'TAILORED', brand: 'Le Suit Petite', condition: 'Never worn', size: '6P', price: 100, image: 'resale1.jpg', description: 'A softly structured grey blazer with gold-tone buttons and a matching skirt for a polished, coordinated look.', search: 'grey blazer skirt set tailored workwear' },
                 { category: 'dress', name: 'Cocoa Slip', tag: 'MINIMAL', image: 'resale2.png', description: 'Simple shape, polished finish, and all-day wearability.', search: 'cocoa slip minimal dress' },
                 { category: 'dress', name: 'Mauve Bias Dress', tag: 'SOFT', image: 'resale3.png', description: 'A flattering bias-cut silhouette in a subtle tone.', search: 'mauve bias dress soft' },
                 { category: 'dress', name: 'Pearl Satin Dress', tag: 'LUXE', image: 'resale4.png', description: 'A sleek option that photographs beautifully and feels elevated.', search: 'pearl satin dress luxe' },
@@ -114,6 +120,12 @@
             var galleryImage = document.getElementById('resale-gallery-image');
             var galleryCaption = document.getElementById('resale-gallery-caption');
             var galleryCount = document.getElementById('resale-gallery-count');
+            var galleryProductTitle = document.getElementById('resale-gallery-product-title');
+            var galleryProductBrand = document.getElementById('resale-gallery-brand');
+            var galleryProductSize = document.getElementById('resale-gallery-size');
+            var galleryProductDescription = document.getElementById('resale-gallery-description');
+            var galleryProductPrice = document.getElementById('resale-gallery-price');
+            var galleryAddButton = document.getElementById('resale-gallery-add');
             var galleryThumbnails = Array.from(galleryDialog.querySelectorAll('[data-gallery-index]'));
             var galleryTouchStartX = null;
             var galleryImages = [
@@ -143,6 +155,7 @@
             var cartPanel = document.getElementById('resale-inquiry');
             var closeCartButton = document.getElementById('resale-inquiry-close');
             var resalePrice = 30;
+            var currentGalleryProductIndex = null;
 
             function showGalleryImage(index) {
                 currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
@@ -156,14 +169,33 @@
                 });
             }
 
-            function openGallery(index) {
+            function openGallery(index, productIndex) {
+                var item = catalog[productIndex];
+                currentGalleryProductIndex = productIndex;
                 showGalleryImage(index);
+                galleryProductTitle.textContent = item.name;
+                galleryProductBrand.textContent = item.brand || 'Not listed';
+                galleryProductSize.textContent = item.size || 'Not listed';
+                galleryProductDescription.textContent = item.description;
+                galleryProductPrice.textContent = formatPrice(getItemPrice(item));
+                updateGalleryAddButton();
                 if (!galleryDialog.open) galleryDialog.showModal();
                 document.getElementById('resale-gallery-close').focus();
             }
 
+            function updateGalleryAddButton() {
+                if (currentGalleryProductIndex === null) return;
+                var quantity = cartItems[currentGalleryProductIndex] || 0;
+                galleryAddButton.textContent = quantity ? 'Added (' + quantity + ')' : 'Add to inquiry';
+            }
+
             document.getElementById('resale-gallery-close').addEventListener('click', function () {
                 galleryDialog.close();
+            });
+            galleryAddButton.addEventListener('click', function () {
+                if (currentGalleryProductIndex === null) return;
+                cartItems[currentGalleryProductIndex] = Math.min((cartItems[currentGalleryProductIndex] || 0) + 1, 99);
+                renderCart();
             });
             document.getElementById('resale-gallery-previous').addEventListener('click', function () {
                 showGalleryImage(currentGalleryIndex - 1);
@@ -229,15 +261,19 @@
                 return '$' + amount.toFixed(2);
             }
 
+            function getItemPrice(item) {
+                return item.price || resalePrice;
+            }
+
             function createCartMessage() {
                 var lines = Object.keys(cartItems).map(function (key) {
                     var item = catalog[Number(key)];
-                    return '- ' + item.name + ' x ' + cartItems[key] + ' at ' + formatPrice(resalePrice) + ' each';
+                    return '- ' + item.name + ' x ' + cartItems[key] + ' at ' + formatPrice(getItemPrice(item)) + ' each';
                 });
                 var subtotal = Object.keys(cartItems).reduce(function (sum, key) {
-                    return sum + resalePrice * cartItems[key];
+                    return sum + getItemPrice(catalog[Number(key)]) * cartItems[key];
                 }, 0);
-                return 'Hi Kelly,\n\nI’m interested in these pre-loved pieces:\n' + lines.join('\n') + '\n\nEstimated subtotal: ' + formatPrice(subtotal) + '\n\nPlease confirm availability, condition, size, and pickup details before I decide. I understand the listed prices and subtotal are estimates until confirmed. This is an inquiry only; no payment is being made.\n\nThank you!';
+                return 'Hi Kelly,\n\nI’m interested in these resale pieces:\n' + lines.join('\n') + '\n\nEstimated subtotal: ' + formatPrice(subtotal) + '\n\nPlease confirm availability, condition, size, and pickup details before I decide. I understand the listed prices and subtotal are estimates until confirmed. This is an inquiry only; no payment is being made.\n\nThank you!';
             }
 
             function saveCart() {
@@ -251,7 +287,9 @@
             function renderCart() {
                 var ids = Object.keys(cartItems);
                 var totalQuantity = ids.reduce(function (total, key) { return total + cartItems[key]; }, 0);
-                var subtotal = totalQuantity * resalePrice;
+                var subtotal = ids.reduce(function (sum, key) {
+                    return sum + getItemPrice(catalog[Number(key)]) * cartItems[key];
+                }, 0);
 
                 if (!ids.length) {
                     cartContainer.innerHTML = '<p class="shop-cart-empty">Your resale inquiry list is empty.</p>';
@@ -260,7 +298,9 @@
                         var index = Number(key);
                         var item = catalog[index];
                         var quantity = cartItems[key];
-                        return '<div class="shop-cart-item"><div><p class="shop-product-brand">PRE-LOVED</p><h3>' + item.name + '</h3><p class="shop-cart-unit">Listed price ' + formatPrice(resalePrice) + ' · confirm condition and size</p></div><label>Qty <input class="shop-cart-quantity" type="number" min="1" max="99" value="' + quantity + '" data-cart-quantity="' + index + '" aria-label="Quantity of ' + item.name + '"></label><strong class="shop-cart-line-total">' + formatPrice(resalePrice * quantity) + '</strong><button class="shop-remove-item" type="button" data-cart-remove="' + index + '" aria-label="Remove ' + item.name + '">Remove</button></div>';
+                        var brand = item.brand || 'RESALE';
+                        var details = item.size ? 'Size ' + item.size + ' · ' + item.condition + ' · ' + formatPrice(getItemPrice(item)) + ' each' : 'Listed price ' + formatPrice(getItemPrice(item)) + ' · confirm condition and size';
+                        return '<div class="shop-cart-item"><div><p class="shop-product-brand">' + brand + '</p><h3>' + item.name + '</h3><p class="shop-cart-unit">' + details + '</p></div><label>Qty <input class="shop-cart-quantity" type="number" min="1" max="99" value="' + quantity + '" data-cart-quantity="' + index + '" aria-label="Quantity of ' + item.name + '"></label><strong class="shop-cart-line-total">' + formatPrice(getItemPrice(item) * quantity) + '</strong><button class="shop-remove-item" type="button" data-cart-remove="' + index + '" aria-label="Remove ' + item.name + '">Remove</button></div>';
                     }).join('');
                 }
 
@@ -275,6 +315,7 @@
                     var quantity = cartItems[button.dataset.addInquiry];
                     button.textContent = quantity ? 'Added (' + quantity + ')' : 'Add to inquiry';
                 });
+                if (galleryDialog.open) updateGalleryAddButton();
                 updateCartShortcut(cartPanel.open);
                 saveCart();
             }
@@ -308,10 +349,11 @@
             grid.addEventListener('click', function (event) {
                 var imageButton = event.target.closest('[data-gallery-open]');
                 if (imageButton) {
+                    var productIndex = Number(imageButton.dataset.productIndex);
                     var imageIndex = galleryImages.findIndex(function (image) {
                         return image.src === imageButton.dataset.galleryOpen;
                     });
-                    openGallery(imageIndex < 0 ? 0 : imageIndex);
+                    openGallery(imageIndex < 0 ? 0 : imageIndex, productIndex);
                     return;
                 }
                 var button = event.target.closest('[data-add-inquiry]');
@@ -359,20 +401,22 @@
 
             function createProductCard(item) {
                 var article = document.createElement('article');
+                var condition = item.condition || 'Resale';
+                var itemPrice = getItemPrice(item);
                 article.className = 'shop-product';
                 article.dataset.category = item.category;
                 article.dataset.search = item.search + ' ' + item.name.toLowerCase();
                 article.innerHTML = [
                     '<div class="shop-product-image">',
-                    '<button class="resale-image-open" type="button" data-gallery-open="' + item.image + '" aria-label="Open photos for ' + item.name + '">',
+                    '<button class="resale-image-open" type="button" data-gallery-open="' + item.image + '" data-product-index="' + catalog.indexOf(item) + '" aria-label="Open photos and details for ' + item.name + '">',
                     '<img src="' + item.image + '" alt="' + item.name + '">',
                     '</button>',
                     '</div>',
                     '<div class="shop-product-info">',
-                    '<div class="shop-product-brandline"><p class="shop-product-brand">PRE-LOVED</p><span class="shop-retailer-link">Resale</span></div>',
+                    '<div class="shop-product-brandline"><p class="shop-product-brand">RESALE</p><span class="shop-retailer-link">' + condition + '</span></div>',
                     '<div class="shop-product-title"><h2>' + item.name + '</h2></div>',
-                    '<div class="shop-product-purchase"><div class="shop-product-prices"><span class="shop-retail-price">Listed price</span><span class="shop-client-price"><strong>$30</strong></span></div><button class="shop-add-inquiry" type="button" data-add-inquiry="' + catalog.indexOf(item) + '">Add to inquiry</button></div>',
-                    '<div class="shop-product-meta"><span>Confirm condition, size, and pickup</span></div>',
+                    '<div class="shop-product-purchase"><div class="shop-product-prices"><span class="shop-retail-price">' + (item.price ? 'Price' : 'Listed price') + '</span><span class="shop-client-price"><strong>$' + itemPrice + '</strong></span></div><button class="shop-add-inquiry" type="button" data-add-inquiry="' + catalog.indexOf(item) + '">Add to inquiry</button></div>',
+                    '<div class="shop-product-meta"><span>Confirm condition and pickup</span></div>',
                     '</div>'
                 ].join('');
                 return article;
