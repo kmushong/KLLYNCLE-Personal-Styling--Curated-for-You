@@ -41,6 +41,22 @@
                 <a class="shop-inquiry-fallback" id="resale-inquiry-fallback" href="mailto:kellynicolemushonga@gmail.com" hidden>Email Kelly instead</a>
             </form>
         </dialog>
+        <dialog class="resale-gallery" id="resale-gallery" aria-label="Resale photo gallery">
+            <div class="resale-gallery-content">
+                <div class="resale-gallery-header"><p class="page-kicker">RESALE LOOKS</p><button class="resale-gallery-close" id="resale-gallery-close" type="button" aria-label="Close photo gallery">×</button></div>
+                <div class="resale-gallery-stage" id="resale-gallery-stage">
+                    <button class="resale-gallery-nav" id="resale-gallery-previous" type="button" aria-label="Previous image">‹</button>
+                    <figure><img id="resale-gallery-image" src="resale1.jpg" alt=""><figcaption id="resale-gallery-caption"></figcaption></figure>
+                    <button class="resale-gallery-nav" id="resale-gallery-next" type="button" aria-label="Next image">›</button>
+                </div>
+                <div class="resale-gallery-thumbnails" role="group" aria-label="Choose a resale image">
+                    <button type="button" data-gallery-index="0" aria-label="Show resale image 1" aria-pressed="true"><img src="resale1.jpg" alt=""></button>
+                    <button type="button" data-gallery-index="1" aria-label="Show resale image 2" aria-pressed="false"><img src="resale11.jpg" alt=""></button>
+                    <button type="button" data-gallery-index="2" aria-label="Show resale image 3" aria-pressed="false"><img src="resale111.jpg" alt=""></button>
+                </div>
+                <p class="resale-gallery-count" id="resale-gallery-count" aria-live="polite"></p>
+            </div>
+        </dialog>
         <section class="shop-catalog" aria-label="Resale clothing">
             <div class="shop-toolbar">
                 <div class="shop-categories" role="group" aria-label="Filter resale pieces by category">
@@ -61,7 +77,7 @@
     <script>
         (function () {
             var catalog = [
-                { category: 'dress', name: 'Soft Knit Midi', tag: 'COZY', image: 'resale1.png', description: 'A relaxed midi with an easy drape and soft movement.', search: 'soft knit midi cozy dress' },
+                { category: 'dress', name: 'Soft Knit Midi', tag: 'COZY', image: 'resale1.jpg', description: 'A relaxed midi with an easy drape and soft movement.', search: 'soft knit midi cozy dress' },
                 { category: 'dress', name: 'Cocoa Slip', tag: 'MINIMAL', image: 'resale2.png', description: 'Simple shape, polished finish, and all-day wearability.', search: 'cocoa slip minimal dress' },
                 { category: 'dress', name: 'Mauve Bias Dress', tag: 'SOFT', image: 'resale3.png', description: 'A flattering bias-cut silhouette in a subtle tone.', search: 'mauve bias dress soft' },
                 { category: 'dress', name: 'Pearl Satin Dress', tag: 'LUXE', image: 'resale4.png', description: 'A sleek option that photographs beautifully and feels elevated.', search: 'pearl satin dress luxe' },
@@ -71,7 +87,7 @@
                 { category: 'dress', name: 'Stone Swipe Dress', tag: 'NEUTRAL', image: 'resale8.png', description: 'A tonal piece with structure and understated charm.', search: 'stone swipe dress neutral' },
                 { category: 'dress', name: 'Champagne Twist Dress', tag: 'GLAM', image: 'resale9.png', description: 'A dress with a little shimmer and a lot of polish.', search: 'champagne twist dress glam' },
                 { category: 'dress', name: 'Black Wrap Dress', tag: 'EVERYDAY', image: 'resale10.png', description: 'A dependable classic for work, dinner, or easy evenings.', search: 'black wrap dress everyday' },
-                { category: 'dress', name: 'Rosewater Midi', tag: 'FRESH', image: 'resale11.png', description: 'A pastel tone with a fluid line and easy movement.', search: 'rosewater midi fresh dress' },
+                { category: 'dress', name: 'Rosewater Midi', tag: 'FRESH', image: 'resale11.jpg', description: 'A pastel tone with a fluid line and easy movement.', search: 'rosewater midi fresh dress' },
                 { category: 'dress', name: 'Satin Slip Midi', tag: 'LUXE', image: 'resale12.png', description: 'A polished slip dress with a smooth finish and drape.', search: 'satin slip midi luxe dress' },
                 { category: 'set', name: 'Ivory Riviera Set', tag: 'RESORT', image: 'resale13.png', description: 'Light, easy, and made for easy travel styling.', search: 'ivory riviera set resort' },
                 { category: 'set', name: 'Monochrome Lounge Set', tag: 'CHIC', image: 'resale14.png', description: 'A refined co-ord that feels elevated and easy to wear.', search: 'monochrome lounge set chic' },
@@ -94,6 +110,18 @@
             ];
 
             var grid = document.getElementById('shop-product-grid');
+            var galleryDialog = document.getElementById('resale-gallery');
+            var galleryImage = document.getElementById('resale-gallery-image');
+            var galleryCaption = document.getElementById('resale-gallery-caption');
+            var galleryCount = document.getElementById('resale-gallery-count');
+            var galleryThumbnails = Array.from(galleryDialog.querySelectorAll('[data-gallery-index]'));
+            var galleryTouchStartX = null;
+            var galleryImages = [
+                { src: 'resale1.jpg', label: 'Resale look 1' },
+                { src: 'resale11.jpg', label: 'Resale look 2' },
+                { src: 'resale111.jpg', label: 'Resale look 3' }
+            ];
+            var currentGalleryIndex = 0;
             var products = [];
             var filters = Array.from(document.querySelectorAll('.shop-filter'));
             var search = document.getElementById('shop-search');
@@ -115,6 +143,58 @@
             var cartPanel = document.getElementById('resale-inquiry');
             var closeCartButton = document.getElementById('resale-inquiry-close');
             var resalePrice = 30;
+
+            function showGalleryImage(index) {
+                currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
+                var image = galleryImages[currentGalleryIndex];
+                galleryImage.src = image.src;
+                galleryImage.alt = image.label;
+                galleryCaption.textContent = image.label;
+                galleryCount.textContent = (currentGalleryIndex + 1) + ' / ' + galleryImages.length;
+                galleryThumbnails.forEach(function (thumbnail, thumbnailIndex) {
+                    thumbnail.setAttribute('aria-pressed', String(thumbnailIndex === currentGalleryIndex));
+                });
+            }
+
+            function openGallery(index) {
+                showGalleryImage(index);
+                if (!galleryDialog.open) galleryDialog.showModal();
+                document.getElementById('resale-gallery-close').focus();
+            }
+
+            document.getElementById('resale-gallery-close').addEventListener('click', function () {
+                galleryDialog.close();
+            });
+            document.getElementById('resale-gallery-previous').addEventListener('click', function () {
+                showGalleryImage(currentGalleryIndex - 1);
+            });
+            document.getElementById('resale-gallery-next').addEventListener('click', function () {
+                showGalleryImage(currentGalleryIndex + 1);
+            });
+            galleryThumbnails.forEach(function (thumbnail) {
+                thumbnail.addEventListener('click', function () {
+                    showGalleryImage(Number(thumbnail.dataset.galleryIndex));
+                });
+            });
+            galleryDialog.addEventListener('click', function (event) {
+                if (event.target === galleryDialog) galleryDialog.close();
+            });
+            document.addEventListener('keydown', function (event) {
+                if (!galleryDialog.open) return;
+                if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    showGalleryImage(currentGalleryIndex + (event.key === 'ArrowRight' ? 1 : -1));
+                }
+            });
+            document.getElementById('resale-gallery-stage').addEventListener('touchstart', function (event) {
+                if (event.touches.length === 1) galleryTouchStartX = event.touches[0].clientX;
+            }, { passive: true });
+            document.getElementById('resale-gallery-stage').addEventListener('touchend', function (event) {
+                if (galleryTouchStartX === null || !event.changedTouches.length) return;
+                var deltaX = event.changedTouches[0].clientX - galleryTouchStartX;
+                if (Math.abs(deltaX) > 40) showGalleryImage(currentGalleryIndex + (deltaX < 0 ? 1 : -1));
+                galleryTouchStartX = null;
+            }, { passive: true });
 
             try {
                 var savedCart = JSON.parse(localStorage.getItem('kelly-resale-inquiry') || '{}');
@@ -226,6 +306,14 @@
             });
 
             grid.addEventListener('click', function (event) {
+                var imageButton = event.target.closest('[data-gallery-open]');
+                if (imageButton) {
+                    var imageIndex = galleryImages.findIndex(function (image) {
+                        return image.src === imageButton.dataset.galleryOpen;
+                    });
+                    openGallery(imageIndex < 0 ? 0 : imageIndex);
+                    return;
+                }
                 var button = event.target.closest('[data-add-inquiry]');
                 if (!button) return;
                 var index = button.dataset.addInquiry;
@@ -276,7 +364,9 @@
                 article.dataset.search = item.search + ' ' + item.name.toLowerCase();
                 article.innerHTML = [
                     '<div class="shop-product-image">',
+                    '<button class="resale-image-open" type="button" data-gallery-open="' + item.image + '" aria-label="Open photos for ' + item.name + '">',
                     '<img src="' + item.image + '" alt="' + item.name + '">',
+                    '</button>',
                     '</div>',
                     '<div class="shop-product-info">',
                     '<div class="shop-product-brandline"><p class="shop-product-brand">PRE-LOVED</p><span class="shop-retailer-link">Resale</span></div>',
