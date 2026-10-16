@@ -128,11 +128,7 @@
             var galleryAddButton = document.getElementById('resale-gallery-add');
             var galleryThumbnails = Array.from(galleryDialog.querySelectorAll('[data-gallery-index]'));
             var galleryTouchStartX = null;
-            var galleryImages = [
-                { src: 'resale1.jpg', label: 'Resale look 1' },
-                { src: 'resale11.jpg', label: 'Resale look 2' },
-                { src: 'resale111.jpg', label: 'Resale look 3' }
-            ];
+            var galleryImages = [];
             var currentGalleryIndex = 0;
             var products = [];
             var filters = Array.from(document.querySelectorAll('.shop-filter'));
@@ -157,6 +153,16 @@
             var resalePrice = 30;
             var currentGalleryProductIndex = null;
 
+            function getGalleryImages(productIndex) {
+                var itemNumber = String(productIndex + 1);
+                return [1, 2, 3].map(function (repeatCount, imageIndex) {
+                    return {
+                        src: 'resale' + itemNumber.repeat(repeatCount) + '.jpg',
+                        label: 'Photo ' + (imageIndex + 1) + ' of ' + catalog[productIndex].name
+                    };
+                });
+            }
+
             function showGalleryImage(index) {
                 currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
                 var image = galleryImages[currentGalleryIndex];
@@ -172,6 +178,12 @@
             function openGallery(index, productIndex) {
                 var item = catalog[productIndex];
                 currentGalleryProductIndex = productIndex;
+                galleryImages = getGalleryImages(productIndex);
+                galleryThumbnails.forEach(function (thumbnail, thumbnailIndex) {
+                    var image = galleryImages[thumbnailIndex];
+                    thumbnail.querySelector('img').src = image.src;
+                    thumbnail.setAttribute('aria-label', 'Show ' + image.label);
+                });
                 showGalleryImage(index);
                 galleryProductTitle.textContent = item.name;
                 galleryProductBrand.textContent = item.brand || 'Not listed';
@@ -350,10 +362,7 @@
                 var imageButton = event.target.closest('[data-gallery-open]');
                 if (imageButton) {
                     var productIndex = Number(imageButton.dataset.productIndex);
-                    var imageIndex = galleryImages.findIndex(function (image) {
-                        return image.src === imageButton.dataset.galleryOpen;
-                    });
-                    openGallery(imageIndex < 0 ? 0 : imageIndex, productIndex);
+                    openGallery(0, productIndex);
                     return;
                 }
                 var button = event.target.closest('[data-add-inquiry]');
@@ -401,6 +410,8 @@
 
             function createProductCard(item) {
                 var article = document.createElement('article');
+                var productIndex = catalog.indexOf(item);
+                var imagePaths = getGalleryImages(productIndex);
                 var condition = item.condition || 'Resale';
                 var itemPrice = getItemPrice(item);
                 article.className = 'shop-product';
@@ -408,8 +419,8 @@
                 article.dataset.search = item.search + ' ' + item.name.toLowerCase();
                 article.innerHTML = [
                     '<div class="shop-product-image">',
-                    '<button class="resale-image-open" type="button" data-gallery-open="' + item.image + '" data-product-index="' + catalog.indexOf(item) + '" aria-label="Open photos and details for ' + item.name + '">',
-                    '<img src="' + item.image + '" alt="' + item.name + '">',
+                    '<button class="resale-image-open" type="button" data-gallery-open="' + imagePaths[0].src + '" data-product-index="' + productIndex + '" aria-label="Open photos and details for ' + item.name + '">',
+                    '<img src="' + imagePaths[0].src + '" alt="' + item.name + '">',
                     '</button>',
                     '</div>',
                     '<div class="shop-product-info">',
