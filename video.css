@@ -406,10 +406,10 @@ h1 span {
 }
 .index-sections .services-list .service-item{
     position: relative;
-    flex: 0 0 clamp(150px, 20vw, 250px);
-    width: clamp(150px, 20vw, 250px);
+    flex: 0 0 clamp(210px, 25vw, 340px);
+    width: clamp(210px, 25vw, 340px);
     min-width: 0;
-    margin-left: clamp(-105px, -8vw, -50px);
+    margin-left: clamp(-90px, -5vw, -42px);
     margin-bottom: 170px;
     overflow: visible;
     transform: perspective(900px) rotateY(var(--coverflow-rotate, 0deg)) translateY(var(--coverflow-lift, 0px)) translateZ(var(--coverflow-depth, 0px)) scale(var(--coverflow-scale, 1));
@@ -555,7 +555,7 @@ h1 span {
 .index-sections .layer{
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 3;
     background: linear-gradient(145deg, #262626, #101010 68%, #401726);
     border-radius: 10px;
     position: absolute;
@@ -570,6 +570,7 @@ h1 span {
     text-align: center;
     font-size: 14px;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 350ms ease;
 }
 .index-sections .work:hover img,
@@ -580,6 +581,7 @@ h1 span {
 .index-sections .work:hover .layer,
 .index-sections .work:focus-within .layer{
     opacity: 1;
+    pointer-events: auto;
 }
 @media (hover: hover) {
     .index-sections .work.is-active img{
@@ -1226,6 +1228,7 @@ h1 span {
     .index-sections .work.is-open .layer {
         opacity: 1;
         pointer-events: auto;
+        z-index: 3;
     }
 
     .index-sections .layer h3 {
