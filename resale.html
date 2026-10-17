@@ -93,7 +93,7 @@
                 { category: 'dress', name: 'Stone Swipe Dress', tag: 'NEUTRAL', image: 'resale8.png', description: 'A tonal piece with structure and understated charm.', search: 'stone swipe dress neutral' },
                 { category: 'dress', name: 'Champagne Twist Dress', tag: 'GLAM', image: 'resale9.png', description: 'A dress with a little shimmer and a lot of polish.', search: 'champagne twist dress glam' },
                 { category: 'dress', name: 'Black Wrap Dress', tag: 'EVERYDAY', image: 'resale10.png', description: 'A dependable classic for work, dinner, or easy evenings.', search: 'black wrap dress everyday' },
-                { category: 'dress', name: 'Rosewater Midi', tag: 'FRESH', image: 'resale11.jpg', description: 'A pastel tone with a fluid line and easy movement.', search: 'rosewater midi fresh dress' },
+                { category: 'dress', name: 'Rosewater Midi', tag: 'FRESH', image: 'resale011.jpg', gallery: ['resale011.jpg', 'resale1111.jpg', 'resale111111.jpg'], description: 'A pastel tone with a fluid line and easy movement.', search: 'rosewater midi fresh dress' },
                 { category: 'dress', name: 'Satin Slip Midi', tag: 'LUXE', image: 'resale12.png', description: 'A polished slip dress with a smooth finish and drape.', search: 'satin slip midi luxe dress' },
                 { category: 'set', name: 'Ivory Riviera Set', tag: 'RESORT', image: 'resale13.png', description: 'Light, easy, and made for easy travel styling.', search: 'ivory riviera set resort' },
                 { category: 'set', name: 'Monochrome Lounge Set', tag: 'CHIC', image: 'resale14.png', description: 'A refined co-ord that feels elevated and easy to wear.', search: 'monochrome lounge set chic' },
@@ -155,9 +155,16 @@
 
             function getGalleryImages(productIndex) {
                 var itemNumber = String(productIndex + 1);
+                if (catalog[productIndex].gallery) {
+                    return catalog[productIndex].gallery.map(function (src, imageIndex) {
+                        return { src: src, label: 'Photo ' + (imageIndex + 1) + ' of ' + catalog[productIndex].name };
+                    });
+                }
                 return [1, 2, 3].map(function (repeatCount, imageIndex) {
                     return {
-                        src: 'resale' + itemNumber.repeat(repeatCount) + '.jpg',
+                        src: imageIndex === 0 && catalog[productIndex].image.endsWith('.jpg')
+                            ? catalog[productIndex].image
+                            : 'resale' + itemNumber.repeat(repeatCount) + '.jpg',
                         label: 'Photo ' + (imageIndex + 1) + ' of ' + catalog[productIndex].name
                     };
                 });
