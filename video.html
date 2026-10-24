@@ -42,7 +42,7 @@
   });
 </script>
 
-        <video class="background-video" autoplay muted playsinline aria-hidden="true">
+        <video class="background-video" autoplay muted playsinline webkit-playsinline preload="auto" aria-hidden="true">
             <source src="vid-background.m4v" type="video/mp4">
             <source src="vid.mov">
         </video>
@@ -287,6 +287,23 @@ You focus on your career. I'll handle the closet and the access.
         var reversing = false;
         var SPEED = 0.7;
         bg.playbackRate = SPEED;
+        bg.muted = true;
+        bg.defaultMuted = true;
+        bg.setAttribute('muted', '');
+
+        // Mobile browsers may block autoplay; retry and fall back to first touch.
+        function startVideo() {
+            var p = bg.play();
+            if (p && p.catch) p.catch(function () {});
+        }
+        startVideo();
+        bg.addEventListener('loadeddata', startVideo);
+        ['touchstart', 'click', 'scroll'].forEach(function (ev) {
+            window.addEventListener(ev, function once() {
+                if (bg.paused && !reversing) startVideo();
+                window.removeEventListener(ev, once);
+            }, { passive: true });
+        });
 
         function tick(now) {
             var dt = (now - last) / 1000;
