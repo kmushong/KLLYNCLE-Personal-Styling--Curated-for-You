@@ -846,6 +846,12 @@ h1 span {
     grid-row: 3 / span 2;
 }
 
+@media (min-width: 801px) {
+    #about .row {
+        grid-template-rows: auto auto auto 1fr;
+    }
+}
+
 #about .about-col-1 img {
     display: block;
     box-shadow: 0 24px 60px rgb(255 0 79 / 22%);
@@ -889,12 +895,13 @@ h1 span {
     grid-column: 2;
     grid-row: 3;
     gap: 36px;
-    margin: 0 0 24px;
+    margin: 0 0 -16px;
     padding-bottom: 10px;
     border-bottom: 1px solid #262626;
 }
 
 #about .tab-links {
+    margin-block: 0;
     margin-right: 0;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -906,14 +913,16 @@ h1 span {
 }
 
 #about .tab-contents ul {
+    display: grid;
+    gap: 14px;
+    width: max-content;
+    max-width: 100%;
     margin: 0;
     padding: 0;
 }
 
 #about .tab-contents ul li {
-    width: fit-content;
-    max-width: 100%;
-    margin: 0 0 14px;
+    margin: 0;
     padding: 14px 18px;
     border-left: 3px solid #ff004f;
     border-radius: 0 8px 8px 0;
@@ -995,6 +1004,10 @@ h1 span {
 }
 
 #about #brands ul li {
+    white-space: nowrap;
+}
+
+#about #brands ul li {
     margin: 0;
 }
 
@@ -1002,14 +1015,14 @@ h1 span {
     font-family: inherit;
     font-style: normal;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: normal;
     text-transform: uppercase;
 }
 
 #about .tab-contents .brand-script {
     font-family: 'Brush Script MT', cursive;
-    font-size: 14px;
+    font-size: 18px;
     font-style: italic;
     text-transform: none;
 }
@@ -1041,7 +1054,7 @@ h1 span {
 #about .tab-contents .brand-subline {
     display: block;
     color: #fff;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: .2em;
 }
 
@@ -1049,7 +1062,7 @@ h1 span {
     display: block;
     margin-bottom: 4px;
     color: #b54769;
-    font-size: 9px;
+    font-size: 11px;
     font-style: normal;
     font-weight: 400;
     letter-spacing: .1em;
