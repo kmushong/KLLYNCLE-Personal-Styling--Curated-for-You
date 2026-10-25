@@ -905,7 +905,14 @@ h1 span {
     color: #ff5a78;
 }
 
+#about .tab-contents ul {
+    margin: 0;
+    padding: 0;
+}
+
 #about .tab-contents ul li {
+    width: fit-content;
+    max-width: 100%;
     margin: 0 0 14px;
     padding: 14px 18px;
     border-left: 3px solid #ff004f;
@@ -1301,4 +1308,62 @@ h1 span {
         transition: none;
     }
 
+}
+
+/* Mobile polish */
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 600px) {
+    .video-page,
+    .intro {
+        min-height: 100dvh;
+    }
+
+    .intro {
+        padding-bottom: 84px;
+    }
+
+    #about .about-col-2 > p {
+        text-align: left;
+        hyphens: auto;
+    }
+
+    #about .tab-contents ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    #about .tab-titles {
+        gap: 22px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    #about .tab-links {
+        padding: 6px 0;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .index-sections form input,
+    .index-sections form select,
+    .index-sections form textarea {
+        margin: 8px 0;
+        font-size: 16px;
+    }
+
+    .index-sections form .btn2,
+    .index-sections .contact-left .btn.btn2 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .index-sections .footer-contact {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
 }
