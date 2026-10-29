@@ -1380,3 +1380,74 @@ html {
         gap: 8px;
     }
 }
+
+/* Holiday */
+#holiday {
+    padding: 70px 0;
+    text-align: center;
+}
+
+#holiday .holiday-eyebrow {
+    margin: 0 0 14px;
+    color: #ff5a78;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+#holiday .sub-title {
+    font-size: 48px;
+}
+
+#holiday .holiday-copy {
+    max-width: 62ch;
+    margin: 24px auto 0;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+    #holiday {
+        padding: 48px 0;
+    }
+
+    #holiday .sub-title {
+        font-size: 36px;
+    }
+}
+
+/* My Work: caption and button sit underneath each tile */
+.index-sections .work,
+.index-sections .work.is-active {
+    aspect-ratio: auto;
+    overflow: visible;
+}
+
+.index-sections .work img,
+.index-sections .work:hover img,
+.index-sections .work:focus-within img,
+.index-sections .work.is-active img,
+.index-sections .work.is-open img {
+    position: static;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.index-sections .work .layer,
+.index-sections .work:hover .layer,
+.index-sections .work.is-active .layer,
+.index-sections .work.is-open .layer {
+    position: static;
+    width: 100%;
+    height: auto;
+    background: none;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 14px 4px 0;
+    overflow: visible;
+}
