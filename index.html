@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#101010">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,600;0,700;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="video.css">
     <title>Kelly Mushonga | Luxury Personal Stylist</title>
     <script src="https://kit.fontawesome.com/14684a48e7.js" crossorigin="anonymous"></script>
@@ -53,6 +56,10 @@
                     <span></span><span></span><span></span>
                 </button>
                 <a class="wordmark" href="index.html">KELLY MUSHONGA</a>
+                <button class="cart-toggle" type="button" aria-label="Open cart" aria-controls="cart-drawer" aria-expanded="false">
+                    <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+                    <span class="cart-count" hidden>0</span>
+                </button>
                 <nav id="burger-menu" class="burger-menu" hidden>
                     <a href="index.html">Home</a>
                     <a href="#about">About</a>
@@ -64,7 +71,7 @@
             <div class="intro-copy">
                 <p class="eyebrow">Your Refined Style · At My Price</p>
                 <h1 id="page-title">Luxury Stylist<br><span>Washington DC.</span></h1>
-                <a class="back-link" href="index.html"><span aria-hidden="true">↓</span> Book a consultation</a>
+                <a class="back-link" href="#contact"><span aria-hidden="true">↓</span> Book a consultation</a>
             </div>
             <p class="page-index">01 <span></span> 02</p>
         </section>
@@ -78,7 +85,7 @@
                 <img src="headshot.png">
             </div>
             <div class="about-col-2">
-                <h1 class="sub-title">About Me</h1>
+                <h1 class="sub-title">About <span>Me</span></h1>
                 <p>Stop paying retail markup for luxury.
 Modern luxury pricing isn't about true value — it's inflated to be discounted later. But you don't have time to hunt off-price racks or negotiate with boutique SAs.
 I do.
@@ -133,7 +140,7 @@ You focus on your career. I'll handle the closet and the access.
 <!-- ---------services---------------- -->
 <div id="services">
     <div class="container">
-        <h1 class="sub-title">My Services</h1>
+        <h1 class="sub-title">My <span>Services</span></h1>
         <p class="services-scroll-hint">Scroll to explore <i class="fas fa-arrow-right" aria-hidden="true"></i></p>
         <div class="services-list">
             <div class="service-item">
@@ -177,53 +184,189 @@ You focus on your career. I'll handle the closet and the access.
                 <p>High-quality, gently used items removed during the audit are sorted, photographed, and prepared for consignment or resale.</p>
             </div>
         </div>
-        <a href="portfolio.html" class="btn">See more</a>
     </div>
 </div>
 <!-- ----------holiday------------ -->
 <div id="holiday" class="fade-up">
     <div class="container">
         <p class="holiday-eyebrow">The Holidays Are Almost Here</p>
-        <h1 class="sub-title">It's Almost Christmas</h1>
+        <h1 class="sub-title">It's Almost <span>Christmas</span></h1>
         <p class="holiday-copy">Make the most of my exclusive discounts and get access to the best holiday sales. Whether you're refreshing your own wardrobe or finding the perfect gift for someone you love, I'll help you shop smarter and give more for less.</p>
         <a href="#contact" class="btn">Start Your Holiday Shopping</a>
     </div>
 </div>
+<!-- ----------holiday picks------------ -->
+<div id="picks" class="fade-up">
+    <div class="container">
+        <p class="holiday-eyebrow">Members' Pricing</p>
+        <h1 class="sub-title">Holiday <span>Picks</span></h1>
+        <div class="product-carousel">
+        <button type="button" class="carousel-btn carousel-prev" aria-label="Previous products">&#8249;</button>
+        <button type="button" class="carousel-btn carousel-next" aria-label="Next products">&#8250;</button>
+        <div class="product-grid">
+            <article class="product-card" data-id="rb-lori-shearling-coat" data-brand="rag &amp; bone" data-name="Lori Patchwork Shearling Coat" data-price="3198" data-url="https://www.rag-bone.com/p/lori-patchwork-shearling-coat-RAFB26F0MLT.html" data-image="https://cdn.media.amplience.net/i/rb/RAFB26F0MLT-977-A/Lori-Patchwork-Shearling-Coat-977?$large$&amp;fmt=auto$">
+                <a class="product-link" href="https://www.rag-bone.com/p/lori-patchwork-shearling-coat-RAFB26F0MLT.html" target="_blank" rel="noopener noreferrer" aria-label="View Lori Patchwork Shearling Coat on rag &amp; bone">
+                    <span class="product-image"><img src="https://cdn.media.amplience.net/i/rb/RAFB26F0MLT-977-A/Lori-Patchwork-Shearling-Coat-977?$large$&amp;fmt=auto$" alt="Lori Patchwork Shearling Coat" loading="lazy"></span>
+                    <span class="product-brand">rag &amp; bone</span>
+                    <span class="product-name">Lori Patchwork Shearling Coat</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="khaite-marlene-boot" data-brand="KHAITE" data-name="Marlene Knee-High Boot in Black Leather" data-price="1980" data-url="https://khaite.com/products/marlene-knee-high-boot-in-black-leather?variant=42930980618303" data-image="https://khaite.com/cdn/shop/files/MARLENE-KNEE-HIGH-BOOT-85_BLACK_F1133-1027-200_A.jpg?v=1784753839">
+                <a class="product-link" href="https://khaite.com/products/marlene-knee-high-boot-in-black-leather?variant=42930980618303" target="_blank" rel="noopener noreferrer" aria-label="View Marlene Knee-High Boot on KHAITE">
+                    <span class="product-image"><img src="https://khaite.com/cdn/shop/files/MARLENE-KNEE-HIGH-BOOT-85_BLACK_F1133-1027-200_A.jpg?v=1784753839" alt="Marlene Knee-High Boot in Black Leather" loading="lazy"></span>
+                    <span class="product-brand">KHAITE</span>
+                    <span class="product-name">Marlene Knee-High Boot in Black Leather</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="therow-small-ew-india-bag" data-brand="The Row" data-name="Small E/W India Bag in Black" data-price="3400" data-url="https://www.therow.com/products/small-e-w-india-black-ans" data-image="https://www.therow.com/cdn/shop/files/W2120L129BLANSF_4e05e8d8-af4e-445a-a835-20ed764a9c9b.jpg?v=1792450451">
+                <a class="product-link" href="https://www.therow.com/products/small-e-w-india-black-ans" target="_blank" rel="noopener noreferrer" aria-label="View Small E/W India Bag on The Row">
+                    <span class="product-image"><img src="https://www.therow.com/cdn/shop/files/W2120L129BLANSF_4e05e8d8-af4e-445a-a835-20ed764a9c9b.jpg?v=1792450451" alt="Small E/W India Bag in Black" loading="lazy"></span>
+                    <span class="product-brand">The Row</span>
+                    <span class="product-name">Small E/W India Bag in Black</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="therow-gordon-pants" data-brand="The Row" data-name="Gordon Wool Wide Leg Pants" data-price="1450" data-url="https://shopmy.us/shop/product/638361" data-image="https://static.shopmy.us/uploads/pretty-prod-1757381357787">
+                <a class="product-link" href="https://shopmy.us/shop/product/638361" target="_blank" rel="noopener noreferrer" aria-label="View Gordon Wool Wide Leg Pants by The Row">
+                    <span class="product-image"><img src="https://static.shopmy.us/uploads/pretty-prod-1757381357787" alt="Gordon Wool Wide Leg Pants" loading="lazy"></span>
+                    <span class="product-brand">The Row</span>
+                    <span class="product-name">Gordon Wool Wide Leg Pants</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="softgoat-girlfriend-turtleneck" data-brand="Soft Goat" data-name="Girlfriend Turtleneck" data-price="645" data-url="https://shoprescuespa.com/products/girlfriend-turtleneck?variant=52295349797165" data-image="https://shoprescuespa.com/cdn/shop/files/shop-rescue-spa-cream-cashmere-turtleneck_47dcb48a-35fc-44ff-a9dd-431eafe6447b.jpg?v=1788461243">
+                <a class="product-link" href="https://shoprescuespa.com/products/girlfriend-turtleneck?variant=52295349797165" target="_blank" rel="noopener noreferrer" aria-label="View Girlfriend Turtleneck by Soft Goat">
+                    <span class="product-image"><img src="https://shoprescuespa.com/cdn/shop/files/shop-rescue-spa-cream-cashmere-turtleneck_47dcb48a-35fc-44ff-a9dd-431eafe6447b.jpg?v=1788461243" alt="Soft Goat Girlfriend Turtleneck" loading="lazy"></span>
+                    <span class="product-brand">Soft Goat</span>
+                    <span class="product-name">Girlfriend Turtleneck</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="thombrowne-shearling-shirt-jacket" data-brand="Thom Browne" data-name="Shearling 4-Bar Oversized Shirt Jacket" data-price="5290" data-url="https://www.thombrowne.com/products/shearling-4-bar-oversized-shirt-jacket-mjo159x-02821-415?variant=45645406109859" data-image="https://cdn.shopify.com/s/files/1/0642/4523/5875/files/MJO159X-02821-415_V1.jpg?v=1740676263">
+                <a class="product-link" href="https://www.thombrowne.com/products/shearling-4-bar-oversized-shirt-jacket-mjo159x-02821-415?variant=45645406109859" target="_blank" rel="noopener noreferrer" aria-label="View Shearling 4-Bar Oversized Shirt Jacket by Thom Browne">
+                    <span class="product-image"><img src="https://cdn.shopify.com/s/files/1/0642/4523/5875/files/MJO159X-02821-415_V1.jpg?v=1740676263" alt="Thom Browne Shearling 4-Bar Oversized Shirt Jacket" loading="lazy"></span>
+                    <span class="product-brand">Thom Browne</span>
+                    <span class="product-name">Shearling 4-Bar Oversized Shirt Jacket</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="frame-wide-leg-trousers" data-brand="FRAME" data-name="Wide Leg Trousers in Warm Mauve" data-price="598" data-url="https://www.frame-store.com/products/wide-leg-trousers-mf26wpa001-wmme?variant=45126064603312" data-image="https://cdn.shopify.com/s/files/1/2259/1799/files/MF26WPA001_WMME_PCK_Front.jpg?v=1781033283">
+                <a class="product-link" href="https://www.frame-store.com/products/wide-leg-trousers-mf26wpa001-wmme?variant=45126064603312" target="_blank" rel="noopener noreferrer" aria-label="View Wide Leg Trousers by FRAME">
+                    <span class="product-image"><img src="https://cdn.shopify.com/s/files/1/2259/1799/files/MF26WPA001_WMME_PCK_Front.jpg?v=1781033283" alt="FRAME Wide Leg Trousers in Warm Mauve" loading="lazy"></span>
+                    <span class="product-brand">FRAME</span>
+                    <span class="product-name">Wide Leg Trousers in Warm Mauve</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+            <article class="product-card" data-id="loropiana-sergio-beanie" data-brand="Loro Piana" data-name="Sergio Beanie in Toffee Cream" data-price="520" data-url="https://modesens.com/product/loro-piana-sergio-beanie-toffee-cream-136802903/" data-image="https://cdn.modesens.com/media/305358085?w=1024">
+                <a class="product-link" href="https://modesens.com/product/loro-piana-sergio-beanie-toffee-cream-136802903/" target="_blank" rel="noopener noreferrer" aria-label="View Sergio Beanie by Loro Piana">
+                    <span class="product-image"><img src="https://cdn.modesens.com/media/305358085?w=1024" alt="Loro Piana Sergio Beanie in Toffee Cream" loading="lazy"></span>
+                    <span class="product-brand">Loro Piana</span>
+                    <span class="product-name">Sergio Beanie in Toffee Cream</span>
+                </a>
+                <p class="product-prices">
+                    <span class="price-original" aria-label="Original price"></span>
+                    <span class="price-mine" aria-label="My price"></span>
+                    <span class="price-save"></span>
+                </p>
+                <button type="button" class="btn add-to-cart">Add to Cart</button>
+            </article>
+        </div>
+        </div>
+        <p class="picks-cta"><a href="holiday-picks.html" class="btn" id="start-shopping">Need Gift Ideas? Shop All Holiday Picks</a></p>
+        <script>
+        (function () {
+            var track = document.querySelector('.product-grid');
+            var step = function () { var c = track.querySelector('.product-card'); return c.offsetWidth + 28; };
+            document.querySelector('.carousel-prev').addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+            document.querySelector('.carousel-next').addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+        })();
+        </script>
+    </div>
+</div>
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart" hidden>
+    <div class="cart-head">
+        <h2>Your Cart</h2>
+        <button type="button" class="cart-close" aria-label="Close cart">&times;</button>
+    </div>
+    <ul class="cart-items"></ul>
+    <p class="cart-empty">Your cart is empty.</p>
+    <div class="cart-foot">
+        <dl class="cart-summary">
+            <div><dt>Subtotal</dt><dd class="sum-retail"></dd></div>
+            <div class="sum-discount"><dt>Member discount</dt><dd></dd></div>
+            <div><dt>Estimated tax (6%)</dt><dd class="sum-tax"></dd></div>
+            <div class="sum-total"><dt>Total</dt><dd></dd></div>
+        </dl>
+        <button type="button" class="btn cart-checkout">Request These Items</button>
+        <p class="cart-note">I'll confirm availability and send your order details within 24 hours.</p>
+    </div>
+</aside>
+<div class="cart-backdrop" hidden></div>
 <!-- ----------portfolio------------ -->
 <div id="portfolio">
     <div class="container">
-        <h1 class="sub-title">My Work</h1>
+        <h1 class="sub-title">My <span>Work</span></h1>
         <div class="work-list">
             <div class="work">
                 <img src="img1.jpg" alt="">
                 <div class="layer">
-                    <h3>Portfolio</h3>
-                    <p>My notable styling appointments.</p>
-                    <a href="portfolio.html" aria-label="Open portfolio"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <h3><a href="portfolio.html">Portfolio</a></h3>
                 </div>
             </div>
             <div class="work">
                 <img src="socials.png" alt="">
                 <div class="layer">
-                    <h3>Socials</h3>
-                    <p>Take a peek.</p>
-                    <a href="socials.html" aria-label="Open social media links"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <h3><a href="socials.html">Socials</a></h3>
                 </div>
             </div>
             <div class="work">
-                <img src="Content Creation.png">
+                <img src="refresh.jpg" alt="">
                 <div class="layer">
-                    <h3>Wardrobe Refresh</h3>
-                    <p>Fresh combinations built around your personal style.</p>
-                    <a href="wardrobe-refresh.html" aria-label="Open wardrobe refresh preview"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <h3><a href="wardrobe-refresh.html">Wardrobe Refresh</a></h3>
                 </div>
             </div>
             <div class="work">
                 <img src="Website Design.png">
                 <div class="layer">
-                    <h3>Style Notes</h3>
-                    <p>Everyday inspiration and styling details.</p>
-                    <a href="style-notes.html" aria-label="Open style notes"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <h3><a href="style-notes.html">Style Notes</a></h3>
                 </div>
             </div>
         </div>
@@ -234,11 +377,13 @@ You focus on your career. I'll handle the closet and the access.
     <div class="container">
         <div class="row">
             <div class="contact-left">
-                <h1 class="sub-title">Contact Me</h1>
-                <a href="images/Kelly Resume.docx" download class="btn btn2">Download This Fall’s Lookbook</a>
+                <span class="contact-eyebrow">Let’s Work Together</span>
+                <h1 class="sub-title">Book Your Styling <span>Session</span></h1>
+                <p class="contact-intro">Tell me what you’re shopping for, an event on the calendar, or a closet that needs a refresh, and I’ll reply within 24 hours with next steps.</p>
             </div>
             <div class="contact-right">
-                <form name="submit-to-google-sheet">
+                <form name="submit-to-google-sheet" class="contact-form">
+                    <h2 class="form-title">Send an Inquiry</h2>
                     <input type="text" name="Name" placeholder="Your Name" required>
                     <input type="email" name="Email" placeholder="Your Email" required>
                     <select name="Inquiry Type" aria-label="What can I help you with?" required>
@@ -250,9 +395,9 @@ You focus on your career. I'll handle the closet and the access.
                         <option value="Custom">Custom</option>
                     </select>
                     <textarea name="Message" rows="6" placeholder="Your Message" hidden></textarea>
-                    <button type="submit" class="btn btn2">Submit</button>
+                    <button type="submit" class="btn btn2">Send Inquiry</button>
                 </form>
-                <span id="msg"></span>
+                <span id="msg" role="status" aria-live="polite"></span>
             </div>
         </div>
     </div>
@@ -264,9 +409,9 @@ You focus on your career. I'll handle the closet and the access.
                 <span><i class="fas fa-map-marker-alt"></i> Washington, DC</span>
             </div>
             <div class="footer-socials">
-                <a href="https://www.facebook.com/profile.php?id=100075216384094" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/mshsocials?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Social profile"><i class="fab fa-twitter-square"></i></a>
-                <a href="https://www.instagram.com/mshsocials?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/styledbykllyncle/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.tiktok.com/@styledbykllyncle" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/styledbykllyncle/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.linkedin.com/in/kelly-nicole-mushonga-364477133/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
             <p class="footer-copyright">© 2026 Kelly Mushonga</p>
@@ -290,22 +435,32 @@ You focus on your career. I'll handle the closet and the access.
             if (p && p.catch) p.catch(function () {});
         }
         startVideo();
-        bg.addEventListener('loadeddata', startVideo);
-        ['touchstart', 'click', 'scroll'].forEach(function (ev) {
-            window.addEventListener(ev, function once() {
+        ['loadeddata', 'canplay'].forEach(function (ev) {
+            bg.addEventListener(ev, startVideo);
+        });
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden && bg.paused && !reversing) startVideo();
+        });
+        window.addEventListener('pageshow', function () {
+            if (bg.paused && !reversing) startVideo();
+        });
+        ['touchstart', 'touchend', 'click', 'scroll'].forEach(function (ev) {
+            window.addEventListener(ev, function () {
                 if (bg.paused && !reversing) startVideo();
-                window.removeEventListener(ev, once);
             }, { passive: true });
         });
 
         function tick(now) {
-            var dt = (now - last) / 1000;
+            var dt = Math.min((now - last) / 1000, 0.1);
             last = now;
             if (reversing) {
-                bg.currentTime = Math.max(0, bg.currentTime - dt * SPEED);
+                // Mobile browsers seek asynchronously; skip frames while a seek is pending.
+                if (!bg.seeking) {
+                    bg.currentTime = Math.max(0, bg.currentTime - dt * SPEED);
+                }
                 if (bg.currentTime <= 0.05) {
                     reversing = false;
-                    bg.play();
+                    startVideo();
                 }
             } else if (bg.duration && bg.currentTime >= bg.duration - 0.15) {
                 // Reverse before 'ended' fires, which is what causes the black flash.
@@ -324,6 +479,19 @@ You focus on your career. I'll handle the closet and the access.
             menu.hidden = !open;
             burger.setAttribute('aria-expanded', open);
         });
+        menu.addEventListener('click', function (e) {
+            if (e.target.closest('a')) {
+                menu.hidden = true;
+                burger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        var topbar = document.querySelector('.topbar');
+        function updateTopbar() {
+            topbar.classList.toggle('is-scrolled', window.scrollY > 40);
+        }
+        window.addEventListener('scroll', updateTopbar, { passive: true });
+        updateTopbar();
     </script>
 <script>
 
@@ -362,28 +530,48 @@ You focus on your career. I'll handle the closet and the access.
         const inquiryType = form.elements['Inquiry Type']
         const messageField = form.elements['Message']
 
+        let cartRequest = false
+
         function updateCustomMessage() {
-            const isCustom = inquiryType.value === 'Custom'
-            messageField.hidden = !isCustom
-            messageField.required = isCustom
-            if (!isCustom) messageField.value = ''
+            const showMessage = inquiryType.value === 'Custom' || cartRequest
+            messageField.hidden = !showMessage
+            messageField.required = inquiryType.value === 'Custom'
+            if (!showMessage) messageField.value = ''
         }
 
-        inquiryType.addEventListener('change', updateCustomMessage)
+        inquiryType.addEventListener('change', () => {
+            if (inquiryType.value !== 'Product / discount sourcing') cartRequest = false
+            updateCustomMessage()
+        })
         updateCustomMessage()
   
     form.addEventListener('submit', e => {
       e.preventDefault()
+      const submitBtn = form.querySelector('button[type="submit"]')
+      const label = submitBtn.textContent
+      submitBtn.disabled = true
+      submitBtn.textContent = 'Sending...'
+      msg.className = ''
+      msg.textContent = ''
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => {
-            msg.innerHTML = "Message sent successfully"
-            setTimeout(function(){
-                msg.innerHTML = ""
-            },5000)
+            if (!response.ok) throw new Error('Request failed')
+            msg.className = 'is-success'
+            msg.textContent = "Thank you! Your inquiry is in. I'll be in touch within 24 hours."
+            if (cartRequest) document.dispatchEvent(new Event('cart:clear'))
             form.reset()
+            cartRequest = false
             updateCustomMessage()
         })
-        .catch(error => console.error('Error!', error.message))
+        .catch(error => {
+            console.error('Error!', error.message)
+            msg.className = 'is-error'
+            msg.textContent = 'Something went wrong. Please email me directly at kellynicolemushonga@gmail.com.'
+        })
+        .finally(() => {
+            submitBtn.disabled = false
+            submitBtn.textContent = label
+        })
     })
   </script>
 <script>
@@ -547,5 +735,6 @@ You focus on your career. I'll handle the closet and the access.
         });
     });
 </script>
+<script src="cart.js"></script>
 </body>
 </html>
