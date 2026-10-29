@@ -1,14 +1,24 @@
 :root {
-    --page-ink: #101010;
-    --page-line: #363232;
-    --page-pink: #ff5a78;
-    --page-white: #f6f3f1;
-    --page-muted: #b9b1b0;
+    --page-ink: #fff;
+    --page-line: #e2ded9;
+    --page-pink: #e0003f;
+    --page-white: #111;
+    --page-muted: #5c5c5c;
+    --page-alt: #f4f1ee;
+    --font-display: 'Bodoni Moda', 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-body: 'Jost', 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
-html { background: var(--page-ink); color-scheme: dark; scroll-behavior: smooth; }
-body { min-width: 320px; margin: 0; background: var(--page-ink); color: var(--page-white); font-family: 'Poppins', 'Avenir Next', sans-serif; }
+html { background: var(--page-ink); color-scheme: light; scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; background: var(--page-ink); color: var(--page-white); font-family: var(--font-body); font-weight: 300; line-height: 1.7; letter-spacing: .01em; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font-family: var(--font-body); }
+h1, h2, h3, h4 { font-family: var(--font-body); font-weight: 300; letter-spacing: .14em; text-transform: uppercase; }
+.page-brand, .page-nav a, .page-kicker, .portfolio-tab { font-family: var(--font-body); text-transform: uppercase; }
+.page-brand { font-weight: 500; letter-spacing: .14em; }
+.page-nav a { font-weight: 500; letter-spacing: .14em; }
+.page-kicker { font-weight: 500; letter-spacing: .3em; }
+.page-intro h1, .section-heading h2 { font-weight: 300; }
 a { color: inherit; }
 .page-wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 .page-header { border-bottom: 1px solid var(--page-line); }
@@ -280,3 +290,19 @@ a { color: inherit; }
     *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
     .social-entry { transform: none !important; }
 }
+
+/* Match the home page: light theme, Jost body, Bodoni Moda accents */
+.page-header { background: #fff; }
+.social-entry.is-active, .video-preview { background-color: var(--page-alt); background: var(--page-alt); }
+.video-embed { background: var(--page-alt); }
+.project-copy dt, .project-copy dd, .project-copy p { font-family: var(--font-body); }
+/* Burger menu (matches the home page) */
+.page-header { position: sticky; top: 0; z-index: 50; }
+.page-header-inner { position: relative; }
+.burger { display: flex; width: 28px; height: 20px; padding: 0; flex-direction: column; justify-content: space-between; border: 0; background: none; cursor: pointer; }
+.burger span { display: block; width: 100%; height: 2px; background: var(--page-white); }
+.burger-menu { position: absolute; top: 100%; right: 0; z-index: 60; display: flex; min-width: 200px; margin-top: 8px; padding: 14px 22px; flex-direction: column; gap: 10px; border: 1px solid var(--page-line); border-radius: 12px; background: #fff; box-shadow: 0 10px 30px rgb(0 0 0 / 10%); }
+.burger-menu[hidden] { display: none; }
+.burger-menu a { color: var(--page-white); font-size: 13px; font-weight: 500; letter-spacing: .14em; text-decoration: none; text-transform: uppercase; }
+.burger-menu a:hover, .burger-menu a[aria-current="page"] { color: var(--page-pink); }
+.menu-divider { height: 1px; background: var(--page-line); }

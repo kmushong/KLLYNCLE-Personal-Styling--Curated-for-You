@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#101010">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,600;0,700;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="pages.css">
     <title>Style Notes | Kelly Mushonga</title>
 </head>
 <body>
     <header class="page-header"><div class="page-wrap page-header-inner">
         <a class="page-brand" href="index.html">KELLY MUSHONGA</a>
-        <nav class="page-nav" aria-label="Work pages"><a href="portfolio.html">Portfolio</a><a href="socials.html">Socials</a><a href="wardrobe-refresh.html">Wardrobe Refresh</a><a href="style-notes.html" aria-current="page">Style Notes</a></nav>
+        <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="burger-menu"><span></span><span></span><span></span></button>
+        <nav id="burger-menu" class="burger-menu" hidden><a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#services">Services</a><a href="index.html#portfolio">Portfolio</a><a href="index.html#contact">Contact</a><span class="menu-divider"></span><a href="portfolio.html">Portfolio</a><a href="socials.html">Socials</a><a href="wardrobe-refresh.html">Wardrobe Refresh</a><a href="style-notes.html" aria-current="page">Style Notes</a></nav>
     </div></header>
     <main class="page-wrap page-main">
         <section class="page-intro"><p class="page-kicker">Notes on getting dressed / 06</p><h1>Small shifts. Better outfits.</h1><p>Practical thoughts on using what you own, shopping with intention, and keeping a wardrobe working for real life.</p></section>
@@ -23,5 +27,20 @@
         </section>
     </main>
     <footer class="page-footer"><div class="page-wrap"><a href="index.html#portfolio">Back to My Work</a> · Style Notes</div></footer>
+<script>
+        var burger = document.querySelector('.burger');
+        var menu = document.getElementById('burger-menu');
+        burger.addEventListener('click', function () {
+            var open = menu.hidden;
+            menu.hidden = !open;
+            burger.setAttribute('aria-expanded', open);
+        });
+        document.addEventListener('click', function (e) {
+            if (!menu.hidden && !e.target.closest('.burger, .burger-menu')) {
+                menu.hidden = true;
+                burger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
 </body>
 </html>
