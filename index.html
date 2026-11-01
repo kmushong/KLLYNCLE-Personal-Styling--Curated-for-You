@@ -65,13 +65,14 @@
                     <a href="#about">About</a>
                     <a href="#services">Services</a>
                     <a href="#portfolio">Portfolio</a>
+                    <a href="#book">Book</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </div>
             <div class="intro-copy">
                 <p class="eyebrow">Your Refined Style · At My Price</p>
                 <h1 id="page-title">Luxury Stylist<br><span>Washington DC.</span></h1>
-                <a class="back-link" href="#contact"><span aria-hidden="true">↓</span> Book a consultation</a>
+                <a class="back-link" href="#book"><span aria-hidden="true">↓</span> Book a consultation</a>
             </div>
             <p class="page-index">01 <span></span> 02</p>
         </section>
@@ -367,6 +368,48 @@ You focus on your career. I'll handle the closet and the access.
                 <img src="Website Design.png">
                 <div class="layer">
                     <h3><a href="style-notes.html">Style Notes</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------book a session------------- -->
+<div id="book">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <span class="contact-eyebrow">Book Online</span>
+                <h1 class="sub-title">Reserve Your <span>Time</span></h1>
+                <p class="contact-intro">Choose a service, pick a day and time that works, and I’ll confirm your session by email.</p>
+            </div>
+            <div class="contact-right">
+                <form id="booking-form" class="contact-form" novalidate>
+                    <h2 class="form-title">Request a Session</h2>
+                    <select name="service" aria-label="Service" required>
+                        <option value="" disabled selected>Choose a service</option>
+                        <option value="consultation">Style Consultation</option>
+                        <option value="audit">Closet Audit</option>
+                        <option value="shopping">Curated Shopping</option>
+                        <option value="resale">Resale &amp; Donation</option>
+                        <option value="meet">Meet &amp; Greet — $5 (Venmo)</option>
+                    </select>
+                    <input type="date" name="date" aria-label="Date" required>
+                    <div class="time-slots" id="time-slots" role="radiogroup" aria-label="Time">
+                        <p class="time-hint">Pick a date to see available times.</p>
+                    </div>
+                    <input type="text" name="name" placeholder="Your Name" autocomplete="name" required>
+                    <input type="email" name="email" placeholder="Your Email" autocomplete="email" required>
+                    <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel">
+                    <textarea name="notes" rows="4" placeholder="Anything I should know? (optional)"></textarea>
+                    <button type="submit" class="btn btn2">Request Session</button>
+                    <p class="booking-msg" id="booking-msg" role="status" aria-live="polite"></p>
+                </form>
+                <div class="pay-panel" id="pay-panel" hidden>
+                    <h3>Almost there — pay $<span id="pay-amount">5</span> on Venmo</h3>
+                    <p>Your meet &amp; greet is reserved. Pay <strong>@Kelly-Mushonga</strong> to confirm it; I’ll email you once your payment arrives.</p>
+                    <a class="btn btn2" id="pay-link" href="https://venmo.com/u/Kelly-Mushonga" target="_blank" rel="noopener">Pay with Venmo</a>
+                    <img src="venmo-qr.png" alt="Venmo QR code for @Kelly-Mushonga" width="240" loading="lazy">
+                    <p class="pay-note">On a computer? Scan the code with your phone’s Venmo app.</p>
                 </div>
             </div>
         </div>
@@ -736,5 +779,6 @@ You focus on your career. I'll handle the closet and the access.
     });
 </script>
 <script src="cart.js"></script>
+    <script src="booking.js"></script>
 </body>
 </html>

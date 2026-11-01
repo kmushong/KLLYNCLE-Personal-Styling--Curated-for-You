@@ -2435,3 +2435,101 @@ html {
         width: clamp(210px, 23vw, 262px);
     }
 }
+
+/* Booking section reuses the contact layout */
+.index-sections #book .row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: clamp(32px, 7vw, 96px);
+}
+
+@media (max-width: 800px) {
+    .index-sections #book .row {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+.index-sections #book input[type="date"] {
+    min-height: 54px;
+    font-family: inherit;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 8px;
+    margin: 6px 0 4px;
+}
+
+.time-slots .time-hint {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+}
+
+.time-slot {
+    padding: 11px 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.time-slot:hover:not(:disabled) {
+    border-color: #e0003f;
+}
+
+.time-slot[aria-checked="true"] {
+    border-color: #e0003f;
+    background: #e0003f;
+    color: #fff;
+}
+
+.time-slot:disabled {
+    color: #b0aaa4;
+    text-decoration: line-through;
+    cursor: not-allowed;
+}
+
+.booking-msg {
+    margin: 16px 0 0;
+    min-height: 1.4em;
+    color: #2e7d32;
+}
+
+.booking-msg.is-error {
+    color: #c62828;
+}
+
+.pay-panel {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid #e2ded9;
+    text-align: center;
+}
+
+.pay-panel[hidden] {
+    display: none;
+}
+
+.pay-panel h3 {
+    margin: 0 0 12px;
+}
+
+.pay-panel img {
+    display: block;
+    margin: 20px auto 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+.pay-note {
+    font-size: 13px;
+    color: #5c5c5c;
+}
