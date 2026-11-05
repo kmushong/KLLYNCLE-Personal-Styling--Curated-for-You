@@ -2638,18 +2638,6 @@ html {
     cursor: not-allowed;
 }
 
-.index-sections #book .contact-form .btn.btn-outline {
-    margin-top: 10px;
-    background: transparent;
-    border: 1px solid #111;
-    color: #111;
-}
-
-.index-sections #book .contact-form .btn.btn-outline:hover {
-    border-color: #ff004f;
-    color: #ff004f;
-}
-
 .booking-msg {
     margin: 16px 0 0;
     min-height: 1.4em;

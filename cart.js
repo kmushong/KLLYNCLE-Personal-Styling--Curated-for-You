@@ -125,12 +125,12 @@
         return { retail: retail, discount: retail - mine, tax: tax, services: svc, total: mine + tax + svc, mine: mine };
     }
 
-    function addService(key, when) {
+    function addService(key, when, slot) {
         var def = SERVICES[key];
         if (!def) return;
         var id = 'svc-' + key + '-' + (when || '');
         if (!cart.some(function (i) { return i.id === id; })) {
-            cart.push({ id: id, type: 'service', key: key, name: def.name, price: def.price, when: when || '', qty: 1 });
+            cart.push({ id: id, type: 'service', key: key, name: def.name, price: def.price, when: when || '', date: slot ? slot.date : '', time: slot ? slot.time : '', qty: 1 });
         }
         justSent = false;
         save();
@@ -244,7 +244,25 @@
         var sendBtn = requestForm.querySelector('.cart-send');
         sendBtn.disabled = true;
         statusEl.textContent = 'Sending...';
-        fetch(scriptURL, { method: 'POST', body: data })
+        var phone = f.Phone.value.trim();
+        var notes = f.Notes.value.trim();
+        var payment = null;
+        // Timed services reserve their slot first; a taken slot stops the request.
+        services().filter(function (i) { return i.date && i.time; }).reduce(function (chain, item) {
+            return chain.then(function () {
+                return fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ service: item.key, date: item.date, time: item.time, name: f.Name.value.trim(), email: f.Email.value.trim(), phone: phone, notes: notes })
+                }).then(function (r) {
+                    return r.json().catch(function () { return {}; }).then(function (d) {
+                        if (!r.ok) throw new Error(d.error || 'That time is no longer available. Please remove it and pick another.');
+                        if (d.amount) payment = { amount: d.amount, venmo: d.venmo, when: item.when };
+                    });
+                });
+            });
+        }, Promise.resolve())
+            .then(function () { return fetch(scriptURL, { method: 'POST', body: data }); })
             .then(function (response) {
                 if (!response.ok) throw new Error('Request failed');
                 requestForm.reset();
@@ -252,12 +270,34 @@
                 justSent = true;
                 save();
                 render();
+                showPayment(payment);
             })
-            .catch(function () {
-                statusEl.textContent = 'Something went wrong. Please email me directly at kellynicolemushonga@gmail.com.';
+            .catch(function (err) {
+                statusEl.textContent = err && err.message && err.message !== 'Request failed' && err.message !== 'Failed to fetch'
+                    ? err.message
+                    : 'Something went wrong. Please email me directly at kellynicolemushonga@gmail.com.';
             })
             .then(function () { sendBtn.disabled = false; });
     });
+
+    // The Meet & Greet is held until the $5 is paid on Venmo.
+    function showPayment(p) {
+        if (!p) return;
+        var url = 'https://venmo.com/' + encodeURIComponent(p.venmo) + '?txn=pay&amount=' + p.amount + '&note=' + encodeURIComponent('Meet & Greet ' + p.when);
+        var panel = document.getElementById('pay-panel');
+        if (panel) {
+            document.getElementById('pay-amount').textContent = p.amount;
+            document.getElementById('pay-link').href = url;
+            panel.hidden = false;
+        }
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Pay $' + p.amount + ' on Venmo to confirm your Meet & Greet';
+        emptyEl.appendChild(document.createElement('br'));
+        emptyEl.appendChild(link);
+    }
 
     window.kmCart = { addService: addService, open: openCart };
     document.addEventListener('cart:clear', function () { cart = []; save(); render(); });
