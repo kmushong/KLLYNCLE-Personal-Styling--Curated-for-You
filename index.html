@@ -329,14 +329,32 @@ You focus on your career. I'll handle the closet and the access.
     </div>
     <ul class="cart-items"></ul>
     <p class="cart-empty">Your cart is empty.</p>
+    <div class="cart-services">
+        <label for="cart-service-select">Add a service</label>
+        <select id="cart-service-select" class="cart-service-select">
+            <option value="">Choose a service</option>
+        </select>
+        <button type="button" class="cart-service-add">Add</button>
+    </div>
     <div class="cart-foot">
         <dl class="cart-summary">
-            <div><dt>Subtotal</dt><dd class="sum-retail"></dd></div>
-            <div class="sum-discount"><dt>Member discount</dt><dd></dd></div>
-            <div><dt>Estimated tax (6%)</dt><dd class="sum-tax"></dd></div>
+            <div class="sum-products"><dt>Subtotal</dt><dd class="sum-retail"></dd></div>
+            <div class="sum-products sum-discount"><dt>Member discount</dt><dd></dd></div>
+            <div class="sum-services"><dt>Services</dt><dd></dd></div>
+            <div class="sum-products"><dt>Estimated tax (6%)</dt><dd class="sum-tax"></dd></div>
             <div class="sum-total"><dt>Total</dt><dd></dd></div>
         </dl>
         <button type="button" class="btn cart-checkout">Request These Items</button>
+        <form class="cart-request" hidden novalidate>
+            <h3>Your contact details</h3>
+            <input type="text" name="Name" placeholder="Your Name" autocomplete="name" required>
+            <input type="email" name="Email" placeholder="Your Email" autocomplete="email" required>
+            <input type="tel" name="Phone" placeholder="Phone (optional)" autocomplete="tel">
+            <textarea name="Notes" rows="3" placeholder="Anything I should know? (optional)"></textarea>
+            <button type="submit" class="btn cart-send">Send Request</button>
+            <button type="button" class="cart-request-back">Back</button>
+            <p class="cart-status" role="status" aria-live="polite"></p>
+        </form>
         <p class="cart-note">I'll confirm availability and send your order details within 24 hours.</p>
     </div>
 </aside>
@@ -404,6 +422,7 @@ You focus on your career. I'll handle the closet and the access.
                         <textarea name="notes" rows="4" placeholder="Anything I should know? (optional)"></textarea>
                     </div>
                     <button type="submit" class="btn btn2">Request Session</button>
+                    <button type="button" class="btn btn2 btn-outline" id="booking-add-cart">Add Service to Cart</button>
                     <p class="booking-msg" id="booking-msg" role="status" aria-live="polite"></p>
                 </form>
                 <div class="pay-panel" id="pay-panel" hidden>

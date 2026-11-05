@@ -95,6 +95,18 @@
     slots.querySelectorAll('.time-slot').forEach(function (x) { x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
   });
 
+  document.getElementById('booking-add-cart').addEventListener('click', function () {
+    if (!serviceInput.value) { return say('Please choose a service to add to your cart.', true); }
+    var when = '';
+    if (dateInput.value) {
+      when = new Date(dateInput.value + 'T00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      if (selected) when += ', ' + clock(selected);
+    }
+    window.kmCart.addService(serviceInput.value, when);
+    say('Added to your cart.');
+    window.kmCart.open();
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var f = form.elements;
