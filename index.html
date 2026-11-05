@@ -65,14 +65,13 @@
                     <a href="#about">About</a>
                     <a href="#services">Services</a>
                     <a href="#portfolio">Portfolio</a>
-                    <a href="#book">Book</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </div>
             <div class="intro-copy">
                 <p class="eyebrow">Your Refined Style · At My Price</p>
                 <h1 id="page-title">Luxury Stylist<br><span>Washington DC.</span></h1>
-                <a class="back-link" href="#book"><span aria-hidden="true">↓</span> Book a consultation</a>
+                <a class="back-link" href="#contact"><span aria-hidden="true">↓</span> Book a consultation</a>
             </div>
             <p class="page-index">01 <span></span> 02</p>
         </section>
@@ -365,7 +364,7 @@ You focus on your career. I'll handle the closet and the access.
                 </div>
             </div>
             <div class="work">
-                <img src="style-notes.jpg" alt="Style Notes">
+                <img src="Website Design.png">
                 <div class="layer">
                     <h3><a href="style-notes.html">Style Notes</a></h3>
                 </div>
@@ -373,52 +372,35 @@ You focus on your career. I'll handle the closet and the access.
         </div>
     </div>
 </div>
-<!-- ----------book a session------------- -->
-<div id="book">
+<!-- ----------contact------------- -->
+<div id="contact">
     <div class="container">
         <div class="row">
             <div class="contact-left">
-                <span class="contact-eyebrow">Book Online</span>
-                <h1 class="sub-title">Reserve Your <span>Time</span></h1>
-                <p class="contact-intro">Choose a service, pick a day and time that works, and I’ll confirm your session by email.</p>
+                <span class="contact-eyebrow">Let’s Work Together</span>
+                <h1 class="sub-title">Book Your Styling <span>Session</span></h1>
+                <p class="contact-intro">Tell me what you’re shopping for, an event on the calendar, or a closet that needs a refresh, and I’ll reply within 24 hours with next steps.</p>
             </div>
             <div class="contact-right">
-                <form id="booking-form" class="contact-form" novalidate>
-                    <h2 class="form-title">Request a Session</h2>
-                    <select name="service" aria-label="Service" required>
-                        <option value="" disabled selected>Choose a service</option>
-                        <option value="consultation">Style Consultation</option>
-                        <option value="audit">Closet Audit</option>
-                        <option value="shopping">Curated Shopping</option>
-                        <option value="resale">Resale &amp; Donation</option>
-                        <option value="meet">Meet &amp; Greet — $5 (Venmo)</option>
+                <form name="submit-to-google-sheet" class="contact-form">
+                    <h2 class="form-title">Send an Inquiry</h2>
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <select name="Inquiry Type" aria-label="What can I help you with?" required>
+                        <option value="" disabled selected>What can I help you with?</option>
+                        <option value="General inquiry">General inquiry</option>
+                        <option value="Emergency styling">Emergency styling</option>
+                        <option value="Product / discount sourcing">Product / discount sourcing</option>
+                        <option value="Closet cleanout / resale">Closet cleanout / resale</option>
+                        <option value="Custom">Custom</option>
                     </select>
-                    <input type="date" name="date" aria-label="Date" required>
-                    <div class="time-slots" id="time-slots" role="radiogroup" aria-label="Time">
-                        <p class="time-hint">Pick a date to see available times.</p>
-                    </div>
-                    <div class="booking-details" id="booking-details" hidden>
-                        <input type="text" name="name" placeholder="Your Name" autocomplete="name" required>
-                        <input type="email" name="email" placeholder="Your Email" autocomplete="email" required>
-                        <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel">
-                        <textarea name="notes" rows="4" placeholder="Anything I should know? (optional)"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn2">Request Session</button>
-                    <p class="booking-msg" id="booking-msg" role="status" aria-live="polite"></p>
+                    <textarea name="Message" rows="6" placeholder="Your Message" hidden></textarea>
+                    <button type="submit" class="btn btn2">Send Inquiry</button>
                 </form>
-                <div class="pay-panel" id="pay-panel" hidden>
-                    <h3>Almost there — pay $<span id="pay-amount">5</span> on Venmo</h3>
-                    <p>Your meet &amp; greet is reserved. Pay <strong>@Kelly-Mushonga</strong> to confirm it; I’ll email you once your payment arrives.</p>
-                    <a class="btn btn2" id="pay-link" href="https://venmo.com/u/Kelly-Mushonga" target="_blank" rel="noopener">Pay with Venmo</a>
-                    <img src="venmo-qr.png" alt="Venmo QR code for @Kelly-Mushonga" width="240" loading="lazy">
-                    <p class="pay-note">On a computer? Scan the code with your phone’s Venmo app.</p>
-                </div>
+                <span id="msg" role="status" aria-live="polite"></span>
             </div>
         </div>
     </div>
-</div>
-<!-- ----------contact------------- -->
-<div id="contact">
     <footer class="copyright">
         <div class="footer-content">
             <div class="footer-contact">
@@ -541,6 +523,57 @@ You focus on your career. I'll handle the closet and the access.
     }
 
 </script>
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyXt1-6Y1Ma95ZKtQQNAyTO-XSPZySLn9kr2MY4ZSM-GQCApT3VnqAGBV4AOHuLWJfh/exec' 
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+        const inquiryType = form.elements['Inquiry Type']
+        const messageField = form.elements['Message']
+
+        let cartRequest = false
+
+        function updateCustomMessage() {
+            const showMessage = inquiryType.value === 'Custom' || cartRequest
+            messageField.hidden = !showMessage
+            messageField.required = inquiryType.value === 'Custom'
+            if (!showMessage) messageField.value = ''
+        }
+
+        inquiryType.addEventListener('change', () => {
+            if (inquiryType.value !== 'Product / discount sourcing') cartRequest = false
+            updateCustomMessage()
+        })
+        updateCustomMessage()
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      const submitBtn = form.querySelector('button[type="submit"]')
+      const label = submitBtn.textContent
+      submitBtn.disabled = true
+      submitBtn.textContent = 'Sending...'
+      msg.className = ''
+      msg.textContent = ''
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            if (!response.ok) throw new Error('Request failed')
+            msg.className = 'is-success'
+            msg.textContent = "Thank you! Your inquiry is in. I'll be in touch within 24 hours."
+            if (cartRequest) document.dispatchEvent(new Event('cart:clear'))
+            form.reset()
+            cartRequest = false
+            updateCustomMessage()
+        })
+        .catch(error => {
+            console.error('Error!', error.message)
+            msg.className = 'is-error'
+            msg.textContent = 'Something went wrong. Please email me directly at kellynicolemushonga@gmail.com.'
+        })
+        .finally(() => {
+            submitBtn.disabled = false
+            submitBtn.textContent = label
+        })
+    })
+  </script>
 <script>
     var fadeObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -703,6 +736,5 @@ You focus on your career. I'll handle the closet and the access.
     });
 </script>
 <script src="cart.js"></script>
-    <script src="booking.js"></script>
 </body>
 </html>
