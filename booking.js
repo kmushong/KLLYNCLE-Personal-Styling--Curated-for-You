@@ -4,10 +4,16 @@
   var slots = document.getElementById('time-slots');
   var msg = document.getElementById('booking-msg');
   var pay = document.getElementById('pay-panel');
+  var details = document.getElementById('booking-details');
   var dateInput = form.elements.date;
+  var serviceInput = form.elements.service;
   var selected = '';
   var unavailable = {};
   var times = [];
+
+  function updateDetailsVisibility() {
+    details.hidden = !serviceInput.value || !dateInput.value;
+  }
 
   function ymd(d) {
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
@@ -58,7 +64,12 @@
       .catch(function () { slots.innerHTML = '<p class="time-hint">Couldn’t load times. Please refresh, or use the contact form below.</p>'; });
   }
 
-  dateInput.addEventListener('change', loadAvailability);
+  serviceInput.addEventListener('change', updateDetailsVisibility);
+  dateInput.addEventListener('change', function () {
+    updateDetailsVisibility();
+    loadAvailability();
+  });
+  updateDetailsVisibility();
   slots.addEventListener('click', function (e) {
     var b = e.target.closest('.time-slot');
     if (!b || b.disabled) return;
@@ -89,6 +100,7 @@
         var when = f.date.value + ' ' + clock(selected);
         form.reset();
         selected = '';
+        updateDetailsVisibility();
         renderSlots();
         if (r.d.amount) {
           document.getElementById('pay-amount').textContent = r.d.amount;
