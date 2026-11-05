@@ -542,57 +542,6 @@ You focus on your career. I'll handle the closet and the access.
 
 </script>
 <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyXt1-6Y1Ma95ZKtQQNAyTO-XSPZySLn9kr2MY4ZSM-GQCApT3VnqAGBV4AOHuLWJfh/exec' 
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-        const inquiryType = form.elements['Inquiry Type']
-        const messageField = form.elements['Message']
-
-        let cartRequest = false
-
-        function updateCustomMessage() {
-            const showMessage = inquiryType.value === 'Custom' || cartRequest
-            messageField.hidden = !showMessage
-            messageField.required = inquiryType.value === 'Custom'
-            if (!showMessage) messageField.value = ''
-        }
-
-        inquiryType.addEventListener('change', () => {
-            if (inquiryType.value !== 'Product / discount sourcing') cartRequest = false
-            updateCustomMessage()
-        })
-        updateCustomMessage()
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      const submitBtn = form.querySelector('button[type="submit"]')
-      const label = submitBtn.textContent
-      submitBtn.disabled = true
-      submitBtn.textContent = 'Sending...'
-      msg.className = ''
-      msg.textContent = ''
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            if (!response.ok) throw new Error('Request failed')
-            msg.className = 'is-success'
-            msg.textContent = "Thank you! Your inquiry is in. I'll be in touch within 24 hours."
-            if (cartRequest) document.dispatchEvent(new Event('cart:clear'))
-            form.reset()
-            cartRequest = false
-            updateCustomMessage()
-        })
-        .catch(error => {
-            console.error('Error!', error.message)
-            msg.className = 'is-error'
-            msg.textContent = 'Something went wrong. Please email me directly at kellynicolemushonga@gmail.com.'
-        })
-        .finally(() => {
-            submitBtn.disabled = false
-            submitBtn.textContent = label
-        })
-    })
-  </script>
-<script>
     var fadeObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {

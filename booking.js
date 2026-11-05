@@ -10,6 +10,24 @@
   var selected = '';
   var unavailable = {};
   var times = [];
+  var scriptURL = 'https://script.google.com/macros/s/AKfycbyXt1-6Y1Ma95ZKtQQNAyTO-XSPZySLn9kr2MY4ZSM-GQCApT3VnqAGBV4AOHuLWJfh/exec';
+
+  function emailBooking(booking) {
+    var data = new FormData();
+    data.append('Name', booking.name);
+    data.append('Email', booking.email);
+    data.append('Inquiry Type', booking.service);
+    data.append('Message', [
+      'Booking request',
+      'Date: ' + booking.date,
+      'Time: ' + booking.time,
+      'Phone: ' + (booking.phone || 'Not provided'),
+      'Notes: ' + (booking.notes || 'None')
+    ].join('\n'));
+    return fetch(scriptURL, { method: 'POST', body: data }).then(function (response) {
+      if (!response.ok) throw new Error('Booking email request failed.');
+    });
+  }
 
   function updateDetailsVisibility() {
     details.hidden = !serviceInput.value || !dateInput.value;
@@ -98,6 +116,15 @@
       .then(function (r) {
         if (!r.ok) { say(r.d.error || 'Something went wrong. Please try again.', true); loadAvailability(); return; }
         var when = f.date.value + ' ' + clock(selected);
+        var booking = {
+          name: f.name.value,
+          email: f.email.value,
+          service: f.service.options[f.service.selectedIndex].text,
+          date: f.date.value,
+          time: clock(selected),
+          phone: f.phone.value,
+          notes: f.notes.value
+        };
         form.reset();
         selected = '';
         updateDetailsVisibility();
@@ -108,11 +135,15 @@
             '?txn=pay&amount=' + r.d.amount + '&note=' + encodeURIComponent('Meet & Greet ' + when);
           pay.hidden = false;
           pay.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          say('Thank you! Your time is held while you pay.');
         } else {
           pay.hidden = true;
-          say('Thank you! Your request is in. I’ll confirm by email shortly.');
         }
+        return emailBooking(booking).then(function () {
+          say(r.d.amount ? 'Thank you! Your time is held while you pay.' : 'Thank you! Your request is in. I’ll confirm by email shortly.');
+        }).catch(function (error) {
+          console.error(error);
+          say('Your booking was saved, but I couldn’t send the email notification. Please email kellynicolemushonga@gmail.com.', true);
+        });
       })
       .catch(function () { say('Couldn’t send your request. Please try again.', true); })
       .then(function () { btn.disabled = false; });

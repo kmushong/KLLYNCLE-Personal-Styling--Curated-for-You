@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "wrangler pages dev . --binding ADMIN_PASSWORD=dev --port 8788"
+    "dev": "wrangler pages dev . --port 8788"
   },
   "dependencies": {
     "@libsql/client": "^0.15.0"

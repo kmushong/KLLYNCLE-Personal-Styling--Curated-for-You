@@ -1,5 +1,5 @@
 import { createClient } from "@libsql/client/web";
-import { DEFAULT_CAPACITY, SERVICES, STATUSES, TIMES, TIME_ZONE } from "./config.js";
+import { DEFAULT_CAPACITY, SERVICES, TIMES, TIME_ZONE } from "./config.js";
 
 let schemaReady = null;
 
@@ -26,14 +26,7 @@ function initSchema(db) {
       date TEXT NOT NULL, time TEXT NOT NULL DEFAULT '', reason TEXT NOT NULL DEFAULT '',
       UNIQUE(date, time)
     )`,
-  ], "write").then(() =>
-    // Older databases lack this column; ignore the error if it already exists.
-    db.execute("ALTER TABLE bookings ADD COLUMN paid INTEGER NOT NULL DEFAULT 0").catch(() => {}));
-}
-
-export async function setPaid(db, id, paid) {
-  const r = await db.execute({ sql: "UPDATE bookings SET paid = ? WHERE id = ?", args: [paid ? 1 : 0, id] });
-  return r.rowsAffected ? { status: 200 } : { status: 404, error: "Not found." };
+  ], "write");
 }
 
 export const run = async (db, sql, args = []) => (await db.execute({ sql, args })).rows;
@@ -127,26 +120,6 @@ export async function createBooking(db, b) {
   return { status: 201, id: Number(r.lastInsertRowid) };
 }
 
-export async function changeStatus(db, id, status) {
-  const b = await one(db, "SELECT status, date, time FROM bookings WHERE id = ?", [id]);
-  if (!b) return { status: 404, error: "Not found." };
-  if (!STATUSES.includes(status)) return { status: 400, error: "Bad status." };
-  const reactivating = (status === "pending" || status === "confirmed") && !["pending", "confirmed"].includes(b.status);
-  if (reactivating) {
-    const cap = await getCapacity(db);
-    const r = await db.execute({
-      sql: `UPDATE bookings SET status = ? WHERE id = ?
-            AND (SELECT COUNT(*) FROM bookings WHERE status IN ${ACTIVE} AND date = ? AND time = ? AND id != ?) < ?
-            AND NOT EXISTS (SELECT 1 FROM blocks WHERE date = ? AND (time = '' OR time = ?))`,
-      args: [status, id, b.date, b.time, id, cap, b.date, b.time],
-    });
-    if (!r.rowsAffected) return { status: 409, error: b.date + " " + b.time + " is already full or blocked." };
-  } else {
-    await db.execute({ sql: "UPDATE bookings SET status = ? WHERE id = ?", args: [status, id] });
-  }
-  return { status: 200, id, newStatus: status };
-}
-
 export function notifyNew(env, b, id) {
   const text = b.name + " — " + SERVICES[b.service] + "\n" + b.date + " at " + b.time + "\n" + b.email + (b.phone ? " · " + b.phone : "");
   const jobs = [];
@@ -159,10 +132,4 @@ export function notifyNew(env, b, id) {
     jobs.push(fetch(env.NOTIFY_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, ...b, text }) }).catch(() => {}));
   }
   return Promise.all(jobs);
-}
-
-export function csvCell(v) {
-  let t = v == null ? "" : String(v);
-  if (/^[=+\-@\t\r]/.test(t)) t = "'" + t;
-  return '"' + t.replace(/"/g, '""') + '"';
 }
